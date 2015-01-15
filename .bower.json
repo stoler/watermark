@@ -1,0 +1,21 @@
+{
+  "name": "s4w-start-project",
+  "version": "0.0.2",
+  "description": "start-project",
+  "main": "index.html",
+  "authors": [
+    "Anatoly Plyutenko"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/stoler/start-project",
+  "_release": "0.0.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.0.2",
+    "commit": "19a4afc005ebf8034ae34fdb29d72a35fc059811"
+  },
+  "_source": "git://github.com/stoler/start-project.git",
+  "_target": "~0.0.2",
+  "_originalSource": "s4w-start-project",
+  "_direct": true
+}
