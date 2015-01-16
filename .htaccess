@@ -1,0 +1,18 @@
+AddDefaultCharset utf-8
+
+php_value register_globals 0
+php_value register_quotes_gpc off
+
+Options FollowSymLinks
+Options -Indexes
+
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^www.plyutenko\.ru$ [NC]
+RewriteRule ^(.*)$ http://plyutenko.ru/$1 [R=301,L]
+
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteCond %{SCRIPT_FILENAME} !-d
+
+RewriteRule ^(.*)$ index.php/$1
+
+php_flag display_errors 1
