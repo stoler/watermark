@@ -6,6 +6,7 @@
  * Time: 12:18
  * To change this template use File | Settings | File Templates.
  */
+
 $lang = array();
 $lang['title'] = 'Watermarks generator';
 $lang['settings'] = 'Settings';
@@ -15,4 +16,4 @@ $lang['position'] = 'Place';
 $lang['transparency'] = 'Transparency';
 $lang['reset'] = 'Reset';
 $lang['download'] = 'Download';
-$lang['footer'] = '&copy; 2014, This is my site, please, don\'t copy it without my permission';
+$lang['footer'] = '&copy; 2015, This is my site, please, don\'t copy it without my permission';
