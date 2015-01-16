@@ -39,3 +39,11 @@ html
 
         div.generator-setup
           h2.generator-setup__title Настройки
+          div.generator-setup__upload
+            form(action="" method="").upload__picture
+              div.upload__main-picture
+                label(for="upload-picture").main-picture__title Исходное изображение
+                input(type="file" placeholder="image.png")#upload-picture.main-picture__file
+              div.upload__watermark
+                label(for="upload-watermark").watermark__title Водяной знак
+                input(type="file" placeholder="image.png")#upload-watermark.watermark__file
