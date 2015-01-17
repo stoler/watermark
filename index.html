@@ -18,6 +18,90 @@
     -->
   </head>
   <body>
-    <h1>привет!</h1>
+    <div class="wrapper">
+      <div class="lang-soc-block">
+        <ul class="languages">
+          <li class="languages__item-ru"><a href="">рус</a></li>
+          <li class="languages__item-en"><a href="">eng</a></li>
+        </ul>
+        <ul class="social">
+          <li class="social__item-share"><a href="">share</a></li>
+          <li class="social__item-fb"><a href="">facebook</a></li>
+          <li class="social__item-tw"><a href="">twitter</a></li>
+          <li class="social__item-vk"><a href="">vkontakte</a></li>
+        </ul>
+      </div>
+      <div class="main-generator">
+        <div class="generator-picture col9">
+          <h1 class="generator-picture__title">Генератор водяных знаков</h1>
+          <div class="generator-picture__result"></div>
+        </div>
+        <div class="generator-setup col3">
+          <h2 class="generator-setup__title">Настройки</h2>
+          <div class="generator-setup__upload">
+            <form action="" method="" class="upload__picture">
+              <div class="upload__main-picture">
+                <label for="upload-picture" class="main-picture__title">Исходное изображение</label>
+                <input type="file" placeholder="image.png" id="upload-picture" class="main-picture__file">
+              </div>
+              <div class="upload__watermark">
+                <label for="upload-watermark" class="watermark__title">Водяной знак</label>
+                <input type="file" placeholder="image.png" id="upload-watermark" class="watermark__file">
+              </div>
+            </form>
+          </div>
+          <div class="generator-position">
+            <div class="generator-position__top">
+              <h3 class="generator-position__title"></h3>
+              <div class="generator-position__switch"><a href="" class="switch__mono">mono</a><a href="" class="switch__multi">multi</a></div>
+            </div>
+            <div class="generator-position__bottom">
+              <div class="generator-positio__square">
+                <div class="square_tr">
+                  <div class="square_td"></div>
+                  <div class="square_td"></div>
+                  <div class="square_td"></div>
+                </div>
+                <div class="square_tr">
+                  <div class="square_td"></div>
+                  <div class="square_td"></div>
+                  <div class="square_td"></div>
+                </div>
+                <div class="square_tr">
+                  <div class="square_td"></div>
+                  <div class="square_td"></div>
+                  <div class="square_td"></div>
+                </div>
+              </div>
+              <div class="generator-position__coordinates">
+                <div class="coordinates__x-y coordinates__x"><span class="coordinates_name">x</span>
+                  <div class="coordinates__shift">0</div>
+                  <div class="coordinates__up-down"><a href="" class="coordinates__x-up"></a><a href="" class="coordinates__x-down"></a></div>
+                </div>
+                <div class="coordinates__x-y coordinates__x"><span class="coordinates_name">y</span>
+                  <div class="coordinates__shift">0</div>
+                  <div class="coordinates__up-down"><a href="" class="coordinates__y-up"></a><a href="" class="coordinates__y-down"></a></div>
+                </div>
+              </div>
+              <div class="generator-transparency">
+                <h3 class="generator-transparency__title">Прозрачность</h3>
+                <div class="generator-transparency__slider"><span class="slider__handle"></span></div>
+              </div>
+              <div class="generator-buttons">
+                <form action="" method="" class="buttons">
+                  <button class="button-reset">Сбросить</button>
+                  <button class="button-download">Скачать</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="main-footer">
+        <div class="footer">
+          <p>&#169; 2015, Это мой сайт, пожалуйста, не копируйте и не воруйте его</p>
+        </div>
+      </footer>
+    </div>
   </body>
 </html>

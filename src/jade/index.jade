@@ -16,4 +16,80 @@ html
       script(src="https://html5shim.googlecode.com/svn/trunk/html5.js")
       script(src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js")
   body
-    h1 привет!
+    div.wrapper
+      div.lang-soc-block
+        ul.languages
+          li.languages__item-ru
+            a(href="") рус
+          li.languages__item-en
+            a(href="") eng
+        ul.social
+          li.social__item-share
+            a(href="") share
+          li.social__item-fb
+            a(href="") facebook
+          li.social__item-tw
+            a(href="") twitter
+          li.social__item-vk
+            a(href="") vkontakte
+      div.main-generator
+        div.generator-picture.col9
+          h1.generator-picture__title Генератор водяных знаков
+          div.generator-picture__result
+
+        div.generator-setup.col3
+          h2.generator-setup__title Настройки
+          div.generator-setup__upload
+            form(action="" method="").upload__picture
+              div.upload__main-picture
+                label(for="upload-picture").main-picture__title Исходное изображение
+                input(type="file" placeholder="image.png")#upload-picture.main-picture__file
+              div.upload__watermark
+                label(for="upload-watermark").watermark__title Водяной знак
+                input(type="file" placeholder="image.png")#upload-watermark.watermark__file
+          div.generator-position
+            div.generator-position__top
+              h3.generator-position__title
+              div.generator-position__switch
+                a(href="").switch__mono mono
+                a(href="").switch__multi multi
+            div.generator-position__bottom
+              div.generator-positio__square
+                div.square_tr
+                  div.square_td
+                  div.square_td
+                  div.square_td
+                div.square_tr
+                  div.square_td
+                  div.square_td
+                  div.square_td
+                div.square_tr
+                  div.square_td
+                  div.square_td
+                  div.square_td
+              div.generator-position__coordinates
+                div.coordinates__x-y.coordinates__x
+                  span.coordinates_name x
+                  div.coordinates__shift 0
+                  div.coordinates__up-down
+                    a(href="").coordinates__x-up
+                    a(href="").coordinates__x-down
+                div.coordinates__x-y.coordinates__x
+                  span.coordinates_name y
+                  div.coordinates__shift 0
+                  div.coordinates__up-down
+                    a(href="").coordinates__y-up
+                    a(href="").coordinates__y-down
+              div.generator-transparency
+                h3.generator-transparency__title Прозрачность
+                div.generator-transparency__slider
+                  span.slider__handle
+              div.generator-buttons
+                form(action="" method="").buttons
+                  button.button-reset Сбросить
+                  button.button-download Скачать
+
+
+      footer.main-footer
+        div.footer
+          p &#169; 2015, Это мой сайт, пожалуйста, не копируйте и не воруйте его
