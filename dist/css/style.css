@@ -389,5 +389,16 @@ td, th {
   src: local("SEGOEUIL"), url("../fonts/segoe-ui/SEGOEUIL.woff") format("woff"), url("../fonts/segoe-ui/SEGOEUIL.ttf") format("truetype"); }
 
 body {
-  background: url(../img/backgroung.jpg);
+  background: url(../img/backgroung.jpg) no-repeat;
+  background-size: 100% 100%;
   font-family: 'robotolight'; }
+
+.wrapper {
+  width: 100%;
+  min-width: 1000px;
+  position: relative; }
+
+.main-generator {
+  width: 960px;
+  margin: 0 auto;
+  overflow: hidden; }
