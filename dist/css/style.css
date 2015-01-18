@@ -388,12 +388,22 @@ td, th {
   src: url("../fonts/segoe-ui/SEGOEUIL.eot");
   src: local("SEGOEUIL"), url("../fonts/segoe-ui/SEGOEUIL.woff") format("woff"), url("../fonts/segoe-ui/SEGOEUIL.ttf") format("truetype"); }
 
+html {
+  position: absolute;
+  width: 100%;
+  min-width: 1000px;
+  min-height: 100%; }
+
 body {
-  background: url(../img/backgroung.jpg) no-repeat;
-  background-size: 100% 100%;
+  background: url(../img/backgroung.jpg) 0 0 no-repeat;
   font-family: 'robotolight';
   font-weight: 300;
-  color: #2e3641; }
+  color: #2e3641;
+  -moz-background-size: 100%;
+  -webkit-background-size: 100%;
+  -o-background-size: 100%;
+  background-size: 100%;
+  width: 100%; }
 
 h1, h2, h3, h4, h5 {
   margin: 0;

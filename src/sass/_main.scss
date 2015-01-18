@@ -5,12 +5,24 @@ $lightRedColor: #f97e76;
 $silverOne: #c1cfd9;
 $picBlockBgColor: rgba(46, 54, 65, 0.64);
 
+html {
+  position: absolute;
+  width: 100%;
+  min-width: 1000px;
+  min-height: 100%;
+}
+
 body{
-  background: url(../img/backgroung.jpg) no-repeat;
-  background-size: 100% 100%;
+  background: url(../img/backgroung.jpg) 0 0 no-repeat;
   font-family: 'robotolight';
   font-weight: 300;
   color: $baseColor;
+  -moz-background-size: 100%;
+  -webkit-background-size: 100%;
+  -o-background-size: 100%;
+  background-size: 100%;
+  width: 100%;
+
 }
 
 h1,
