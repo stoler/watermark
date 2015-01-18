@@ -1,0 +1,86 @@
+.lang-soc-block{
+  position: absolute;
+  left: 0;
+  top: 50px;
+}
+
+.languages,
+.social{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background: rgba(241, 241, 245, 0.7);
+}
+
+.languages{
+  margin-bottom: 20px;
+}
+
+.languages__item{
+  border-bottom: 1px solid #8e9298;
+  width: 43px;
+  &:last-child{
+    border-bottom: none;
+  }
+}
+
+.languages__item-ru,
+.languages__item-en{
+  @extend .languages__item;
+  a{
+    font-family: SEGOEUIL;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #8e9298;
+    font-size: 1.250em;
+    font-weight: 300;
+    width: 43px;
+    padding: 5px 0;
+    display: block;
+    text-align: center;
+    &:hover{
+      color: #444a53;
+    }
+  }
+}
+
+.social__item{
+  width: 43px;
+  display: table;
+  a{
+    font: 0/0 serif;
+    text-shadow: none;
+    color: transparent;
+    width: 26px;
+    height: 40px;
+    display: table-cell;
+  }
+}
+
+.social__item-share{
+  @extend .social__item;
+  a{
+    background: url(../img/sprite.png) 0px -7px no-repeat;
+    &:hover{
+      background: url(../img/sprite.png) -34px -7px no-repeat;
+    }
+  }
+}
+
+.social__item-fb{
+  @extend .social__item;
+  a{
+    background: url(../img/sprite.png) -78px -7px no-repeat;
+    &:hover{
+      background: url(../img/sprite.png) -34px -7px no-repeat;
+    }
+  }
+}
+
+.social__item-tw{
+  @extend .social__item;
+}
+
+.social__item-vk{
+  @extend .social__item;
+}
