@@ -1,5 +1,5 @@
 doctype html
-html
+html(lang="ru")
   head
     meta(charset="UTF-8")
     meta(name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE")
@@ -11,9 +11,7 @@ html
     meta(http-equiv="X-UA-Compatible" content="IE=edge")
     meta(name="description" content="")
     link(rel="stylesheet" href="dist/css/style.min.css")
-    //[if lt IE 9]
-      script(src="https://html5shim.googlecode.com/svn/trunk/html5.js")
-      script(src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js")
+    <!--[if lt IE 9]><script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   body
     div.wrapper
       div.lang-soc-block
@@ -84,10 +82,8 @@ html
                 div.generator-transparency__slider
                   span.slider__handle
               div.generator-buttons
-                form(action="" method="").buttons
-                  button.button-reset Сбросить
-                  button.button-download Скачать
-
+                button.button-reset Сбросить
+                button.button-download Скачать
 
       footer.main-footer
         div.footer

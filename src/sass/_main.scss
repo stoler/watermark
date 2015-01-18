@@ -1,7 +1,47 @@
+$baseColor: #2e3641;
+$whiteColor: #ffffff;
+$generatorSetupBgColor: #f1f1f5;
+$lightRedColor: #f97e76;
+$silverOne: #c1cfd9;
+$picBlockBgColor: rgba(46, 54, 65, 0.64);
+
 body{
   background: url(../img/backgroung.jpg) no-repeat;
   background-size: 100% 100%;
   font-family: 'robotolight';
+  font-weight: 300;
+  color: $baseColor;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin: 0;
+  color: $baseColor;
+}
+
+h1 {
+  font-family: 'SEGOEUIL';
+  color:  #ffffff;
+  font-size: 2.25em;
+  font-weight: 300;
+  text-align: left;
+}
+h2 {
+  font-size: 1.625em;
+}
+h3 {}
+h4 {}
+h5 {}
+
+.after-clear {
+  &:after {
+    content: ' ';
+    display: table;
+    clear: both;
+  }
 }
 
 .wrapper{
@@ -11,7 +51,7 @@ body{
 }
 
 .main-generator{
-  width: 960px;
+  width: 980px;
   margin: 0 auto;
   overflow: hidden;
 }

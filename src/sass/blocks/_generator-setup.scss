@@ -1,0 +1,15 @@
+/*
+generator-setup
+*/
+
+.generator-setup {
+  @extend .col3;
+  @extend .after-clear;
+  margin: 0 0 40px;
+  background: $generatorSetupBgColor;
+}
+
+.generator-setup__title {
+  margin: 28px 20px;
+  text-align: center;
+}
