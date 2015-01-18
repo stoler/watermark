@@ -1,0 +1,21 @@
+/*
+generator-picture
+*/
+.generator-picture {
+  @extend .after-clear;
+  @extend .col9;
+  padding: 25px;
+  background: $picBlockBgColor;
+  width: 650px;
+  margin: 0 0 40px 0;
+}
+
+.generator-picture__result {
+  width: 651px;
+  height: 534px;
+  background: $whiteColor;
+}
+
+.generator-picture__title {
+  margin: 0 0 50px 0;
+}

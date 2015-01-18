@@ -396,7 +396,7 @@ th {
   padding: 0;
 }
 
-.col, .col1, .col2, .col3, .col4, .col5, .col6, .col7, .col8, .col9, .col10, .col11, .col12 {
+.col, .col1, .col2, .col3, .generator-setup, .col4, .col5, .col6, .col7, .col8, .col9, .generator-picture, .col10, .col11, .col12 {
   display: block;
   float: left;
   margin-left: 10px;
@@ -411,7 +411,7 @@ th {
   width: 150px;
 }
 
-.col3 {
+.col3, .generator-setup {
   width: 235px;
 }
 
@@ -435,7 +435,7 @@ th {
   width: 660px;
 }
 
-.col9 {
+.col9, .generator-picture {
   width: 745px;
 }
 
@@ -481,6 +481,35 @@ body {
   background: url(../img/backgroung.jpg) no-repeat;
   background-size: 100% 100%;
   font-family: 'robotolight';
+  font-weight: 300;
+  color: #2e3641;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin: 0;
+  color: #2e3641;
+}
+
+h1 {
+  font-family: 'SEGOEUIL';
+  color: #ffffff;
+  font-size: 2.25em;
+  font-weight: 300;
+  text-align: left;
+}
+
+h2 {
+  font-size: 1.625em;
+}
+
+.after-clear:after, .generator-picture:after, .generator-setup:after {
+  content: ' ';
+  display: table;
+  clear: both;
 }
 
 .wrapper {
@@ -490,11 +519,14 @@ body {
 }
 
 .main-generator {
-  width: 960px;
+  width: 980px;
   margin: 0 auto;
   overflow: hidden;
 }
 
+/*
+lang-soc
+*/
 .lang-soc-block {
   position: absolute;
   left: 0;
@@ -541,9 +573,22 @@ body {
   color: #444a53;
 }
 
+.social {
+  position: relative;
+  left: -43px;
+  -webkit-transition: left 0.5s ease-out 0s;
+  -moz-transition: left 0.5s ease-out 0s;
+  -o-transition: left 0.5s ease-out 0s;
+  transition: left 0.5s ease-out 0s;
+}
+.social:hover {
+  left: 0;
+}
+
 .social__item, .social__item-share, .social__item-fb, .social__item-tw, .social__item-vk {
   width: 43px;
   display: table;
+  background: rgba(241, 241, 245, 0.7);
 }
 .social__item a, .social__item-share a, .social__item-fb a, .social__item-tw a, .social__item-vk a {
   font: 0/0 serif;
@@ -553,17 +598,123 @@ body {
   height: 40px;
   display: table-cell;
 }
+.social__item a span, .social__item-share a span, .social__item-fb a span, .social__item-tw a span, .social__item-vk a span {
+  webkit-transition: background 0.5s;
+  -moz-transition: background 0.5s;
+  -o-transition: background 0.5s;
+  transition: background 0.5s;
+  display: block;
+  margin: 0 auto;
+}
 
-.social__item-share a {
-  background: url(../img/sprite.png) 0px -7px no-repeat;
+.social__item-share {
+  position: absolute;
+  right: -43px;
 }
-.social__item-share a:hover {
-  background: url(../img/sprite.png) -34px -7px no-repeat;
+.social__item-share a span {
+  background: url(../img/sprite.png) -9px -10px no-repeat;
+  width: 26px;
+  height: 32px;
+  margin-top: 3px;
+}
+.social__item-share a:hover span {
+  background: url(../img/sprite.png) -43px -10px no-repeat;
 }
 
-.social__item-fb a {
-  background: url(../img/sprite.png) -78px -7px no-repeat;
+.social__item-fb a span {
+  background: url(../img/sprite.png) -227px -15px no-repeat;
+  width: 15px;
+  height: 27px;
+  margin-top: 5px;
 }
-.social__item-fb a:hover {
-  background: url(../img/sprite.png) -34px -7px no-repeat;
+.social__item-fb a:hover span {
+  background: url(../img/sprite.png) -250px -15px no-repeat;
+}
+
+.social__item-tw a span {
+  background: url(../img/sprite.png) -77px -20px no-repeat;
+  width: 28px;
+  height: 22px;
+  margin-top: 9px;
+}
+.social__item-tw a:hover span {
+  background: url(../img/sprite.png) -111px -20px no-repeat;
+}
+
+.social__item-vk a span {
+  background: url(../img/sprite.png) -147px -24px no-repeat;
+  width: 32px;
+  height: 18px;
+  margin-top: 11px;
+}
+.social__item-vk a:hover span {
+  background: url(../img/sprite.png) -187px -24px no-repeat;
+}
+
+/*
+generator-picture
+*/
+.generator-picture {
+  padding: 25px;
+  background: rgba(46, 54, 65, 0.64);
+  width: 650px;
+  margin: 0 0 40px 0;
+}
+
+.generator-picture__result {
+  width: 651px;
+  height: 534px;
+  background: #ffffff;
+}
+
+.generator-picture__title {
+  margin: 0 0 50px 0;
+}
+
+/*
+generator-setup
+*/
+.generator-setup {
+  margin: 0 0 40px;
+  background: #f1f1f5;
+}
+
+.generator-setup__title {
+  margin: 28px 20px;
+  text-align: center;
+}
+
+/*
+buttons
+*/
+.btn, .button-reset, .button-download {
+  font-size: 1.125em;
+  font-family: robotomedium;
+  display: inline-block;
+  border-radius: 3px;
+  color: #f1f1f5;
+  border: 0;
+}
+
+.button-reset {
+  background: #c1cfd9;
+  width: 99px;
+  height: 42px;
+}
+
+.button-download {
+  background: #f97e76;
+  width: 99px;
+  height: 42px;
+}
+
+/*
+footer
+*/
+footer {
+  font-family: fira_sanslight;
+  color: #ffffff;
+  font-size: 0.75em;
+  font-weight: 300;
+  text-align: center;
 }

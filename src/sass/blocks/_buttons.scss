@@ -1,0 +1,24 @@
+/*
+buttons
+*/
+.btn {
+  font-size: 1.125em;
+  font-family: robotomedium;
+  display: inline-block;
+  border-radius: 3px;
+  color: $generatorSetupBgColor;
+  border: 0;
+}
+
+.button-reset {
+  @extend .btn;
+  background: $silverOne;
+  width: 99px;
+  height: 42px;
+}
+.button-download {
+  @extend .btn;
+  background: $lightRedColor;
+  width: 99px;
+  height: 42px;
+}

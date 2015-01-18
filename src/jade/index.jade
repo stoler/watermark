@@ -1,5 +1,5 @@
 doctype html
-html
+html(lang="ru")
   head
     meta(charset="UTF-8")
     meta(name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE")
@@ -11,9 +11,7 @@ html
     meta(http-equiv="X-UA-Compatible" content="IE=edge")
     meta(name="description" content="")
     link(rel="stylesheet" href="dist/css/style.min.css")
-    //[if lt IE 9]
-      script(src="https://html5shim.googlecode.com/svn/trunk/html5.js")
-      script(src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js")
+    <!--[if lt IE 9]><script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   body
     div.wrapper
       div.lang-soc-block
@@ -25,18 +23,22 @@ html
         ul.social
           li.social__item-share
             a(href="") share
+              span
           li.social__item-fb
             a(href="") facebook
+              span
           li.social__item-tw
             a(href="") twitter
+              span
           li.social__item-vk
             a(href="") vkontakte
+              span
       div.main-generator
-        div.generator-picture.col9
+        div.generator-picture
           h1.generator-picture__title Генератор водяных знаков
           div.generator-picture__result
 
-        div.generator-setup.col3
+        div.generator-setup
           h2.generator-setup__title Настройки
           div.generator-setup__upload
             form(action="" method="").upload__picture
@@ -84,10 +86,8 @@ html
                 div.generator-transparency__slider
                   span.slider__handle
               div.generator-buttons
-                form(action="" method="").buttons
-                  button.button-reset Сбросить
-                  button.button-download Скачать
-
+                button.button-reset Сбросить
+                button.button-download Скачать
 
       footer.main-footer
         div.footer
