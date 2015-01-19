@@ -3,7 +3,8 @@ generator-setup
 */
 
 .generator-setup {
-  @extend .col3;
+  width: 260px;
+  float: left;
   @extend .after-clear;
   margin: 0 0 40px;
   background: $generatorSetupBgColor;
@@ -12,4 +13,8 @@ generator-setup
 .generator-setup__title {
   margin: 28px 20px;
   text-align: center;
+}
+
+.generator-setup__upload{
+  margin: 0 20px;
 }
