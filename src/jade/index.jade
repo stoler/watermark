@@ -44,9 +44,17 @@ html(lang="ru")
             form(action="" method="").upload__picture
               div.upload__main-picture
                 label(for="upload-picture").main-picture__title Исходное изображение
+                div.main-picture__stylization
+                  div.main-picture__stylization-input image.png
+                  div.main-picture__stylization-button
+                    span
                 input(type="file" placeholder="image.png")#upload-picture.main-picture__file
               div.upload__watermark
                 label(for="upload-watermark").watermark__title Водяной знак
+                div.watermark__stylization
+                  div.watermark__stylization-input image.png
+                  div.watermark__stylization-button
+                    span
                 input(type="file" placeholder="image.png")#upload-watermark.watermark__file
           div.generator-position
             div.generator-position__top
