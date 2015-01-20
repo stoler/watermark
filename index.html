@@ -21,9 +21,9 @@
         </ul>
         <ul class="social">
           <li class="social__item-share"><a href="">share<span></span></a></li>
-          <li class="social__item-fb"><a href="">facebook<span></span></a></li>
-          <li class="social__item-tw"><a href="">twitter<span></span></a></li>
-          <li class="social__item-vk"><a href="">vkontakte<span></span></a></li>
+          <li class="social__item-fb"><a href="" onclick="Share.facebook('URL','TITLE','IMG_PATH','DESC')">facebook<span></span></a></li>
+          <li class="social__item-tw"><a href="" onclick="Share.twitter('URL','TITLE')">twitter<span></span></a></li>
+          <li class="social__item-vk"><a href="" onclick="Share.vkontakte('URL','TITLE','IMG_PATH','DESC')">vkontakte<span></span></a></li>
         </ul>
       </div>
       <div class="main-generator">
@@ -50,6 +50,11 @@
                   <div class="watermark__stylization-button"><span></span></div>
                 </div>
                 <input type="file" placeholder="image.png" id="upload-watermark" class="watermark__file">
+                <input type="file" placeholder="image.png" id="upload-picture" class="main-picture__file js-upload">
+              </div>
+              <div class="upload__watermark">
+                <label for="upload-watermark" class="watermark__title">Водяной знак</label>
+                <input type="file" placeholder="image.png" id="upload-watermark" class="watermark__file js-upload">
               </div>
             </form>
           </div>
@@ -104,5 +109,6 @@
         </div>
       </footer>
     </div>
+    <script src="dist/js/scripts.min.js"></script>
   </body>
 </html>
