@@ -38,7 +38,10 @@ gulp.task('sass', function () {
 
 gulp.task('scripts', function () {
     gulp.src([
-            'src/js/jquery-1.11.1.min.js'
+            'src/js/jquery-1.11.1.min.js',
+            'src/js/jquery.formstyler.js',
+            'src/js/socialSharing.js',
+            'src/js/plugins.js'
         ])
         .pipe(concat('scripts.js'))
         .pipe(gulp.dest('dist/js'))

@@ -25,13 +25,13 @@ html(lang="ru")
             a(href="") share
               span
           li.social__item-fb
-            a(href="") facebook
+            a(href="", onclick="Share.facebook('URL','TITLE','IMG_PATH','DESC')") facebook
               span
           li.social__item-tw
-            a(href="") twitter
+            a(href="", onclick="Share.twitter('URL','TITLE')") twitter
               span
           li.social__item-vk
-            a(href="") vkontakte
+            a(href="", onclick="Share.vkontakte('URL','TITLE','IMG_PATH','DESC')") vkontakte
               span
       div.main-generator
         div.generator-picture
@@ -44,18 +44,10 @@ html(lang="ru")
             form(action="" method="").upload__picture
               div.upload__main-picture
                 label(for="upload-picture").main-picture__title Исходное изображение
-                div.main-picture__stylization
-                  div.main-picture__stylization-input image.png
-                  div.main-picture__stylization-button
-                    span
-                input(type="file" placeholder="image.png")#upload-picture.main-picture__file
+                input(type="file" placeholder="image.png")#upload-picture.main-picture__file.js-upload
               div.upload__watermark
                 label(for="upload-watermark").watermark__title Водяной знак
-                div.watermark__stylization
-                  div.watermark__stylization-input image.png
-                  div.watermark__stylization-button
-                    span
-                input(type="file" placeholder="image.png")#upload-watermark.watermark__file
+                input(type="file" placeholder="image.png")#upload-watermark.watermark__file.js-upload
           div.generator-position
             div.generator-position__top
               h3.generator-position__title
@@ -100,3 +92,4 @@ html(lang="ru")
       footer.main-footer
         div.footer
           p &#169; 2015, Это мой сайт, пожалуйста, не копируйте и не воруйте его
+    script(src="dist/js/scripts.min.js")
