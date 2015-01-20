@@ -4,8 +4,6 @@ $generatorSetupBgColor: #f1f1f5;
 $lightRedColor: #f97e76;
 $silverOne: #c1cfd9;
 $picBlockBgColor: rgba(46, 54, 65, 0.64);
-$borderColor: #9eb2c0;
-$borderRadius: 3px;
 
 html {
   position: absolute;
@@ -68,4 +66,38 @@ h5 {}
   width: 980px;
   margin: 0 auto;
   overflow: hidden;
+}
+
+.main-picture__file,
+.watermark__file{
+  width: 219px;
+  height: 27px;
+  cursor: pointer;
+}
+
+.main-picture__title,
+.watermark__title {
+  display: block;
+  margin: 0 0 8px 0;
+  color: #2e3641;
+  font-size: 14px;
+}
+
+.jq-file__name {
+  height: 25px;
+  padding: 0 50px 0 3px;
+  border: 1px solid #9eb2c0;
+  border-radius: 3px;
+  color: #9eb2c0;
+  font-size: 12px;
+  line-height: 27px;
+
+}
+.jq-file__browse {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 39px;
+  height: 27px;
+  background: url(../img/file_browse_bg.jpg);
 }
