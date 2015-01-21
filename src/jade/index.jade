@@ -69,18 +69,26 @@ html(lang="ru")
                   div.square_td
                   div.square_td
               div.generator-position__coordinates
-                div.coordinates__x-y.coordinates__x
-                  span.coordinates_name x
-                  div.coordinates__shift 0
-                  div.coordinates__up-down
-                    a(href="").coordinates__x-up
-                    a(href="").coordinates__x-down
-                div.coordinates__x-y.coordinates__x
-                  span.coordinates_name y
-                  div.coordinates__shift 0
-                  div.coordinates__up-down
-                    a(href="").coordinates__y-up
-                    a(href="").coordinates__y-down
+                div.generator-position-coordinates.clearfix
+                  div.generator-position-coordinates__axis
+                    div.crd-axis X
+                  div.generator-position-coordinates__window
+                    div.crd-window 
+                      div.crd-window__num.crd-window__num--x 0
+                  div.generator-position-coordinates__arrow-list
+                    div.crd-arrow-list
+                      div.crd-arrow-list__item.crd-arrow-list__item--up
+                      div.crd-arrow-list__item.crd-arrow-list__item--down
+                div.generator-position-coordinates.clearfix
+                  div.generator-position-coordinates__axis
+                    div.crd-axis Y
+                  div.generator-position-coordinates__window
+                    div.crd-window 
+                      div.crd-window__num.crd-window__num--y 0
+                  div.generator-position-coordinates__arrow-list
+                    div.crd-arrow-list
+                      div.crd-arrow-list__item.crd-arrow-list__item--up
+                      div.crd-arrow-list__item.crd-arrow-list__item--down
               div.generator-transparency
                 h3.generator-transparency__title Прозрачность
                 div.generator-transparency__slider
