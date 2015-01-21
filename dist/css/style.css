@@ -4,6 +4,13 @@
  * 2. Prevent iOS text size adjust after orientation change, without disabling
  *    user zoom.
  */
+.clearfix:before, .clearfix:after {
+  display: table;
+  content: ' '; }
+
+.clearfix:after {
+  clear: both; }
+
 html {
   font-family: sans-serif;
   /* 1 */
@@ -600,6 +607,68 @@ generator-setup
 .generator-setup__title {
   margin: 28px 20px;
   text-align: center; }
+
+.generator-position-coordinates {
+  margin-top: 12px; }
+
+.generator-position-coordinates:first-child {
+  margin-top: 0; }
+
+.generator-position-coordinates__axis {
+  float: left; }
+
+.crd-axis {
+  font-family: "robotolight";
+  font-size: 16px;
+  padding: 11px 0; }
+
+.generator-position-coordinates__window {
+  float: left;
+  margin-left: 6px; }
+
+.crd-window {
+  width: 44px;
+  height: 43px;
+  border: 1px solid #9eb2c0;
+  border-radius: 5px;
+  font-family: "SEGOEUIL";
+  font-size: 22px;
+  overflow: hidden;
+  position: relative; }
+
+.crd-window__num {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 35px;
+  text-align: center; }
+
+.generator-position-coordinates__arrow-list {
+  float: left; }
+
+.crd-arrow-list {
+  height: 44px;
+  width: 25px; }
+
+.crd-arrow-list__item {
+  height: 22px; }
+
+.crd-arrow-list__item--up {
+  background: url(../img/sprite.png) no-repeat -295px 2px;
+  cursor: pointer; }
+
+.crd-arrow-list__item--up:hover {
+  background: url(../img/sprite.png) no-repeat -316px 2px; }
+
+.crd-arrow-list__item--down {
+  background: url(../img/sprite.png) no-repeat -295px -22px;
+  cursor: pointer; }
+
+.crd-arrow-list__item--down:hover {
+  background: url(../img/sprite.png) no-repeat -316px -22px; }
 
 /*
 buttons
