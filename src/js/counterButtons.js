@@ -13,15 +13,12 @@ var COUNTERBTN = (function () {
   return {
 
     init: function () {
-      // $('.crd-arrow-list__item').on('click', function () {
-      //   changeCoordValue($(this));
-      // });
-      $('.crd-arrow-list__item').on('mousedown mouseup', function (event) {
+      $('.crd-arrow-list__item').on('click', function () {
         changeCoordValue($(this));
       });
     }
 
   }
 })()
-// create DOM ready!
-COUNTERBTN.init();
+
+$(document).ready(COUNTERBTN.init());
