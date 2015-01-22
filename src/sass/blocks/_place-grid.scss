@@ -1,0 +1,28 @@
+/*
+place-grid
+*/
+
+.generator-positio__square{
+  display: table;
+  width: 100px;
+  height: 100px;
+  background: #dae0e8;
+  border-collapse: collapse;
+  border: 1px solid #9eb2c0;
+  overflow: hidden;
+  border-radius: 3px;
+}
+
+.square-tr{
+  display: table-row;
+  border: 1px solid #9eb2c0;
+}
+
+.square-td {
+  display: table-cell;
+  width: 33.333%;
+  border: 1px solid #9eb2c0;
+  &:hover{
+    background: $lightRedColor;
+  }
+}
