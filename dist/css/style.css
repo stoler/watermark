@@ -613,6 +613,45 @@ generator-setup
 .generator-setup__upload, .generator-position {
   margin: 0 20px; }
 
+/*
+switch
+*/
+.switch, .switch__mono, .switch__multi {
+  font: 0/0 serif;
+  text-shadow: none;
+  color: transparent;
+  width: 19px;
+  height: 19px;
+  display: inline-block;
+  margin-right: 10px; }
+
+.switch:last-child, .switch__mono:last-child, .switch__multi:last-child {
+  margin-right: 0; }
+
+.switch__mono {
+  background: url(../img/sprite.png) no-repeat -56px -56px; }
+
+.switch__mono:hover {
+  background: url(../img/sprite.png) no-repeat -84px -56px; }
+
+.switch__mono-active {
+  background: url(../img/sprite.png) no-repeat -112px -56px; }
+
+.switch__mono-active:hover {
+  background: url(../img/sprite.png) no-repeat -112px -56px; }
+
+.switch__multi {
+  background: url(../img/sprite.png) no-repeat -140px -56px; }
+
+.switch__multi:hover {
+  background: url(../img/sprite.png) no-repeat -168px -56px; }
+
+.switch__multi-active {
+  background: url(../img/sprite.png) no-repeat -196px -56px; }
+
+.switch__multi-active:hover {
+  background: url(../img/sprite.png) no-repeat -196px -56px; }
+
 .generator-position-coordinates {
   margin-top: 12px; }
 

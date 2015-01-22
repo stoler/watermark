@@ -1,0 +1,44 @@
+/*
+switch
+*/
+
+.switch{
+  font: 0/0 serif;
+  text-shadow: none;
+  color: transparent;
+  width: 19px;
+  height: 19px;
+  display: inline-block;
+  margin-right: 10px;
+  &:last-child{
+    margin-right: 0;
+  }
+}
+
+.switch__mono{
+  @extend .switch;
+  background: url(../img/sprite.png) no-repeat -56px -56px;
+  &:hover{
+    background: url(../img/sprite.png) no-repeat -84px -56px;
+  }
+  &-active{
+    background: url(../img/sprite.png) no-repeat -112px -56px;
+    &:hover{
+      background: url(../img/sprite.png) no-repeat -112px -56px;
+    }
+  }
+}
+
+.switch__multi{
+  @extend .switch;
+  background: url(../img/sprite.png) no-repeat -140px -56px;
+  &:hover{
+    background: url(../img/sprite.png) no-repeat -168px -56px;
+  }
+  &-active{
+    background: url(../img/sprite.png) no-repeat -196px -56px;
+    &:hover{
+      background: url(../img/sprite.png) no-repeat -196px -56px;
+    }
+  }
+}
