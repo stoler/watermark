@@ -4,7 +4,7 @@ lang-soc
 .lang-soc-block{
   position: absolute;
   left: 0;
-  top: 50px;
+  top: 40px;
 }
 
 .languages,
@@ -16,12 +16,13 @@ lang-soc
 }
 
 .languages{
-  margin-bottom: 20px;
+  margin-bottom: 17px;
 }
 
 .languages__item{
   border-bottom: 1px solid #8e9298;
   width: 43px;
+  box-sizing: border-box;
   &:last-child{
     border-bottom: none;
   }
@@ -38,7 +39,7 @@ lang-soc
     font-size: 1.250em;
     font-weight: 300;
     width: 43px;
-    padding: 5px 0;
+    padding: 4px 0;
     display: block;
     text-align: center;
     &:hover{

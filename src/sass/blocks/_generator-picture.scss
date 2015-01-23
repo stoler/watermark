@@ -7,7 +7,7 @@ generator-picture
   padding: 25px;
   background: $picBlockBgColor;
   width: 650px;
-  margin: 0 0 40px 0;
+  margin: 0;
 }
 
 .generator-picture__result {
@@ -17,5 +17,6 @@ generator-picture
 }
 
 .generator-picture__title {
-  margin: 0 0 50px 0;
+  margin: 0 0 70px -4px;
+  line-height: 17px;
 }
