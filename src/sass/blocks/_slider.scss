@@ -1,7 +1,37 @@
 .generator-transparency__slider{
-
+  position: relative;
+}
+.ui-slider{
+  height: 3px;
+  width: 218px;
+  border-radius: 3px;
+  background: $sliderBackground;
+}
+.ui-slider-range{
+  @extend .ui-slider;
+  height: 3px;
+  background: $sliderRangeColor;
+}
+.ui-slider-handle{
+  position: absolute;
+  z-index: 2;
+  height: 8px;
+  width: 8px;
+  background: $sliderRangeColor;
+  border: 7px solid $sliderBackground;
+  border-radius: 50%;
+  top: -9px;
+  margin-left: -11px;
+  cursor: pointer;
+  
+  &:active{
+    background: $lightRedColor;
+  }
+  // firefox don't change color on mousedown in contrast to chrome
+  // so need hover effect
+  &:hover{
+    background: $lightRedColor;
+  }
 }
 
-.slider__handle{
-
-}
+// как она будет передавать данные? через объект? нужно посмотреть документацию по этой штуке
