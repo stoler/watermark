@@ -741,9 +741,48 @@ generator-setup
   text-align: center;
 }
 
-.generator-setup__upload,
-.generator-position {
+.main-generator-upload,
+.main-generator-position,
+.main-generator-transparency {
+  border-bottom: 1px solid rgba(249, 126, 118, 0.4);
+  margin-bottom: 20px;
+  position: relative;
+}
+.main-generator-upload:before,
+.main-generator-position:before,
+.main-generator-transparency:before {
+  position: absolute;
+  z-index: 5;
+  bottom: -10px;
+  left: 50%;
+  margin-left: -9px;
+  content: '';
+  border-top: 10px solid #f1f1f5;
+  border-right: 9px solid transparent;
+  border-left: 9px solid transparent;
+}
+.main-generator-upload:after,
+.main-generator-position:after,
+.main-generator-transparency:after {
+  position: absolute;
+  z-index: 2;
+  bottom: -11px;
+  left: 50%;
+  margin-left: -9px;
+  content: '';
+  border-top: 10px solid rgba(249, 126, 118, 0.4);
+  border-right: 9px solid transparent;
+  border-left: 9px solid transparent;
+}
+
+.generator-upload,
+.generator-position,
+.generator-transparency {
   margin: 0 20px;
+}
+
+.generator-buttons {
+  margin: 0 10px;
 }
 
 /*
