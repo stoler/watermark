@@ -1,3 +1,5 @@
+// поведение кнопок, изменяющих значения в окнах координат
+
 var COUNTERBTN = (function () {
   var 
       // get button, checkout what direction it is 
@@ -19,6 +21,4 @@ var COUNTERBTN = (function () {
     }
 
   }
-})()
-
-$(document).ready(COUNTERBTN.init());
+})();

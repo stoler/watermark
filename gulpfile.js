@@ -42,6 +42,7 @@ gulp.task('scripts', function () {
             'src/js/jquery.formstyler.js',
             'src/js/socialSharing.js',
             'src/js/counterButtons.js',
+            'src/js/jquery-ui.min.js',
             'src/js/plugins.js'
         ])
         .pipe(concat('scripts.js'))
