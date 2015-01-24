@@ -2,6 +2,15 @@
 place-grid
 */
 
+.generator-positio__main-square{
+  position: relative;
+  width: 101px;
+  height: 101px;
+  text-align: center;
+  overflow: hidden;
+  vertical-align: middle;
+}
+
 .generator-positio__square{
   display: table;
   width: 100px;
@@ -25,4 +34,22 @@ place-grid
   &:hover{
     background: $lightRedColor;
   }
+}
+
+.position-vertical,
+.position-horizontal{
+  position: absolute;
+  background: $lightRedColor;
+  display: inline-block;
+}
+
+.position-vertical{
+  height: 100%;
+  top: 0;
+}
+
+.position-horizontal{
+  width: 100%;
+  left: 0;
+  top: 50%;
 }

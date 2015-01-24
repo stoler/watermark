@@ -6,12 +6,12 @@ generator-setup
   width: 260px;
   float: left;
   @extend .after-clear;
-  margin: 0 0 40px;
   background: $generatorSetupBgColor;
+  margin: 0;
 }
 
 .generator-setup__title {
-  margin: 28px 20px;
+  margin: 21px 20px 29px 12px;
   text-align: center;
 }
 
@@ -19,7 +19,7 @@ generator-setup
 .main-generator-position,
 .main-generator-transparency{
   border-bottom: 1px solid rgba(249, 126, 118, 0.4);
-  margin-bottom: 20px;
+  margin-bottom: 14px;
   position: relative;
   &:before{
     position: absolute;
@@ -51,6 +51,60 @@ generator-setup
   margin: 0 20px;
 }
 
+.generator-upload{
+  margin-bottom: 27px;
+}
+
+.generator-position{
+  margin-bottom: 33px;
+}
+
+.generator-transparency{
+  margin-bottom: 33px;
+}
+
+.generator-position__title{
+  font-size: 0.875em;
+  margin-bottom: 38px;
+}
+
+.generator-position__top{
+  position: relative;
+}
+
+.generator-position__bottom{
+  position: relative;
+}
+
+.generator-position__coordinates{
+  position: absolute;
+  right: -3px;
+  top: 0;
+}
+
+.main-generator-transparency{
+  margin-bottom: 57px;
+}
+
+.generator-transparency__title{
+  font-size: 0.875em;
+  margin-bottom: 27px;
+}
+
 .generator-buttons{
   margin: 0 10px;
+  position: relative;
+}
+
+.main-generator-buttons {
+  margin-bottom: 25px;
+}
+
+.button-download{
+  position: absolute;
+  right: 0;
+}
+
+.upload__main-picture{
+  margin-bottom: 15px;
 }
