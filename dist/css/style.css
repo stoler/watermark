@@ -769,6 +769,37 @@ place-grid
 .square-td:hover {
   background: #f97e76; }
 
+.generator-transparency__slider {
+  position: relative; }
+
+.ui-slider, .ui-slider-range {
+  height: 3px;
+  width: 218px;
+  border-radius: 3px;
+  background: #dbe1e8; }
+
+.ui-slider-range {
+  height: 3px;
+  background: #9eb2c0; }
+
+.ui-slider-handle {
+  position: absolute;
+  z-index: 2;
+  height: 8px;
+  width: 8px;
+  background: #9eb2c0;
+  border: 7px solid #dbe1e8;
+  border-radius: 50%;
+  top: -9px;
+  margin-left: -11px;
+  cursor: pointer; }
+
+.ui-slider-handle:active {
+  background: #f97e76; }
+
+.ui-slider-handle:hover {
+  background: #f97e76; }
+
 /*
 buttons
 */
