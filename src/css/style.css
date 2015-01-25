@@ -1008,6 +1008,13 @@ place-grid
   background: #c1cfd9;
 }
 
+.square-td--active {
+  background: #f97e76;
+}
+.square-td--active:hover {
+  background: #f97e76;
+}
+
 .position-vertical,
 .position-horizontal {
   position: absolute;

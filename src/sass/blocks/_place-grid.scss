@@ -36,6 +36,12 @@ place-grid
     background: $silverOne;
   }
 }
+.square-td--active{
+  background: $lightRedColor;
+  &:hover{
+    background: $lightRedColor;
+  }
+}
 
 .position-vertical,
 .position-horizontal{
