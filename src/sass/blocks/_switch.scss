@@ -3,9 +3,8 @@ switch
 */
 
 .generator-position__switch{
-  position: absolute;
-  right: -9px;
-  top: -20px;
+  float: right;
+  height: 19px;
 }
 
 .switch{
@@ -16,6 +15,7 @@ switch
   height: 19px;
   display: inline-block;
   margin-right: 10px;
+  vertical-align: top;
   &:last-child{
     margin-right: 0;
   }
@@ -27,7 +27,7 @@ switch
   &:hover{
     background: url(../img/sprite.png) no-repeat -84px -56px;
   }
-  &-active{
+  &.active{
     background: url(../img/sprite.png) no-repeat -112px -56px;
     &:hover{
       background: url(../img/sprite.png) no-repeat -112px -56px;
@@ -41,7 +41,7 @@ switch
   &:hover{
     background: url(../img/sprite.png) no-repeat -168px -56px;
   }
-  &-active{
+  &.active{
     background: url(../img/sprite.png) no-repeat -196px -56px;
     &:hover{
       background: url(../img/sprite.png) no-repeat -196px -56px;

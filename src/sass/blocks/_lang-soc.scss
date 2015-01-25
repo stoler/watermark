@@ -20,7 +20,7 @@ lang-soc
 }
 
 .languages__item{
-  border-bottom: 1px solid #8e9298;
+  border-bottom: 1px solid $socialColorBorder;
   width: 43px;
   box-sizing: border-box;
   &:last-child{
@@ -35,7 +35,7 @@ lang-soc
     font-family: SEGOEUIL;
     text-transform: uppercase;
     text-decoration: none;
-    color: #8e9298;
+    color: $socialColorBorder;
     font-size: 1.250em;
     font-weight: 300;
     width: 43px;
@@ -43,7 +43,7 @@ lang-soc
     display: block;
     text-align: center;
     &:hover{
-      color: #444a53;
+      color: $socialColor;
     }
   }
 }

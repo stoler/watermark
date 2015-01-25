@@ -2,8 +2,9 @@
 place-grid
 */
 
-.generator-positio__main-square{
+.generator-position__main-square{
   position: relative;
+  float: left;
   width: 101px;
   height: 101px;
   text-align: center;
@@ -11,26 +12,26 @@ place-grid
   vertical-align: middle;
 }
 
-.generator-positio__square{
+.generator-position__square{
   display: table;
   width: 100px;
   height: 100px;
-  background: #dae0e8;
+  background: $placeGridColor;
   border-collapse: collapse;
-  border: 1px solid #9eb2c0;
+  border: 1px solid $sliderRangeColor;
   overflow: hidden;
   border-radius: 3px;
 }
 
 .square-tr{
   display: table-row;
-  border: 1px solid #9eb2c0;
+  border: 1px solid $sliderRangeColor;
 }
 
 .square-td {
   display: table-cell;
   width: 33.333%;
-  border: 1px solid #9eb2c0;
+  border: 1px solid $sliderRangeColor;
   &:hover{
     background: $lightRedColor;
   }

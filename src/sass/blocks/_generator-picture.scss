@@ -3,8 +3,8 @@ generator-picture
 */
 .generator-picture {
   @extend .after-clear;
-  @extend .col9;
-  padding: 25px;
+  display: table-cell;
+  padding: 10px 25px 25px 25px;
   background: $picBlockBgColor;
   width: 650px;
   margin: 0;
@@ -17,6 +17,6 @@ generator-picture
 }
 
 .generator-picture__title {
-  margin: 0 0 70px -4px;
-  line-height: 17px;
+  margin: 0 0 53px 0;
+  line-height: 1.35em;
 }

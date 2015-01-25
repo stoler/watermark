@@ -1,9 +1,8 @@
 $axisFont: "robotolight";
 $counterNumFont: "SEGOEUIL";
-$borderColor: #9eb2c0;
 
 .generator-position-coordinates{
-  margin-top: 12px;
+  margin-bottom: 12px;
   &:first-child{
     margin-top: 0;
   }
@@ -26,12 +25,8 @@ $borderColor: #9eb2c0;
   border: 1px solid $borderColor;
   border-radius: 5px;
   font-family: $counterNumFont;
-  // плохо выглядят цифры в 4 знака (-100)
-  // поэтому сократил макетный шрифт на 2px
   font-size: 24px - 2px;
   overflow: hidden;
-
-  //for vertical-align center
   position: relative;
 }
 .crd-window__num{
@@ -47,25 +42,26 @@ $borderColor: #9eb2c0;
 }
 .generator-position-coordinates__arrow-list{
   float: left;
+  margin: 0 0 0 3px;
 }
 .crd-arrow-list{
   height: 44px;
-  width: 25px;
+  width: 18px;
 }
 .crd-arrow-list__item{
   height: 22px;
 }
 .crd-arrow-list__item--up{
-  background: url(../img/sprite.png) no-repeat -295px 2px;
+  background: url(../img/sprite.png) no-repeat -300px 2px;
   cursor: pointer;
   &:hover{
-    background: url(../img/sprite.png) no-repeat -316px 2px;
+    background: url(../img/sprite.png) no-repeat -321px 2px;
   }
 }
 .crd-arrow-list__item--down{
-  background: url(../img/sprite.png) no-repeat -295px -22px;
+  background: url(../img/sprite.png) no-repeat -300px -22px;
   cursor: pointer;
   &:hover{
-    background: url(../img/sprite.png) no-repeat -316px -22px;
+    background: url(../img/sprite.png) no-repeat -321px -22px;
   }
 }

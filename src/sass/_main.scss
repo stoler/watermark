@@ -6,12 +6,16 @@ $silverOne: #c1cfd9;
 $picBlockBgColor: rgba(46, 54, 65, 0.64);
 $sliderBackground: #dbe1e8;
 $sliderRangeColor: #9eb2c0;
+$socialColorBorder: #8e9298;
+$socialColor: #444a53;
+$placeGridColor: #dae0e8;
+$borderColor: #9eb2c0;
 
 html {
-  position: absolute;
   width: 100%;
-  min-width: 1000px;
+  min-width: 1200px;
   min-height: 100%;
+  display: table;
 }
 
 body{
@@ -24,7 +28,7 @@ body{
   -o-background-size: 100%;
   background-size: 100%;
   width: 100%;
-
+  display: table-cell;
 }
 
 h1,
@@ -38,7 +42,7 @@ h5 {
 
 h1 {
   font-family: 'SEGOEUIL';
-  color:  #ffffff;
+  color: $whiteColor;
   font-size: 2.25em;
   font-weight: 300;
   text-align: left;
@@ -60,14 +64,15 @@ h5 {}
 
 .wrapper{
   width: 100%;
-  min-width: 1000px;
+  min-width: 1200px;
   position: relative;
 }
 
 .main-generator{
   width: 960px;
   margin: 55px auto 37px;
-  overflow: hidden;
+  display: table;
+  @extend .after-clear;
 }
 
 .main-picture__file,
@@ -81,16 +86,16 @@ h5 {}
 .watermark__title {
   display: block;
   margin: 0 0 7px 0;
-  color: #2e3641;
+  color: $baseColor;
   font-size: 0.875em;
 }
 
 .jq-file__name {
   height: 25px;
   padding: 0 50px 0 3px;
-  border: 1px solid #9eb2c0;
+  border: 1px solid $sliderRangeColor;
   border-radius: 3px;
-  color: #9eb2c0;
+  color: $sliderRangeColor;
   font-size: 0.75em;
   line-height: 27px;
 
@@ -99,7 +104,9 @@ h5 {}
   position: absolute;
   top: 0;
   right: 0;
-  width: 39px;
+  width: 38px;
   height: 27px;
-  background: url(../img/file_browse_bg.jpg);
+  background: url(../img/sprite.png) -265px -20px;
+  background-color: $lightRedColor;
+  @include border-radius(0 4px 4px 0);
 }

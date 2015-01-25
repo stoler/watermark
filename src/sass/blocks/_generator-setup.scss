@@ -4,7 +4,7 @@ generator-setup
 
 .generator-setup {
   width: 260px;
-  float: left;
+  display: table-cell;
   @extend .after-clear;
   background: $generatorSetupBgColor;
   margin: 0;
@@ -19,7 +19,7 @@ generator-setup
 .main-generator-position,
 .main-generator-transparency{
   border-bottom: 1px solid rgba(249, 126, 118, 0.4);
-  margin-bottom: 14px;
+  margin-bottom: 12px;
   position: relative;
   &:before{
     position: absolute;
@@ -28,7 +28,7 @@ generator-setup
     left: 50%;
     margin-left: -9px;
     content: '';
-    border-top: 10px solid #f1f1f5;
+    border-top: 10px solid $generatorSetupBgColor;
     border-right: 9px solid transparent;
     border-left: 9px solid transparent;
   }
@@ -56,7 +56,7 @@ generator-setup
 }
 
 .generator-position{
-  margin-bottom: 33px;
+  margin-bottom: 25px;
 }
 
 .generator-transparency{
@@ -65,21 +65,24 @@ generator-setup
 
 .generator-position__title{
   font-size: 0.875em;
-  margin-bottom: 38px;
+  margin-bottom: 34px;
+  float: left;
 }
 
 .generator-position__top{
   position: relative;
+  @extend .after-clear;
 }
 
 .generator-position__bottom{
   position: relative;
+  @extend .after-clear;
 }
 
 .generator-position__coordinates{
-  position: absolute;
-  right: -3px;
-  top: 0;
+  display: block;
+  float: right;
+  width: 83px;
 }
 
 .main-generator-transparency{
