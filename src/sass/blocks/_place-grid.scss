@@ -33,6 +33,12 @@ place-grid
   width: 33.333%;
   border: 1px solid $sliderRangeColor;
   &:hover{
+    background: $silverOne;
+  }
+}
+.square-td--active{
+  background: $lightRedColor;
+  &:hover{
     background: $lightRedColor;
   }
 }

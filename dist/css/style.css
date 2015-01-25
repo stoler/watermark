@@ -833,6 +833,12 @@ place-grid
   border: 1px solid #9eb2c0; }
 
 .square-td:hover {
+  background: #c1cfd9; }
+
+.square-td--active {
+  background: #f97e76; }
+
+.square-td--active:hover {
   background: #f97e76; }
 
 .position-vertical, .position-horizontal {

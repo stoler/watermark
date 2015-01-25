@@ -989,6 +989,19 @@ var COUNTERBTN = (function () {
 
   }
 })();
+var PLACEGRID = (function () {
+  var putActiveSquare = function (square) {
+    $('.square-td--active').removeClass('square-td--active');
+    square.addClass('square-td--active');
+  }
+  return {
+    init: function() {
+      $('.generator-position__square').on('click', '.square-td', function () {
+        putActiveSquare($(this));
+      });
+    }
+  }
+})();
 /*! jQuery UI - v1.11.2 - 2015-01-22
 * http://jqueryui.com
 * Includes: core.js, widget.js, mouse.js, slider.js
@@ -1005,4 +1018,6 @@ $(function(){
     });
     // init coordinate counter buttons
     COUNTERBTN.init();
+    // init place grid click handler
+    PLACEGRID.init();
 })

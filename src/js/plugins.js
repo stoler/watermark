@@ -8,4 +8,6 @@ $(function(){
     });
     // init coordinate counter buttons
     COUNTERBTN.init();
+    // init place grid click handler
+    PLACEGRID.init();
 })
