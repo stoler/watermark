@@ -51,13 +51,13 @@ var DRAGGABLE = (function () {
         },
         set_pos: function (e, ui) {
             //var $this = $(this);
-            posX.text(ui.position.left)
-            posY.text(ui.position.top)
-            console.log(ui.position.left)
+            posX.attr('value', ui.position.left);
+            posY.attr('value', ui.position.top);
+            // console.log(ui.position.left)
         },
         set_pos_x: function() {
-            console.log(posY.text(),posX.text());
-            watermark.css({top: posY.text()+'px', left: posX.text()+'px'});
+            // console.log(posY.text(),posX.text());
+            watermark.css({top: posY.attr('value')+'px', left: posX.attr('value')+'px'});
 
         },
         set_opacity: function(e,ui){
