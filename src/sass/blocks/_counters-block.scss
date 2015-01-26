@@ -27,18 +27,14 @@ $counterNumFont: "SEGOEUIL";
   font-family: $counterNumFont;
   font-size: 24px - 2px;
   overflow: hidden;
-  position: relative;
 }
 .crd-window__num{
-  position: absolute;
-  margin: auto;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 35px;
+  width: 46px;
+  height: 46px;
   text-align: center;
-
+  background: $generatorSetupBgColor;
+  margin-top: -6px;
+  margin-left: -4px;
 }
 .generator-position-coordinates__arrow-list{
   float: left;
