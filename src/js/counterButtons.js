@@ -9,7 +9,7 @@ var COUNTERBTN = (function () {
             direction = coordButton.hasClass('crd-arrow-list__item--up') ? 10 : -10,
             coordWindow = coordButton.closest('.generator-position-coordinates').find('.crd-window__num');
 
-        coordWindow.text(parseInt(coordWindow.text(), 10) + direction);
+        coordWindow.attr('value', parseInt(coordWindow.attr('value')) + direction);
       };
 
   return {
@@ -19,6 +19,6 @@ var COUNTERBTN = (function () {
         changeCoordValue($(this));
       });
     }
-
+    
   }
 })();
