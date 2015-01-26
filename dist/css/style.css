@@ -605,6 +605,17 @@ generator-picture
   margin: 0 0 53px 0;
   line-height: 1.35em; }
 
+.generator-picture__image {
+  position: relative;
+  max-height: 534px; }
+
+.generator-picture__watermark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: inline-block;
+  opacity: 0.5; }
+
 /*
 generator-setup
 */
