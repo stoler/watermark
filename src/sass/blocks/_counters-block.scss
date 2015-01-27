@@ -13,8 +13,31 @@ $counterNumFont: "SEGOEUIL";
 .crd-axis{
   font-family: $axisFont;
   font-size: 16px;
-  padding: 11px 0;
+  height: 30px;
+  width: 10px;
+  margin-top: 12px;
 }
+
+.crd-axis--x.crd-axis--letter:after{
+  content: "X";
+}
+
+.crd-axis--y.crd-axis--letter:after{
+  content: "Y";
+}
+.crd-axis--x.crd-axis--arrow{
+  background: url(../img/sprite.png) no-repeat -225px -45px;
+  height: 33px;
+  width: 10px;
+  margin-top: 5px;
+}
+.crd-axis--y.crd-axis--arrow{
+  background: url(../img/sprite.png) no-repeat -249px -59px;
+  height: 33px;
+  width: 31px;
+  margin-left: -21px;
+}
+
 .generator-position-coordinates__window{
   float: left;
   margin-left: 6px;

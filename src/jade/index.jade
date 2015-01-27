@@ -55,8 +55,10 @@ html(lang="ru")
               div.generator-position__top
                 h3.generator-position__title Положение
                 div.generator-position__switch
-                  a(href="").switch__multi multi
-                  a(href="").switch__mono.switch__mono-active mono
+                  div.switch.switch__multi multi
+                  //- a(href="#").switch.switch__multi multi
+                  div.switch.switch__mono.switch--active mono
+                  //- a(href="#").switch.switch__mono.switch--active mono
               div.generator-position__bottom
                 div.generator-position__main-square
                   div.generator-position__square
@@ -77,7 +79,7 @@ html(lang="ru")
                 div.generator-position__coordinates
                   div.generator-position-coordinates.clearfix
                     div.generator-position-coordinates__axis
-                      div.crd-axis X
+                      div.crd-axis.crd-axis--x.crd-axis--letter
                     div.generator-position-coordinates__window
                       div.crd-window
                         input(type="text" name="x-axis" value="0").crd-window__num.crd-window__num--x
@@ -87,7 +89,7 @@ html(lang="ru")
                         div.crd-arrow-list__item.crd-arrow-list__item--down
                   div.generator-position-coordinates.clearfix
                     div.generator-position-coordinates__axis
-                      div.crd-axis Y
+                      div.crd-axis.crd-axis--y.crd-axis--letter
                     div.generator-position-coordinates__window
                       div.crd-window
                         input(type="text" name="y-axis" value="0").crd-window__num.crd-window__num--y

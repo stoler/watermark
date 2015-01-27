@@ -3262,6 +3262,50 @@ var PLACEGRID = (function () {
     }
   }
 })();
+var SWITCH = (function () {
+  var
+      switchVariants = $('.switch'),
+
+
+      // меняет названия полей ввода с букв на стрелки
+      changeLabels = function (activeButton) {
+        var
+            axisLabel = $(".crd-axis");
+
+        if (activeButton.hasClass('switch__mono')) {
+          axisLabel.each(function () {
+            var $this = $(this);
+            $this.removeClass('crd-axis--arrow');
+            $this.addClass('crd-axis--letter');
+          });
+        } else if (activeButton.hasClass('switch__multi')) {
+          axisLabel.each(function () {
+            var $this = $(this);
+            $this.removeClass('crd-axis--letter');
+            $this.addClass('crd-axis--arrow');
+          });
+        }
+        
+      },
+
+      // меняет класс активности между кнопками 
+      // меняющими количество вотермарков в окне 
+      // задает класс, который выделяет кнопку красным
+      changeRepeat = function () {
+        console.log('im here');
+        console.log($(this));
+        $('.switch--active').removeClass('switch--active');
+        $(this).addClass('switch--active');
+        changeLabels($(this));
+      };
+  return {
+    init: function () {
+      console.log('im initialized!');
+      switchVariants.on('click', changeRepeat);
+    }
+  }
+})();
+SWITCH.init();
 /*! jQuery UI - v1.11.2 - 2015-01-18
 * http://jqueryui.com
 * Includes: core.js, widget.js, mouse.js, position.js, draggable.js, droppable.js, resizable.js, selectable.js, sortable.js, accordion.js, autocomplete.js, button.js, datepicker.js, dialog.js, menu.js, progressbar.js, selectmenu.js, slider.js, spinner.js, tabs.js, tooltip.js, effect.js, effect-blind.js, effect-bounce.js, effect-clip.js, effect-drop.js, effect-explode.js, effect-fade.js, effect-fold.js, effect-highlight.js, effect-puff.js, effect-pulsate.js, effect-scale.js, effect-shake.js, effect-size.js, effect-slide.js, effect-transfer.js
