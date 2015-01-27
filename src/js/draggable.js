@@ -7,6 +7,7 @@ var DRAGGABLE = (function () {
         spinners = $('.crd-arrow-list__item'),
         slider = $('.generator-transparency__slider'),
         grisSquare = $('.square-td'),
+        inputWindow = $('.crd-window__num'),
 
     // Размеры элементов
         imagesWidth = images.width(),
@@ -46,18 +47,18 @@ var DRAGGABLE = (function () {
         add_listerners: function () {
             watermark.on('drag', this.set_pos);
             spinners.on('click', this.set_pos_x);
+            inputWindow.on('focusout', this.set_pos_x);
             slider.on('slide', this.set_opacity);
             grisSquare.on('click', this.set_grid_pos)
         },
         set_pos: function (e, ui) {
             //var $this = $(this);
-            posX.attr('value', ui.position.left);
-            posY.attr('value', ui.position.top);
-            // console.log(ui.position.left)
+            posX.val(ui.position.left);
+            posY.val(ui.position.top);
         },
         set_pos_x: function() {
             // console.log(posY.text(),posX.text());
-            watermark.css({top: posY.attr('value')+'px', left: posX.attr('value')+'px'});
+            watermark.css({top: posY.val() +'px', left: posX.val() +'px'});
 
         },
         set_opacity: function(e,ui){
