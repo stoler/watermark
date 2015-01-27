@@ -3218,6 +3218,11 @@ Share = {
 
 var COUNTERBTN = (function () {
   var 
+      initInputValue = function () {
+        $('.crd-window__num').each(function () {
+          $(this).val(0);
+        });
+      },
       // get button, checkout what direction it is 
       // and change appropriate window
       changeCoordValue = function (coordButton) {
@@ -3225,12 +3230,18 @@ var COUNTERBTN = (function () {
             direction = coordButton.hasClass('crd-arrow-list__item--up') ? 10 : -10,
             coordWindow = coordButton.closest('.generator-position-coordinates').find('.crd-window__num');
 
-        coordWindow.attr('value', parseInt(coordWindow.attr('value')) + direction);
+        // coordWindow.attr('value', parseInt(coordWindow.attr('value')) + direction);
+        coordWindow.val(parseInt(coordWindow.val()) + direction);
+      },
+      changeInputValue = function (inputField) {
+        console.log(inputField);
+        console.log(inputField.val());
       };
 
   return {
 
     init: function () {
+      initInputValue();
       $('.crd-arrow-list__item').on('click', function () {
         changeCoordValue($(this));
       });
@@ -3273,6 +3284,7 @@ var DRAGGABLE = (function () {
         spinners = $('.crd-arrow-list__item'),
         slider = $('.generator-transparency__slider'),
         grisSquare = $('.square-td'),
+        inputWindow = $('.crd-window__num'),
 
     // Размеры элементов
         imagesWidth = images.width(),
@@ -3312,18 +3324,18 @@ var DRAGGABLE = (function () {
         add_listerners: function () {
             watermark.on('drag', this.set_pos);
             spinners.on('click', this.set_pos_x);
+            inputWindow.on('focusout', this.set_pos_x);
             slider.on('slide', this.set_opacity);
             grisSquare.on('click', this.set_grid_pos)
         },
         set_pos: function (e, ui) {
             //var $this = $(this);
-            posX.attr('value', ui.position.left);
-            posY.attr('value', ui.position.top);
-            // console.log(ui.position.left)
+            posX.val(ui.position.left);
+            posY.val(ui.position.top);
         },
         set_pos_x: function() {
             // console.log(posY.text(),posX.text());
-            watermark.css({top: posY.attr('value')+'px', left: posX.attr('value')+'px'});
+            watermark.css({top: posY.val() +'px', left: posX.val() +'px'});
 
         },
         set_opacity: function(e,ui){
