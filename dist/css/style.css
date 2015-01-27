@@ -722,7 +722,8 @@ switch
   height: 19px;
   display: inline-block;
   margin-right: 10px;
-  vertical-align: top; }
+  vertical-align: top;
+  cursor: pointer; }
 
 .switch:last-child, .switch__mono:last-child, .switch__multi:last-child {
   margin-right: 0; }
@@ -733,10 +734,7 @@ switch
 .switch__mono:hover {
   background: url(../img/sprite.png) no-repeat -84px -56px; }
 
-.switch__mono.active {
-  background: url(../img/sprite.png) no-repeat -112px -56px; }
-
-.switch__mono.active:hover {
+.switch__mono.switch--active {
   background: url(../img/sprite.png) no-repeat -112px -56px; }
 
 .switch__multi {
@@ -745,10 +743,7 @@ switch
 .switch__multi:hover {
   background: url(../img/sprite.png) no-repeat -168px -56px; }
 
-.switch__multi.active {
-  background: url(../img/sprite.png) no-repeat -196px -56px; }
-
-.switch__multi.active:hover {
+.switch__multi.switch--active {
   background: url(../img/sprite.png) no-repeat -196px -56px; }
 
 .generator-position-coordinates {
