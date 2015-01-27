@@ -411,7 +411,8 @@ body {
   -o-background-size: 100%;
   background-size: 100%;
   width: 100%;
-  display: table-cell; }
+  display: table-cell;
+  vertical-align: middle; }
 
 h1, h2, h3, h4, h5 {
   margin: 0;
@@ -439,7 +440,7 @@ h2 {
 
 .main-generator {
   width: 960px;
-  margin: 55px auto 37px;
+  margin: 0 auto 37px;
   display: table; }
 
 .main-picture__file, .watermark__file {
@@ -599,7 +600,8 @@ generator-picture
 .generator-picture__result {
   width: 651px;
   height: 534px;
-  background: #ffffff; }
+  background: #ffffff;
+  overflow: hidden; }
 
 .generator-picture__title {
   margin: 0 0 53px 0;
