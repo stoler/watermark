@@ -49,7 +49,7 @@ gulp.task('scripts', function () {
         'src/js/jquery-ui.min.js',
         'src/js/draggable.js',
         'src/js/plugins.js',
-
+        'src/js/base.js'
     ])
         .pipe(concat('scripts.js'))
         .pipe(gulp.dest('dist/js'))

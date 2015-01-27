@@ -29,11 +29,7 @@
       <div class="main-generator">
         <div class="generator-picture">
           <h1 class="generator-picture__title">Генератор водяных знаков</h1>
-          <div class="generator-picture__result">
-            <div class="generator-picture__image"><img src="dist/img/upload/image.png">
-              <div class="generator-picture__watermark"><img src="dist/img/upload/watermark.png"></div>
-            </div>
-          </div>
+          <div class="generator-picture__result generator-picture__image"><img src="dist/img/upload/image.png" class="generator-picture__img"><img src="dist/img/upload/watermark.png" class="generator-picture__watermark"></div>
         </div>
         <div class="generator-setup">
           <h2 class="generator-setup__title">Настройки</h2>
@@ -42,11 +38,11 @@
               <form action="" method="" class="upload__picture">
                 <div class="upload__main-picture">
                   <label for="upload-picture" class="main-picture__title">Исходное изображение</label>
-                  <input type="file" placeholder="image.png" name="files[]" data-url="server/php/" multiple id="upload-picture" class="main-picture__file js-upload">
+                  <input type="file" placeholder="image.png" name="files[]" data-url="/lib/jquery-file-upload/" id="upload-picture" class="main-picture__file js-upload">
                 </div>
                 <div class="upload__watermark">
                   <label for="upload-watermark" class="watermark__title">Водяной знак</label>
-                  <input type="file" placeholder="image.png" id="upload-watermark" class="watermark__file js-upload">
+                  <input type="file" placeholder="image.png" name="files[]" data-url="/lib/jquery-file-upload/" id="upload-watermark" class="watermark__file js-upload">
                 </div>
               </form>
             </div>

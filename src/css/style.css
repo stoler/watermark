@@ -739,6 +739,7 @@ generator-picture
 .generator-picture__image {
   position: relative;
   max-height: 534px;
+  line-height: 534px;
 }
 
 .generator-picture__watermark {
@@ -747,6 +748,17 @@ generator-picture
   left: 0;
   display: inline-block;
   opacity: 0.5;
+}
+
+.generator-picture__watermark {
+  max-width: 215px;
+  max-height: 170px;
+}
+
+.generator-picture__img {
+  max-width: 651px;
+  max-height: 534px;
+  vertical-align: middle;
 }
 
 /*
