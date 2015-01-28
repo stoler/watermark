@@ -3265,7 +3265,29 @@ var PLACEGRID = (function () {
 var SWITCH = (function () {
   var
       switchVariants = $('.switch'),
+      gridLines = $('.multi-line'),
+      squareOfGrid = $('.square-td'),
 
+      squareToLines = function () {
+        gridLines.each(function () {
+          $(this).show();
+        });
+        $('.square-td--active').removeClass('square-td--active');
+
+        $('.square-td').on('mouseenter', function () {
+          $(this).addClass('square-td--hover-disable');
+        });
+      },
+      linesToSquare = function () {
+        squareOfGrid.off('mouseenter');
+        squareOfGrid.each(function () {
+          $(this).removeClass('square-td--hover-disable');
+        });
+        gridLines.each(function () {
+          $(this).hide();
+        });
+        $('.square-td').first().addClass('square-td--active');
+      },
 
       // меняет названия полей ввода с букв на стрелки
       changeLabels = function (activeButton) {
@@ -3278,34 +3300,33 @@ var SWITCH = (function () {
             $this.removeClass('crd-axis--arrow');
             $this.addClass('crd-axis--letter');
           });
+          linesToSquare();
         } else if (activeButton.hasClass('switch__multi')) {
           axisLabel.each(function () {
             var $this = $(this);
             $this.removeClass('crd-axis--letter');
             $this.addClass('crd-axis--arrow');
           });
+          squareToLines();
         }
         
       },
+
 
       // меняет класс активности между кнопками 
       // меняющими количество вотермарков в окне 
       // задает класс, который выделяет кнопку красным
       changeRepeat = function () {
-        console.log('im here');
-        console.log($(this));
         $('.switch--active').removeClass('switch--active');
         $(this).addClass('switch--active');
         changeLabels($(this));
       };
   return {
     init: function () {
-      console.log('im initialized!');
       switchVariants.on('click', changeRepeat);
     }
   }
 })();
-SWITCH.init();
 /*! jQuery UI - v1.11.2 - 2015-01-18
 * http://jqueryui.com
 * Includes: core.js, widget.js, mouse.js, position.js, draggable.js, droppable.js, resizable.js, selectable.js, sortable.js, accordion.js, autocomplete.js, button.js, datepicker.js, dialog.js, menu.js, progressbar.js, selectmenu.js, slider.js, spinner.js, tabs.js, tooltip.js, effect.js, effect-blind.js, effect-bounce.js, effect-clip.js, effect-drop.js, effect-explode.js, effect-fade.js, effect-fold.js, effect-highlight.js, effect-puff.js, effect-pulsate.js, effect-scale.js, effect-shake.js, effect-size.js, effect-slide.js, effect-transfer.js
@@ -3404,7 +3425,7 @@ $(function(){
 
     // init coordinate counter buttons
     COUNTERBTN.init();
-
+    SWITCH.init();
     // init place grid click handler
     PLACEGRID.init();
     DRAGGABLE.init();

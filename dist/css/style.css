@@ -877,19 +877,26 @@ place-grid
 .square-td--active:hover {
   background: #f97e76; }
 
-.position-vertical, .position-horizontal {
+.square-td--hover-disable:hover {
+  background: #dae0e8; }
+
+.multi-line {
   position: absolute;
   background: #f97e76;
-  display: inline-block; }
+  display: inline-block;
+  display: none; }
 
 .position-vertical {
   height: 100%;
-  top: 0; }
+  top: 0;
+  left: 50%;
+  width: 1px; }
 
 .position-horizontal {
   width: 100%;
   left: 0;
-  top: 50%; }
+  top: 50%;
+  height: 1px; }
 
 .generator-transparency__slider {
   position: relative; }

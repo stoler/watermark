@@ -43,20 +43,30 @@ place-grid
   }
 }
 
-.position-vertical,
-.position-horizontal{
+.square-td--hover-disable{
+  &:hover{
+    background: $placeGridColor;
+  }
+}
+
+
+.multi-line{
   position: absolute;
   background: $lightRedColor;
   display: inline-block;
+  display: none;
 }
 
 .position-vertical{
   height: 100%;
   top: 0;
+  left: 50%;
+  width: 1px;
 }
 
 .position-horizontal{
   width: 100%;
   left: 0;
   top: 50%;
+  height: 1px;
 }
