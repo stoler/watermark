@@ -3217,8 +3217,7 @@ var Share = {
 // поведение кнопок, изменяющих значения в окнах координат
 
 var COUNTERBTN = (function () {
-  var 
-      initInputValue = function () {
+  var initInputValue = function () {
         $('.crd-window__num').each(function () {
           $(this).val(0);
         });
@@ -3226,8 +3225,7 @@ var COUNTERBTN = (function () {
       // get button, checkout what direction it is 
       // and change appropriate window
       changeCoordValue = function (coordButton) {
-        var
-            direction = coordButton.hasClass('crd-arrow-list__item--up') ? 10 : -10,
+        var direction = coordButton.hasClass('crd-arrow-list__item--up') ? 10 : -10,
             coordWindow = coordButton.closest('.generator-position-coordinates').find('.crd-window__num');
 
         // coordWindow.attr('value', parseInt(coordWindow.attr('value')) + direction);
@@ -3239,28 +3237,21 @@ var COUNTERBTN = (function () {
       };
 
   return {
-
     init: function () {
-      initInputValue();
-      $('.crd-arrow-list__item').on('click', function () {
-        changeCoordValue($(this));
-      });
+        initInputValue();
+    },
+    changeCoordValue: function ($el) {
+        changeCoordValue($el);
     }
-    
-  }
+  };
 })();
 var PLACEGRID = (function () {
-  var putActiveSquare = function (square) {
-    $('.square-td--active').removeClass('square-td--active');
-    square.addClass('square-td--active');
-  }
-  return {
-    init: function() {
-      $('.generator-position__square').on('click', '.square-td', function () {
-        putActiveSquare($(this));
-      });
-    }
-  }
+    return {
+        putActiveSquare: function (square) {
+            $('.square-td--active').removeClass('square-td--active');
+            square.addClass('square-td--active');
+        }
+    };
 })();
 var SWITCH = (function () {
   var
@@ -3343,15 +3334,16 @@ var n=t.apply(this,arguments);return n.mode="hide",this.effect.call(this,n)}}(e.
 var DRAGGABLE = (function () {
     var _this = this,
         images = $('.generator-picture__image'),
-        watermark = $('.generator-picture__watermark'),
+
         posX = $('.crd-window__num--x'),
         posY = $('.crd-window__num--y'),
+        watermark = $('.generator-picture__watermark'),
         spinners = $('.crd-arrow-list__item'),
         slider = $('.generator-transparency__slider'),
         grisSquare = $('.square-td'),
         inputWindow = $('.crd-window__num'),
 
-    // Размеры элементов
+        // Размеры элементов
         imagesWidth = images.width(),
         imageHalfWidth = imagesWidth / 2,
         watermarkWidth = watermark.width(),
@@ -3414,37 +3406,20 @@ var DRAGGABLE = (function () {
             console.log(index, gridPosArr[index][0], gridPosArr[index][1]);
             watermark.css({top: gridPosArr[index][0]+'px', left: gridPosArr[index][1]+'px'});
         }
-    }
-
+    };
 })();
-
-
 $(function(){
     // style input
     $('.js-upload').styler();
 
     // init coordinate counter buttons
-    COUNTERBTN.init();
+    //COUNTERBTN.init();
     SWITCH.init();
     // init place grid click handler
-    PLACEGRID.init();
     DRAGGABLE.init();
     // jquery upload
-    $('#upload-picture').fileupload({
-        dataType: 'json',
-        done: function (e, data) {
-            $.each(data.result.files, function (index, file) {
-                $('<p/>').text(file.name).appendTo(document.body);
-                console.log('done')
-            });
-        }
-    });
 
-
-})
-
-// загружаем файл на сервер
-;$(function () {
+    // загрузка основного изображения
     $('#upload-picture').fileupload({
         dataType: 'json',
         done: function (e, data) {
@@ -3454,6 +3429,7 @@ $(function(){
         }
     });
 
+    // загрузка вотермарка
     $('#upload-watermark').fileupload({
         dataType: 'json',
         done: function (e, data) {
@@ -3461,5 +3437,13 @@ $(function(){
                 $('.generator-picture__watermark').attr('src', '/upload/' + file.name);
             });
         }
+    });
+
+    $('.crd-arrow-list__item').on('click', function () {
+        COUNTERBTN.changeCoordValue($(this));
+    });
+
+    $('.generator-position__square').on('click', '.square-td', function () {
+        PLACEGRID.putActiveSquare($(this));
     });
 });

@@ -1,15 +1,16 @@
 var DRAGGABLE = (function () {
     var _this = this,
         images = $('.generator-picture__image'),
-        watermark = $('.generator-picture__watermark'),
+
         posX = $('.crd-window__num--x'),
         posY = $('.crd-window__num--y'),
+        watermark = $('.generator-picture__watermark'),
         spinners = $('.crd-arrow-list__item'),
         slider = $('.generator-transparency__slider'),
         grisSquare = $('.square-td'),
         inputWindow = $('.crd-window__num'),
 
-    // Размеры элементов
+        // Размеры элементов
         imagesWidth = images.width(),
         imageHalfWidth = imagesWidth / 2,
         watermarkWidth = watermark.width(),
@@ -72,7 +73,5 @@ var DRAGGABLE = (function () {
             console.log(index, gridPosArr[index][0], gridPosArr[index][1]);
             watermark.css({top: gridPosArr[index][0]+'px', left: gridPosArr[index][1]+'px'});
         }
-    }
-
+    };
 })();
-
