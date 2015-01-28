@@ -732,7 +732,8 @@ switch
   height: 19px;
   display: inline-block;
   margin-right: 10px;
-  vertical-align: top; }
+  vertical-align: top;
+  cursor: pointer; }
 
 .switch:last-child, .switch__mono:last-child, .switch__multi:last-child {
   margin-right: 0; }
@@ -743,10 +744,7 @@ switch
 .switch__mono:hover {
   background: url(../img/sprite.png) no-repeat -84px -56px; }
 
-.switch__mono.active {
-  background: url(../img/sprite.png) no-repeat -112px -56px; }
-
-.switch__mono.active:hover {
+.switch__mono.switch--active {
   background: url(../img/sprite.png) no-repeat -112px -56px; }
 
 .switch__multi {
@@ -755,10 +753,7 @@ switch
 .switch__multi:hover {
   background: url(../img/sprite.png) no-repeat -168px -56px; }
 
-.switch__multi.active {
-  background: url(../img/sprite.png) no-repeat -196px -56px; }
-
-.switch__multi.active:hover {
+.switch__multi.switch--active {
   background: url(../img/sprite.png) no-repeat -196px -56px; }
 
 .generator-position-coordinates {
@@ -773,7 +768,27 @@ switch
 .crd-axis {
   font-family: "robotolight";
   font-size: 16px;
-  padding: 11px 0; }
+  height: 30px;
+  width: 10px;
+  margin-top: 12px; }
+
+.crd-axis--x.crd-axis--letter:after {
+  content: "X"; }
+
+.crd-axis--y.crd-axis--letter:after {
+  content: "Y"; }
+
+.crd-axis--x.crd-axis--arrow {
+  background: url(../img/sprite.png) no-repeat -225px -45px;
+  height: 33px;
+  width: 10px;
+  margin-top: 5px; }
+
+.crd-axis--y.crd-axis--arrow {
+  background: url(../img/sprite.png) no-repeat -249px -59px;
+  height: 33px;
+  width: 31px;
+  margin-left: -21px; }
 
 .generator-position-coordinates__window {
   float: left;
@@ -862,19 +877,26 @@ place-grid
 .square-td--active:hover {
   background: #f97e76; }
 
-.position-vertical, .position-horizontal {
+.square-td--hover-disable:hover {
+  background: #dae0e8; }
+
+.multi-line {
   position: absolute;
   background: #f97e76;
-  display: inline-block; }
+  display: inline-block;
+  display: none; }
 
 .position-vertical {
   height: 100%;
-  top: 0; }
+  top: 0;
+  left: 50%;
+  width: 1px; }
 
 .position-horizontal {
   width: 100%;
   left: 0;
-  top: 50%; }
+  top: 50%;
+  height: 1px; }
 
 .generator-transparency__slider {
   position: relative; }
