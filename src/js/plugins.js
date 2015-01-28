@@ -4,7 +4,7 @@ $(function(){
 
     // init coordinate counter buttons
     COUNTERBTN.init();
-
+    SWITCH.init();
     // init place grid click handler
     PLACEGRID.init();
     DRAGGABLE.init();

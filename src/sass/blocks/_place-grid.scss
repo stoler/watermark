@@ -43,6 +43,13 @@ place-grid
   }
 }
 
+.square-td--hover-disable{
+  &:hover{
+    background: $placeGridColor;
+  }
+}
+
+
 .multi-line{
   position: absolute;
   background: $lightRedColor;

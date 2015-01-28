@@ -2,16 +2,23 @@ var SWITCH = (function () {
   var
       switchVariants = $('.switch'),
       gridLines = $('.multi-line'),
+      squareOfGrid = $('.square-td'),
 
       squareToLines = function () {
         gridLines.each(function () {
           $(this).show();
         });
         $('.square-td--active').removeClass('square-td--active');
-        $('.square-td:hover').css("background", "#dae0e8");
 
+        $('.square-td').on('mouseenter', function () {
+          $(this).addClass('square-td--hover-disable');
+        });
       },
       linesToSquare = function () {
+        squareOfGrid.off('mouseenter');
+        squareOfGrid.each(function () {
+          $(this).removeClass('square-td--hover-disable');
+        });
         gridLines.each(function () {
           $(this).hide();
         });
@@ -46,17 +53,13 @@ var SWITCH = (function () {
       // меняющими количество вотермарков в окне 
       // задает класс, который выделяет кнопку красным
       changeRepeat = function () {
-        console.log('im here');
-        console.log($(this));
         $('.switch--active').removeClass('switch--active');
         $(this).addClass('switch--active');
         changeLabels($(this));
       };
   return {
     init: function () {
-      console.log('im initialized!');
       switchVariants.on('click', changeRepeat);
     }
   }
 })();
-SWITCH.init();

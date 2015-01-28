@@ -1059,6 +1059,10 @@ place-grid
   background: #f97e76;
 }
 
+.square-td--hover-disable:hover {
+  background: #dae0e8;
+}
+
 .multi-line {
   position: absolute;
   background: #f97e76;
