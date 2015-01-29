@@ -39,6 +39,7 @@ gulp.task('sass', function () {
 gulp.task('scripts', function () {
     gulp.src([
         'src/js/jquery-1.11.1.min.js',
+        'src/js/model.js',
         'src/js/jquery.ui.widget.js',
         'src/js/jquery.iframe-transport.js',
         'src/js/jquery.fileupload.js',
