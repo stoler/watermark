@@ -505,6 +505,7 @@ body {
   background-size: 100%;
   width: 100%;
   display: table-cell;
+  vertical-align: middle;
 }
 
 h1,
@@ -542,7 +543,7 @@ h2 {
 
 .main-generator {
   width: 960px;
-  margin: 55px auto 37px;
+  margin: 0 auto 37px;
   display: table;
 }
 
@@ -727,11 +728,37 @@ generator-picture
   width: 651px;
   height: 534px;
   background: #ffffff;
+  overflow: hidden;
 }
 
 .generator-picture__title {
   margin: 0 0 53px 0;
   line-height: 1.35em;
+}
+
+.generator-picture__image {
+  position: relative;
+  max-height: 534px;
+  line-height: 534px;
+}
+
+.generator-picture__watermark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: inline-block;
+  opacity: 0.5;
+}
+
+.generator-picture__watermark {
+  max-width: 215px;
+  max-height: 170px;
+}
+
+.generator-picture__img {
+  max-width: 651px;
+  max-height: 534px;
+  vertical-align: middle;
 }
 
 /*
@@ -865,6 +892,7 @@ switch
   display: inline-block;
   margin-right: 10px;
   vertical-align: top;
+  cursor: pointer;
 }
 .switch:last-child, .switch__mono:last-child, .switch__multi:last-child {
   margin-right: 0;
@@ -876,10 +904,7 @@ switch
 .switch__mono:hover {
   background: url(../img/sprite.png) no-repeat -84px -56px;
 }
-.switch__mono.active {
-  background: url(../img/sprite.png) no-repeat -112px -56px;
-}
-.switch__mono.active:hover {
+.switch__mono.switch--active {
   background: url(../img/sprite.png) no-repeat -112px -56px;
 }
 
@@ -889,10 +914,7 @@ switch
 .switch__multi:hover {
   background: url(../img/sprite.png) no-repeat -168px -56px;
 }
-.switch__multi.active {
-  background: url(../img/sprite.png) no-repeat -196px -56px;
-}
-.switch__multi.active:hover {
+.switch__multi.switch--active {
   background: url(../img/sprite.png) no-repeat -196px -56px;
 }
 
@@ -910,7 +932,31 @@ switch
 .crd-axis {
   font-family: "robotolight";
   font-size: 16px;
-  padding: 11px 0;
+  height: 30px;
+  width: 10px;
+  margin-top: 12px;
+}
+
+.crd-axis--x.crd-axis--letter:after {
+  content: "X";
+}
+
+.crd-axis--y.crd-axis--letter:after {
+  content: "Y";
+}
+
+.crd-axis--x.crd-axis--arrow {
+  background: url(../img/sprite.png) no-repeat -225px -45px;
+  height: 33px;
+  width: 10px;
+  margin-top: 5px;
+}
+
+.crd-axis--y.crd-axis--arrow {
+  background: url(../img/sprite.png) no-repeat -249px -59px;
+  height: 33px;
+  width: 31px;
+  margin-left: -21px;
 }
 
 .generator-position-coordinates__window {
@@ -926,18 +972,16 @@ switch
   font-family: "SEGOEUIL";
   font-size: 22px;
   overflow: hidden;
-  position: relative;
 }
 
 .crd-window__num {
-  position: absolute;
-  margin: auto;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 35px;
+  width: 46px;
+  height: 46px;
   text-align: center;
+  background: #f1f1f5;
+  margin-top: -6px;
+  margin-left: -4px;
+  outline: none;
 }
 
 .generator-position-coordinates__arrow-list {
@@ -1005,25 +1049,39 @@ place-grid
   border: 1px solid #9eb2c0;
 }
 .square-td:hover {
+  background: #c1cfd9;
+}
+
+.square-td--active {
+  background: #f97e76;
+}
+.square-td--active:hover {
   background: #f97e76;
 }
 
-.position-vertical,
-.position-horizontal {
+.square-td--hover-disable:hover {
+  background: #dae0e8;
+}
+
+.multi-line {
   position: absolute;
   background: #f97e76;
   display: inline-block;
+  display: none;
 }
 
 .position-vertical {
   height: 100%;
   top: 0;
+  left: 50%;
+  width: 1px;
 }
 
 .position-horizontal {
   width: 100%;
   left: 0;
   top: 50%;
+  height: 1px;
 }
 
 .generator-transparency__slider {

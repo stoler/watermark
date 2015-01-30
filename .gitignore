@@ -1,4 +1,5 @@
 materials/*
+upload/*
 node_modules/*
 .sass-cache/*
 .idea/*

@@ -36,8 +36,9 @@ html(lang="ru")
       div.main-generator
         div.generator-picture
           h1.generator-picture__title Генератор водяных знаков
-          div.generator-picture__result
-
+          div.generator-picture__result.generator-picture__image
+            img(src='dist/img/upload/image.png').generator-picture__img
+            img(src='dist/img/upload/watermark.png').generator-picture__watermark
         div.generator-setup
           h2.generator-setup__title Настройки
           div.main-generator-upload
@@ -45,21 +46,27 @@ html(lang="ru")
               form(action="" method="").upload__picture
                 div.upload__main-picture
                   label(for="upload-picture").main-picture__title Исходное изображение
-                  input(type="file" placeholder="image.png")#upload-picture.main-picture__file.js-upload
+                  input(type="file" placeholder="image.png", name="files[]" data-url="/lib/jquery-file-upload/")#upload-picture.main-picture__file.js-upload
                 div.upload__watermark
                   label(for="upload-watermark").watermark__title Водяной знак
-                  input(type="file" placeholder="image.png")#upload-watermark.watermark__file.js-upload
+                  input(type="file" placeholder="image.png", name="files[]" data-url="/lib/jquery-file-upload/")#upload-watermark.watermark__file.js-upload
           div.main-generator-position
             div.generator-position
               div.generator-position__top
                 h3.generator-position__title Положение
                 div.generator-position__switch
-                  a(href="").switch__multi multi
-                  a(href="").switch__mono.switch__mono-active mono
+                  div.switch.switch__multi multi
+                  //- a(href="#").switch.switch__multi multi
+                  div.switch.switch__mono.switch--active mono
+                  //- a(href="#").switch.switch__mono.switch--active mono
               div.generator-position__bottom
                 div.generator-position__main-square
                   div.generator-position__square
                     div.square-tr
+                      div.square-td.square-td--active
+                      div.square-td
+                      div.square-td
+                    div.square-tr
                       div.square-td
                       div.square-td
                       div.square-td
@@ -67,29 +74,25 @@ html(lang="ru")
                       div.square-td
                       div.square-td
                       div.square-td
-                    div.square-tr
-                      div.square-td
-                      div.square-td
-                      div.square-td
-                  div.position-vertical
-                  div.position-horizontal
+                  div.multi-line.position-vertical
+                  div.multi-line.position-horizontal
                 div.generator-position__coordinates
                   div.generator-position-coordinates.clearfix
                     div.generator-position-coordinates__axis
-                      div.crd-axis X
+                      div.crd-axis.crd-axis--x.crd-axis--letter
                     div.generator-position-coordinates__window
                       div.crd-window
-                        div.crd-window__num.crd-window__num--x 0
+                        input(type="text" name="x-axis" value="0").crd-window__num.crd-window__num--x
                     div.generator-position-coordinates__arrow-list
                       div.crd-arrow-list
                         div.crd-arrow-list__item.crd-arrow-list__item--up
                         div.crd-arrow-list__item.crd-arrow-list__item--down
                   div.generator-position-coordinates.clearfix
                     div.generator-position-coordinates__axis
-                      div.crd-axis Y
+                      div.crd-axis.crd-axis--y.crd-axis--letter
                     div.generator-position-coordinates__window
                       div.crd-window
-                        div.crd-window__num.crd-window__num--y 0
+                        input(type="text" name="y-axis" value="0").crd-window__num.crd-window__num--y
                     div.generator-position-coordinates__arrow-list
                       div.crd-arrow-list
                         div.crd-arrow-list__item.crd-arrow-list__item--up

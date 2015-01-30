@@ -14,9 +14,34 @@ generator-picture
   width: 651px;
   height: 534px;
   background: $whiteColor;
+  overflow: hidden;
 }
 
 .generator-picture__title {
   margin: 0 0 53px 0;
   line-height: 1.35em;
 }
+.generator-picture__image {
+  position: relative;
+  max-height: 534px;
+  line-height: 534px;
+}
+.generator-picture__watermark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: inline-block;
+  opacity: 0.5;
+}
+
+.generator-picture__watermark {
+  max-width: 215px;
+  max-height: 170px;
+}
+
+.generator-picture__img {
+  max-width: 651px;
+  max-height: 534px;
+  vertical-align: middle;
+}
+
