@@ -3373,6 +3373,38 @@ var PLACEGRID = (function () {
         // обновлять стиль только в районе толщины линий
         changeLineWidth();
       }
+    },
+    updateModel: function (square) {
+      var
+          // Размеры элементов
+          watermark = $('.generator-picture__watermark'),
+          images = $('.generator-picture__image'),
+          imagesWidth = images.width(),
+          imageHalfWidth = imagesWidth / 2,
+          watermarkWidth = watermark.width(),
+          watermarkHalfWidth = watermarkWidth/ 2,
+          imageHeight = images.height(),
+          imageHalfHeight = imageHeight / 2,
+          watermarkHeight = watermark.height(),
+          watermarkHalfHeight = watermarkHeight/ 2,
+          centerX = imageHalfWidth-watermarkHalfWidth,
+          centerY = imageHalfHeight-watermarkHalfHeight,
+          gridPosArr = [
+              [0, 0],
+              [0, centerX],
+              [0, imagesWidth-watermarkWidth],
+              [centerY, 0],
+              [centerY, centerX],
+              [centerY, imagesWidth-watermarkWidth],
+              [imageHeight-watermarkHeight, 0],
+              [imageHeight-watermarkHeight, centerX],
+              [imageHeight-watermarkHeight, imagesWidth-watermarkWidth]
+          ],
+
+          index = $('.square-td').index(square);
+      // toFixed чтобы не было значения в полпикселя
+      model.coord.x = parseInt(gridPosArr[index][1].toFixed(0));
+      model.coord.y = parseInt(gridPosArr[index][0].toFixed(0));
     }
   }
 })();
@@ -3491,7 +3523,7 @@ var DRAGGABLE = (function () {
             spinners.on('click', this.set_pos_x);
             inputWindow.on('focusout', this.set_pos_x);
             slider.on('slide', this.set_opacity);
-            grisSquare.on('click', this.set_grid_pos)
+            // grisSquare.on('click', this.set_grid_pos)
         },
         set_pos: function (e, ui) {
             //var $this = $(this);
@@ -3575,9 +3607,15 @@ $(function(){
         // ...
     });
 
+    
     $('.generator-position__square').on('click', '.square-td', function () {
         // изменяет модель
+        // только если моно режим
+        if (model.gridType === 'mono') {
+          PLACEGRID.updateModel($(this));
+        }
         // заставляет обновиться инпут
+        INPUTFIELD.setInput();
         // заставляет обновиться уотермарк
     });
 

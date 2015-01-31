@@ -109,6 +109,38 @@ var PLACEGRID = (function () {
         // обновлять стиль только в районе толщины линий
         changeLineWidth();
       }
+    },
+    updateModel: function (square) {
+      var
+          // Размеры элементов
+          watermark = $('.generator-picture__watermark'),
+          images = $('.generator-picture__image'),
+          imagesWidth = images.width(),
+          imageHalfWidth = imagesWidth / 2,
+          watermarkWidth = watermark.width(),
+          watermarkHalfWidth = watermarkWidth/ 2,
+          imageHeight = images.height(),
+          imageHalfHeight = imageHeight / 2,
+          watermarkHeight = watermark.height(),
+          watermarkHalfHeight = watermarkHeight/ 2,
+          centerX = imageHalfWidth-watermarkHalfWidth,
+          centerY = imageHalfHeight-watermarkHalfHeight,
+          gridPosArr = [
+              [0, 0],
+              [0, centerX],
+              [0, imagesWidth-watermarkWidth],
+              [centerY, 0],
+              [centerY, centerX],
+              [centerY, imagesWidth-watermarkWidth],
+              [imageHeight-watermarkHeight, 0],
+              [imageHeight-watermarkHeight, centerX],
+              [imageHeight-watermarkHeight, imagesWidth-watermarkWidth]
+          ],
+
+          index = $('.square-td').index(square);
+      // toFixed чтобы не было значения в полпикселя
+      model.coord.x = parseInt(gridPosArr[index][1].toFixed(0));
+      model.coord.y = parseInt(gridPosArr[index][0].toFixed(0));
     }
   }
 })();

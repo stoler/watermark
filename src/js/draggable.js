@@ -50,7 +50,7 @@ var DRAGGABLE = (function () {
             spinners.on('click', this.set_pos_x);
             inputWindow.on('focusout', this.set_pos_x);
             slider.on('slide', this.set_opacity);
-            grisSquare.on('click', this.set_grid_pos)
+            // grisSquare.on('click', this.set_grid_pos)
         },
         set_pos: function (e, ui) {
             //var $this = $(this);

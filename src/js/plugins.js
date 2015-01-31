@@ -57,9 +57,15 @@ $(function(){
         // ...
     });
 
+    
     $('.generator-position__square').on('click', '.square-td', function () {
         // изменяет модель
+        // только если моно режим
+        if (model.gridType === 'mono') {
+          PLACEGRID.updateModel($(this));
+        }
         // заставляет обновиться инпут
+        INPUTFIELD.setInput();
         // заставляет обновиться уотермарк
     });
 
