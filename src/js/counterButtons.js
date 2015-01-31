@@ -1,31 +1,30 @@
-// поведение кнопок, изменяющих значения в окнах координат
-
 var COUNTERBTN = (function () {
-  var initInputValue = function () {
-        $('.crd-window__num').each(function () {
-          $(this).val(0);
-        });
-      },
-      // get button, checkout what direction it is 
-      // and change appropriate window
-      changeCoordValue = function (coordButton) {
-        var direction = coordButton.hasClass('crd-arrow-list__item--up') ? 10 : -10,
-            coordWindow = coordButton.closest('.generator-position-coordinates').find('.crd-window__num');
-
-        // coordWindow.attr('value', parseInt(coordWindow.attr('value')) + direction);
-        coordWindow.val(parseInt(coordWindow.val()) + direction);
-      },
-      changeInputValue = function (inputField) {
-        console.log(inputField);
-        console.log(inputField.val());
-      };
-
+  var
+      // на сколько увеличивается значение при режиме моно
+      monoStep = 10,
+      // на сколько увеличивается значение при режиме мульти
+      multiStep = 1;
   return {
-    init: function () {
-        initInputValue();
-    },
-    changeCoordValue: function ($el) {
-        changeCoordValue($el);
+    // изменяет модель при нажатии на кнопку
+    counterBtnModelChange: function (btn) {
+      var
+          step = 0,
+          axis = btn.hasClass('crd-arrow-list__item--x') ? 'x' : 'y',
+          // для проверки что марджин не уйдет ниже единицы
+          testValue = 0;
+
+      if (model.gridType === 'mono') {
+        step = monoStep;
+        model.coord[axis] += btn.hasClass('crd-arrow-list__item--up') ? step : -step;
+        console.log(model);
+      } else {
+        step = multiStep;
+        // скидываем значение в переменную чтобы проверить ее величину перед обновлением модели
+        testValue = model.margins[axis] + (btn.hasClass('crd-arrow-list__item--up') ? step : -step);
+        if (testValue > 0) {
+          model.margins[axis] = testValue;
+        }
+      }
     }
-  };
+  }
 })();

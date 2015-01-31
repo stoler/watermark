@@ -5,22 +5,23 @@ if(k&&j[k]&&(e||j[k].data)||void 0!==d||"string"!=typeof b)return k||(k=i?a[h]=c
 
 var model = (function () {
     return {
-        coord: {
-            x: 0,
-            y: 0
+        'coord': {
+            'x': 0,
+            'y': 0
         },
-        files: {
+        'files': {
             image: '',
             watermark: ''
         },
-        gridType: 'mono',
-        alpha: 100,
-        margins: {
-            x: 0,
-            y: 0
+        'gridType': 'mono',
+        'alpha': 1,
+        'margins': {
+            'x': 1,
+            'y': 1
         }
     };
 })();
+
 /*! jQuery UI - v1.11.1+CommonJS - 2014-09-17
 * http://jqueryui.com
 * Includes: widget.js
@@ -3232,107 +3233,197 @@ var Share = {
         window.open(url,'','toolbar=0,status=0,width=626,height=436');
     }
 };
-// поведение кнопок, изменяющих значения в окнах координат
-
 var COUNTERBTN = (function () {
-  var initInputValue = function () {
-        $('.crd-window__num').each(function () {
-          $(this).val(0);
-        });
-      },
-      // get button, checkout what direction it is 
-      // and change appropriate window
-      changeCoordValue = function (coordButton) {
-        var direction = coordButton.hasClass('crd-arrow-list__item--up') ? 10 : -10,
-            coordWindow = coordButton.closest('.generator-position-coordinates').find('.crd-window__num');
-
-        // coordWindow.attr('value', parseInt(coordWindow.attr('value')) + direction);
-        coordWindow.val(parseInt(coordWindow.val()) + direction);
-      },
-      changeInputValue = function (inputField) {
-        console.log(inputField);
-        console.log(inputField.val());
-      };
-
+  var
+      // на сколько увеличивается значение при режиме моно
+      monoStep = 10,
+      // на сколько увеличивается значение при режиме мульти
+      multiStep = 1;
   return {
-    init: function () {
-        initInputValue();
-    },
-    changeCoordValue: function ($el) {
-        changeCoordValue($el);
+    // изменяет модель при нажатии на кнопку
+    counterBtnModelChange: function (btn) {
+      var
+          step = 0,
+          axis = btn.hasClass('crd-arrow-list__item--x') ? 'x' : 'y',
+          // для проверки что марджин не уйдет ниже единицы
+          testValue = 0;
+
+      if (model.gridType === 'mono') {
+        step = monoStep;
+        model.coord[axis] += btn.hasClass('crd-arrow-list__item--up') ? step : -step;
+        console.log(model);
+      } else {
+        step = multiStep;
+        // скидываем значение в переменную чтобы проверить ее величину перед обновлением модели
+        testValue = model.margins[axis] + (btn.hasClass('crd-arrow-list__item--up') ? step : -step);
+        if (testValue > 0) {
+          model.margins[axis] = testValue;
+        }
+      }
     }
-  };
+  }
 })();
 var PLACEGRID = (function () {
-    return {
-        putActiveSquare: function (square) {
-            $('.square-td--active').removeClass('square-td--active');
-            square.addClass('square-td--active');
-        }
-    };
-})();
-var SWITCH = (function () {
   var
-      switchVariants = $('.switch'),
+      // состоянии, которое не позволяет делать дом манипуляции если нажать на свитч, который
+      // и так выбран
+      state = '',
+
+      // линия на гриде
       gridLines = $('.multi-line'),
+
+      // квадрат на гриде
       squareOfGrid = $('.square-td'),
 
-      squareToLines = function () {
+      // стрелки или буквы возле полей инпута
+      inputLabels = $('.crd-axis'),
+
+      // изменяет ширину линий грида
+      changeLineWidth = function () {
+        var
+            gridSide = 101,
+            lineWidthX = model.margins.x,
+            lineWidthY = model.margins.y,
+            // вычисляем центр
+            leftPosition = (gridSide - lineWidthX) / 2,
+            topPosition = (gridSide - lineWidthY) / 2;
+
+        $('.multi-line.position-vertical').css({width: lineWidthX, left: leftPosition});
+        $('.multi-line.position-horizontal').css({height: lineWidthY, top: topPosition});
+      },
+
+      // меняет квадраты на линии
+      squareToLine = function () {
+        // показываем линии
         gridLines.each(function () {
           $(this).show();
         });
+        // отключаем возможности показа активного квадрата
         $('.square-td--active').removeClass('square-td--active');
-
-        $('.square-td').on('mouseenter', function () {
+        // todo
+        // выключаем ховер
+        squareOfGrid.each(function () {
           $(this).addClass('square-td--hover-disable');
         });
+        // отключаем возможность выбора положения активного квадрата
+        squareOfGrid.off('click');
       },
-      linesToSquare = function () {
-        squareOfGrid.off('mouseenter');
+
+      // меняет линии на квадраты
+      lineToSquare = function () {
+        // подключаем ховер по квадратам
         squareOfGrid.each(function () {
           $(this).removeClass('square-td--hover-disable');
         });
+        // прячем линии
         gridLines.each(function () {
           $(this).hide();
         });
-        $('.square-td').first().addClass('square-td--active');
+        // присваиваем левому верхнему квадрату активность
+        squareOfGrid.first().addClass('square-td--active');
+
+        // подключаем возможность переключения активного квадрата
+        squareOfGrid.on('click', function () {
+          $('.square-td--active').removeClass('square-td--active');
+          $(this).addClass('square-td--active');
+        })
+
+
       },
 
       // меняет названия полей ввода с букв на стрелки
-      changeLabels = function (activeButton) {
-        var
-            axisLabel = $(".crd-axis");
-
-        if (activeButton.hasClass('switch__mono')) {
-          axisLabel.each(function () {
-            var $this = $(this);
-            $this.removeClass('crd-axis--arrow');
-            $this.addClass('crd-axis--letter');
-          });
-          linesToSquare();
-        } else if (activeButton.hasClass('switch__multi')) {
-          axisLabel.each(function () {
-            var $this = $(this);
-            $this.removeClass('crd-axis--letter');
-            $this.addClass('crd-axis--arrow');
-          });
-          squareToLines();
+      changeLabels = function (mode) {
+        if (mode === 'mono') {
+          inputLabels.each(function () {
+            inputLabels.addClass('crd-axis--letter');
+            inputLabels.removeClass('crd-axis--arrow');
+          })
+        } else {
+          inputLabels.each(function () {
+            inputLabels.addClass('crd-axis--arrow');
+            inputLabels.removeClass('crd-axis--letter');
+          })
         }
-        
       },
 
-
-      // меняет класс активности между кнопками 
-      // меняющими количество вотермарков в окне 
-      // задает класс, который выделяет кнопку красным
-      changeRepeat = function () {
-        $('.switch--active').removeClass('switch--active');
-        $(this).addClass('switch--active');
-        changeLabels($(this));
+      changeGrid = function (mode) {
+        if (mode === 'mono') {
+          // запускает функцию из линии в квадрат
+          lineToSquare();
+        } else {
+          // запускает функцию из квадрата в линии
+          squareToLine();
+        }
       };
+
   return {
     init: function () {
-      switchVariants.on('click', changeRepeat);
+      state = 'mono';
+      lineToSquare();
+    },
+    setStyle: function () {
+      var 
+          mode = model.gridType === 'mono' ? 'mono' : 'multi';
+      // не запускать, если нажали по активной кнопке свитча
+      if (mode !== state) {
+        state = mode;
+        changeLabels(mode);
+        changeGrid(mode);
+      }
+      if (state === 'multi') {
+        // обновлять стиль только в районе толщины линий
+        changeLineWidth();
+      }
+    }
+  }
+})();
+var INPUTFIELD = (function () {
+  var
+      windowX = $('.crd-window__num--x'),
+      windowY = $('.crd-window__num--y'),
+      variant = '',
+
+      // изменяем координаты или величину марджина?
+      checkVariant = function () {
+        if (model.gridType === 'mono') {
+          variant = 'coord';
+        } else {
+          variant = 'margins';
+        }
+      };
+
+  return {
+    init: function () {
+      windowX.val(0);
+      windowY.val(0);
+    },
+    setInput: function () {
+      checkVariant();
+      windowX.val(model[variant]['x']);
+      windowY.val(model[variant]['y']);
+    },
+    updateModel: function () {
+      checkVariant();
+      model[variant]['x'] = parseInt(windowX.val());
+      model[variant]['y'] = parseInt(windowY.val());
+      console.log('возвращаю модель ', model);
+    }
+  }
+})();
+var SWITCH = (function () {
+
+  return {
+    // изменяет значение gridType
+    changeSwitchInModel: function (switchPosition) {
+      if (switchPosition.hasClass('switch__mono')) {
+        model.gridType = 'mono';
+      } else {
+        model.gridType = 'multi';
+      }
+    },
+    changeStyle: function (switchUnderClick) {
+      $('.switch--active').removeClass('switch--active');
+      switchUnderClick.addClass('switch--active');
     }
   }
 })();
@@ -3432,8 +3523,10 @@ $(function(){
 
     // init coordinate counter buttons
     //COUNTERBTN.init();
-    SWITCH.init();
+    // SWITCH.init();
     // init place grid click handler
+    INPUTFIELD.init();
+    PLACEGRID.init();
     DRAGGABLE.init();
     // jquery upload
 
@@ -3458,10 +3551,42 @@ $(function(){
     });
 
     $('.crd-arrow-list__item').on('click', function () {
-        COUNTERBTN.changeCoordValue($(this));
+        // функция в модуле стрелок, она изменяет модель
+        COUNTERBTN.counterBtnModelChange($(this));
+        // метод модуля инпутов, он сравнивает себя с моделью и обновляется
+        INPUTFIELD.setInput();
+        // метод модуля уотермарк, он сравнивает себя с остальным
+        // ...
+        // метод модуля грид, он сравнивается сам с моделью
+        PLACEGRID.setStyle();
+    });
+
+    // хендлер для переключения режимов мульти/моно
+    $('.switch').on('click', function () {
+        // изменяем модель
+        SWITCH.changeSwitchInModel($(this));
+        // изменяет свой вид
+        SWITCH.changeStyle($(this));
+        // инпут должен обновиться
+        INPUTFIELD.setInput();
+        // грид должен обновиться
+        PLACEGRID.setStyle();
+        // watermark должен перестать двигаться и начать увеличивать марджин
+        // ...
     });
 
     $('.generator-position__square').on('click', '.square-td', function () {
-        PLACEGRID.putActiveSquare($(this));
+        // изменяет модель
+        // заставляет обновиться инпут
+        // заставляет обновиться уотермарк
+    });
+
+    // хендлер для ввода с клавиатуры прямо в инпуты
+    $('.crd-window__num').on('change', function () {
+      // изменяем модель
+      INPUTFIELD.updateModel($(this));
+      // обновляем грид
+      PLACEGRID.setStyle();
+      // обновляем вотермарк
     });
 });
