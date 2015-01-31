@@ -4,12 +4,12 @@ var model = (function () {
             'x': 0,
             'y': 0
         },
-        files: {
-            image: '',
-            watermark: ''
+        'files': {
+            'image': '',
+            'watermark': ''
         },
-        gridType: 'mono',
-        alpha: '100',
+        'gridType': 'mono',
+        'alpha': 1,
         'margins': {
             'x': 1,
             'y': 1
