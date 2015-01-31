@@ -15,4 +15,5 @@ var model = (function () {
             'y': 1
         }
     };
+
 })();
