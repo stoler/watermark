@@ -3281,14 +3281,14 @@ var PLACEGRID = (function () {
       changeLineWidth = function () {
         var
             gridSide = 101,
-            lineWidthX = model.margins.x,
-            lineWidthY = model.margins.y,
+            lineWidthVertical = model.margins.y,
+            lineWidthHorizontal = model.margins.x,
             // вычисляем центр
-            leftPosition = (gridSide - lineWidthX) / 2,
-            topPosition = (gridSide - lineWidthY) / 2;
+            leftPosition = (gridSide - lineWidthVertical) / 2,
+            topPosition = (gridSide - lineWidthHorizontal) / 2;
 
-        $('.multi-line.position-vertical').css({width: lineWidthX, left: leftPosition});
-        $('.multi-line.position-horizontal').css({height: lineWidthY, top: topPosition});
+        $('.multi-line.position-vertical').css({width: lineWidthVertical, left: leftPosition});
+        $('.multi-line.position-horizontal').css({height: lineWidthHorizontal, top: topPosition});
       },
 
       // меняет квадраты на линии
@@ -3549,6 +3549,7 @@ $(function(){
         }
     });
 
+    // хендлер для кнопок-стрелок
     $('.crd-arrow-list__item').on('click', function () {
         // функция в модуле стрелок, она изменяет модель
         COUNTERBTN.counterBtnModelChange($(this));

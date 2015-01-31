@@ -31,6 +31,7 @@ $(function(){
         }
     });
 
+    // хендлер для кнопок-стрелок
     $('.crd-arrow-list__item').on('click', function () {
         // функция в модуле стрелок, она изменяет модель
         COUNTERBTN.counterBtnModelChange($(this));
