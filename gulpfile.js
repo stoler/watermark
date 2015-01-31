@@ -48,6 +48,7 @@ gulp.task('scripts', function () {
         'src/js/counterButtons.js',
         'src/js/placeGrid.js',
         'src/js/inputField.js',
+        'src/js/slider.js',
         'src/js/switch.js',
         'src/js/jquery-ui.min.js',
         'src/js/draggable.js',
