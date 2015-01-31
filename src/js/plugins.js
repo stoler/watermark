@@ -102,4 +102,10 @@ $(function(){
         // дергает обновление вотермарка
         // ...
     });
+
+    // сброс
+    $('.button-reset').on('click', function(){
+        RESET.resetApp();
+        INPUTFIELD.setInput();
+    });
 });

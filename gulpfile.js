@@ -52,6 +52,7 @@ gulp.task('scripts', function () {
         'src/js/switch.js',
         'src/js/jquery-ui.min.js',
         'src/js/draggable.js',
+        'src/js/reset.js',
         'src/js/plugins.js'
     ])
         .pipe(concat('scripts.js'))
