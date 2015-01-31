@@ -1,8 +1,8 @@
 var model = (function () {
     return {
-        coord: {
-            x: 0,
-            y: 0
+        'coord': {
+            'x': 0,
+            'y': 0
         },
         files: {
             image: '',
@@ -10,9 +10,9 @@ var model = (function () {
         },
         gridType: 'mono',
         alpha: '100',
-        margins: {
-            x: 0,
-            y: 0
+        'margins': {
+            'x': 1,
+            'y': 1
         }
     };
 })();
