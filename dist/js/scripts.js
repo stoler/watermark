@@ -14,7 +14,7 @@ var model = (function () {
             watermark: ''
         },
         gridType: 'mono',
-        alpha: '100',
+        alpha: 100,
         margins: {
             x: 0,
             y: 0
