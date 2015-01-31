@@ -1,7 +1,7 @@
 var COUNTERBTN = (function () {
   var
       // на сколько увеличивается значение при режиме моно
-      monoStep = 10,
+      monoStep = 1,
       // на сколько увеличивается значение при режиме мульти
       multiStep = 1;
   return {
@@ -16,7 +16,6 @@ var COUNTERBTN = (function () {
       if (model.gridType === 'mono') {
         step = monoStep;
         model.coord[axis] += btn.hasClass('crd-arrow-list__item--up') ? step : -step;
-        console.log(model);
       } else {
         step = multiStep;
         // скидываем значение в переменную чтобы проверить ее величину перед обновлением модели

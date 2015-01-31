@@ -747,7 +747,6 @@ generator-picture
   top: 0;
   left: 0;
   display: inline-block;
-  opacity: 0.5;
 }
 
 .generator-picture__watermark, .generator-picture__img {

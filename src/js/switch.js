@@ -13,5 +13,5 @@ var SWITCH = (function () {
       $('.switch--active').removeClass('switch--active');
       switchUnderClick.addClass('switch--active');
     }
-  }
+  };
 })();

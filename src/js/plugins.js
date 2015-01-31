@@ -1,4 +1,6 @@
 $(function(){
+    var counterTimeout;
+
     // style input
     $('.js-upload').styler();
 
@@ -31,15 +33,26 @@ $(function(){
         }
     });
 
-    $('.crd-arrow-list__item').on('click', function () {
-        // функция в модуле стрелок, она изменяет модель
-        COUNTERBTN.counterBtnModelChange($(this));
-        // метод модуля инпутов, он сравнивает себя с моделью и обновляется
-        INPUTFIELD.setInput();
-        // метод модуля уотермарк, он сравнивает себя с остальным
-        // ...
-        // метод модуля грид, он сравнивается сам с моделью
-        PLACEGRID.setStyle();
+    $('.crd-arrow-list__item').on('mousedown', function () {
+        var _this = $(this);
+         counterTimeout = setInterval(function () {
+            // функция в модуле стрелок, она изменяет модель
+            COUNTERBTN.counterBtnModelChange(_this);
+            // метод модуля инпутов, он сравнивает себя с моделью и обновляется
+            INPUTFIELD.setInput();
+            DRAGGABLE.set_pos_x();
+            // метод модуля уотермарк, он сравнивает себя с остальным
+            // ...
+            // метод модуля грид, он сравнивается сам с моделью
+            PLACEGRID.setStyle();
+        }, 50);
+
+        $(this).on('mouseup', function () {
+            clearInterval(counterTimeout);
+        });
+        $(this).on('mouseout', function () {
+            clearInterval(counterTimeout);
+        });
     });
 
     // хендлер для переключения режимов мульти/моно
@@ -56,9 +69,15 @@ $(function(){
         // ...
     });
 
+    
     $('.generator-position__square').on('click', '.square-td', function () {
         // изменяет модель
+        // только если моно режим
+        if (model.gridType === 'mono') {
+          PLACEGRID.updateModel($(this));
+        }
         // заставляет обновиться инпут
+        INPUTFIELD.setInput();
         // заставляет обновиться уотермарк
     });
 

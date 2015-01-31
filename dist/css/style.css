@@ -616,8 +616,7 @@ generator-picture
   position: absolute;
   top: 0;
   left: 0;
-  display: inline-block;
-  opacity: 0.5; }
+  display: inline-block; }
 
 .generator-picture__watermark, .generator-picture__img {
   max-width: 651px;

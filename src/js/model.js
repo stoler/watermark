@@ -5,8 +5,8 @@ var model = (function () {
             'y': 0
         },
         'files': {
-            image: '',
-            watermark: ''
+            'image': '',
+            'watermark': ''
         },
         'gridType': 'mono',
         'alpha': 1,
