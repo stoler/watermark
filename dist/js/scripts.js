@@ -3446,6 +3446,8 @@ var SLIDER = (function () {
     updateModel: function (ui) {
       model.alpha = ui.value/100;
     }
+    // todo
+    // слайдер обновляется за счет модели, вероятно лучше чтобы сбрасывался
   }
 })();
 var SWITCH = (function () {
@@ -3495,8 +3497,10 @@ var DRAGGABLE = (function () {
 
   return {
     updateModel: function (ui) {
-      model.coord.x = ui.position.left;
-      model.coord.y = ui.position.top;
+      model.coord.x = parseInt((ui.position.left).toFixed(0));
+      model.coord.y = parseInt((ui.position.top).toFixed(0));
+      // model.coord.x = ui.position.left;
+      // model.coord.y = ui.position.top;
     },
     // изменяет положение
     setWatermark: function () {
