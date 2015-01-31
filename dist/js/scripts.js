@@ -3262,35 +3262,6 @@ var COUNTERBTN = (function () {
   }
 })();
 var PLACEGRID = (function () {
-<<<<<<< HEAD
-    var
-        // состоянии, которое не позволяет делать дом манипуляции если нажать на свитч, который
-        // и так выбран
-        state = '',
-
-        // линия на гриде
-        gridLines = $('.multi-line'),
-
-        // квадрат на гриде
-        squareOfGrid = $('.square-td'),
-
-        // стрелки или буквы возле полей инпута
-        inputLabels = $('.crd-axis'),
-
-        // изменяет ширину линий грида
-        changeLineWidth = function () {
-            var
-                gridSide = 101,
-                lineWidthX = model.margins.x,
-                lineWidthY = model.margins.y,
-                // вычисляем центр
-                leftPosition = (gridSide - lineWidthX) / 2,
-                topPosition = (gridSide - lineWidthY) / 2;
-
-            $('.multi-line.position-vertical').css({width: lineWidthX, left: leftPosition});
-            $('.multi-line.position-horizontal').css({height: lineWidthY, top: topPosition});
-        },
-=======
   var
       // состоянии, которое не позволяет делать дом манипуляции если нажать на свитч, который
       // и так выбран
@@ -3348,91 +3319,39 @@ var PLACEGRID = (function () {
         });
         // присваиваем левому верхнему квадрату активность
         squareOfGrid.first().addClass('square-td--active');
->>>>>>> grid
 
-        // меняет квадраты на линии
-        squareToLine = function () {
-            // показываем линии
-            gridLines.each(function () {
-                $(this).show();
-            });
-            // отключаем возможности показа активного квадрата
-            $('.square-td--active').removeClass('square-td--active');
-            // todo
-            // выключаем ховер
-            squareOfGrid.each(function () {
-                $(this).addClass('square-td--hover-disable');
-            });
-            // отключаем возможность выбора положения активного квадрата
-            squareOfGrid.off('click');
-        },
+        // подключаем возможность переключения активного квадрата
+        squareOfGrid.on('click', function () {
+          $('.square-td--active').removeClass('square-td--active');
+          $(this).addClass('square-td--active');
+        })
 
-        // меняет линии на квадраты
-        lineToSquare = function () {
-            // подключаем ховер по квадратам
-            squareOfGrid.each(function () {
-                $(this).removeClass('square-td--hover-disable');
-            });
-            // прячем линии
-            gridLines.each(function () {
-                $(this).hide();
-            });
-            // присваиваем левому верхнему квадрату активность
-            squareOfGrid.first().addClass('square-td--active');
 
-            // подключаем возможность переключения активного квадрата
-            squareOfGrid.on('click', function () {
-                $('.square-td--active').removeClass('square-td--active');
-                $(this).addClass('square-td--active');
-            })
-        },
+      },
 
-        // меняет названия полей ввода с букв на стрелки
-        changeLabels = function (mode) {
-            if (mode === 'mono') {
-                inputLabels.each(function () {
-                    inputLabels.addClass('crd-axis--letter');
-                    inputLabels.removeClass('crd-axis--arrow');
-                })
-            } else {
-                inputLabels.each(function () {
-                    inputLabels.addClass('crd-axis--arrow');
-                    inputLabels.removeClass('crd-axis--letter');
-                })
-            }
-        },
-
-        changeGrid = function (mode) {
-            if (mode === 'mono') {
-                // запускает функцию из линии в квадрат
-                lineToSquare();
-            } else {
-                // запускает функцию из квадрата в линии
-                squareToLine();
-            }
-        };
-
-    return {
-        init: function () {
-            state = 'mono';
-            lineToSquare();
-        },
-        setStyle: function () {
-            var
-                mode = model.gridType === 'mono' ? 'mono' : 'multi';
-            // не запускать, если нажали по активной кнопке свитча
-            if (mode !== state) {
-                state = mode;
-                changeLabels(mode);
-                changeGrid(mode);
-            }
-            if (state === 'multi') {
-                // обновлять стиль только в районе толщины линий
-                changeLineWidth();
-            }
+      // меняет названия полей ввода с букв на стрелки
+      changeLabels = function (mode) {
+        if (mode === 'mono') {
+          inputLabels.each(function () {
+            inputLabels.addClass('crd-axis--letter');
+            inputLabels.removeClass('crd-axis--arrow');
+          })
+        } else {
+          inputLabels.each(function () {
+            inputLabels.addClass('crd-axis--arrow');
+            inputLabels.removeClass('crd-axis--letter');
+          })
         }
-<<<<<<< HEAD
-=======
+      },
+
+      changeGrid = function (mode) {
+        if (mode === 'mono') {
+          // запускает функцию из линии в квадрат
+          lineToSquare();
+        } else {
+          // запускает функцию из квадрата в линии
+          squareToLine();
+        }
       };
 
   return {
@@ -3485,8 +3404,8 @@ var PLACEGRID = (function () {
       // toFixed чтобы не было значения в полпикселя
       model.coord.x = parseInt(gridPosArr[index][1].toFixed(0));
       model.coord.y = parseInt(gridPosArr[index][0].toFixed(0));
->>>>>>> grid
     }
+  }
 })();
 var INPUTFIELD = (function () {
   var
@@ -3518,6 +3437,14 @@ var INPUTFIELD = (function () {
       model[variant]['x'] = parseInt(windowX.val());
       model[variant]['y'] = parseInt(windowY.val());
       console.log('возвращаю модель ', model);
+    }
+  }
+})();
+var SLIDER = (function () {
+  // ...
+  return {
+    updateModel: function (ui) {
+      model.alpha = ui.value/100;
     }
   }
 })();
@@ -3589,18 +3516,18 @@ var DRAGGABLE = (function () {
             watermark.draggable({
                 containment: "parent"
             });
-            slider.slider({
-                min: 0,
-                max: 100,
-                value: model.alpha * 100,
-                range: 'min'
-            });
+            // slider.slider({
+            //     min: 0,
+            //     max: 100,
+            //     value: model.alpha * 100,
+            //     range: 'min'
+            // });
             this.add_listerners()
         },
         add_listerners: function () {
             watermark.on('drag', this.set_pos);
             inputWindow.on('focusout', this.set_pos_x);
-            slider.on('slide', this.set_opacity);
+            // slider.on('slide', this.set_opacity);
             // grisSquare.on('click', this.set_grid_pos)
         },
         set_pos: function (e, ui) {
@@ -3635,13 +3562,19 @@ $(function(){
     // style input
     $('.js-upload').styler();
 
-    // init coordinate counter buttons
-    //COUNTERBTN.init();
-    // SWITCH.init();
-    // init place grid click handler
     INPUTFIELD.init();
     PLACEGRID.init();
     DRAGGABLE.init();
+
+    
+    // инициализируем слайдер
+    $('.generator-transparency__slider').slider({
+        min: 0,
+        max: 100,
+        value: model.alpha * 100,
+        range: 'min'
+    });
+
     // jquery upload
 
     // загрузка основного изображения
@@ -3664,7 +3597,6 @@ $(function(){
         }
     });
 
-<<<<<<< HEAD
     $('.crd-arrow-list__item').on('mousedown', function () {
         var _this = $(this);
          counterTimeout = setInterval(function () {
@@ -3685,18 +3617,6 @@ $(function(){
         $(this).on('mouseout', function () {
             clearInterval(counterTimeout);
         });
-=======
-    // хендлер для кнопок-стрелок
-    $('.crd-arrow-list__item').on('click', function () {
-        // функция в модуле стрелок, она изменяет модель
-        COUNTERBTN.counterBtnModelChange($(this));
-        // метод модуля инпутов, он сравнивает себя с моделью и обновляется
-        INPUTFIELD.setInput();
-        // метод модуля уотермарк, он сравнивает себя с остальным
-        // ...
-        // метод модуля грид, он сравнивается сам с моделью
-        PLACEGRID.setStyle();
->>>>>>> grid
     });
 
     // хендлер для переключения режимов мульти/моно
@@ -3732,5 +3652,12 @@ $(function(){
       // обновляем грид
       PLACEGRID.setStyle();
       // обновляем вотермарк
+    });
+
+    $('.generator-transparency__slider').on('slide', function (e, ui) {
+        // обновляет модель когда перемещается
+        SLIDER.updateModel(ui);
+        // дергает обновление вотермарка
+        // ...
     });
 });

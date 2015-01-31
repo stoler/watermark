@@ -4,13 +4,19 @@ $(function(){
     // style input
     $('.js-upload').styler();
 
-    // init coordinate counter buttons
-    //COUNTERBTN.init();
-    // SWITCH.init();
-    // init place grid click handler
     INPUTFIELD.init();
     PLACEGRID.init();
     DRAGGABLE.init();
+
+    
+    // инициализируем слайдер
+    $('.generator-transparency__slider').slider({
+        min: 0,
+        max: 100,
+        value: model.alpha * 100,
+        range: 'min'
+    });
+
     // jquery upload
 
     // загрузка основного изображения
@@ -88,5 +94,12 @@ $(function(){
       // обновляем грид
       PLACEGRID.setStyle();
       // обновляем вотермарк
+    });
+
+    $('.generator-transparency__slider').on('slide', function (e, ui) {
+        // обновляет модель когда перемещается
+        SLIDER.updateModel(ui);
+        // дергает обновление вотермарка
+        // ...
     });
 });
