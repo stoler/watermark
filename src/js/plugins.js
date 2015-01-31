@@ -6,9 +6,12 @@ $(function(){
 
     INPUTFIELD.init();
     PLACEGRID.init();
-    DRAGGABLE.init();
 
-    
+    // инициализируем драггабл
+    $('.generator-picture__watermark').draggable({
+        containment: "parent"
+    });
+   
     // инициализируем слайдер
     $('.generator-transparency__slider').slider({
         min: 0,
@@ -39,6 +42,7 @@ $(function(){
         }
     });
 
+    // хендлер для стрелок
     $('.crd-arrow-list__item').on('mousedown', function () {
         var _this = $(this);
          counterTimeout = setInterval(function () {
@@ -46,9 +50,8 @@ $(function(){
             COUNTERBTN.counterBtnModelChange(_this);
             // метод модуля инпутов, он сравнивает себя с моделью и обновляется
             INPUTFIELD.setInput();
-            DRAGGABLE.set_pos_x();
             // метод модуля уотермарк, он сравнивает себя с остальным
-            // ...
+            DRAGGABLE.setWatermark();
             // метод модуля грид, он сравнивается сам с моделью
             PLACEGRID.setStyle();
         }, 50);
@@ -85,6 +88,7 @@ $(function(){
         // заставляет обновиться инпут
         INPUTFIELD.setInput();
         // заставляет обновиться уотермарк
+        DRAGGABLE.setWatermark();
     });
 
     // хендлер для ввода с клавиатуры прямо в инпуты
@@ -94,12 +98,25 @@ $(function(){
       // обновляем грид
       PLACEGRID.setStyle();
       // обновляем вотермарк
+      DRAGGABLE.setWatermark();
+
     });
 
+    // хендлер для слайдера
     $('.generator-transparency__slider').on('slide', function (e, ui) {
         // обновляет модель когда перемещается
         SLIDER.updateModel(ui);
         // дергает обновление вотермарка
+        DRAGGABLE.setOpacity();
+    });
+    
+    // хендлер для окна с возможностью драгабл
+    $('.generator-picture__watermark').on('drag', function (e, ui) {
+        // изменяет модель
+        DRAGGABLE.updateModel(ui)
+        // инпуты изменяются
+        INPUTFIELD.setInput();
+        // грид изменяется
         // ...
     });
 });
