@@ -36,18 +36,18 @@ var DRAGGABLE = (function () {
             watermark.draggable({
                 containment: "parent"
             });
-            slider.slider({
-                min: 0,
-                max: 100,
-                value: model.alpha * 100,
-                range: 'min'
-            });
+            // slider.slider({
+            //     min: 0,
+            //     max: 100,
+            //     value: model.alpha * 100,
+            //     range: 'min'
+            // });
             this.add_listerners()
         },
         add_listerners: function () {
             watermark.on('drag', this.set_pos);
             inputWindow.on('focusout', this.set_pos_x);
-            slider.on('slide', this.set_opacity);
+            // slider.on('slide', this.set_opacity);
             // grisSquare.on('click', this.set_grid_pos)
         },
         set_pos: function (e, ui) {

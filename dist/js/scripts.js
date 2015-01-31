@@ -3440,6 +3440,14 @@ var INPUTFIELD = (function () {
     }
   }
 })();
+var SLIDER = (function () {
+  // ...
+  return {
+    updateModel: function (ui) {
+      model.alpha = ui.value/100;
+    }
+  }
+})();
 var SWITCH = (function () {
 
   return {
@@ -3508,18 +3516,18 @@ var DRAGGABLE = (function () {
             watermark.draggable({
                 containment: "parent"
             });
-            slider.slider({
-                min: 0,
-                max: 100,
-                value: model.alpha * 100,
-                range: 'min'
-            });
+            // slider.slider({
+            //     min: 0,
+            //     max: 100,
+            //     value: model.alpha * 100,
+            //     range: 'min'
+            // });
             this.add_listerners()
         },
         add_listerners: function () {
             watermark.on('drag', this.set_pos);
             inputWindow.on('focusout', this.set_pos_x);
-            slider.on('slide', this.set_opacity);
+            // slider.on('slide', this.set_opacity);
             // grisSquare.on('click', this.set_grid_pos)
         },
         set_pos: function (e, ui) {
@@ -3554,13 +3562,19 @@ $(function(){
     // style input
     $('.js-upload').styler();
 
-    // init coordinate counter buttons
-    //COUNTERBTN.init();
-    // SWITCH.init();
-    // init place grid click handler
     INPUTFIELD.init();
     PLACEGRID.init();
     DRAGGABLE.init();
+
+    
+    // инициализируем слайдер
+    $('.generator-transparency__slider').slider({
+        min: 0,
+        max: 100,
+        value: model.alpha * 100,
+        range: 'min'
+    });
+
     // jquery upload
 
     // загрузка основного изображения
@@ -3638,5 +3652,12 @@ $(function(){
       // обновляем грид
       PLACEGRID.setStyle();
       // обновляем вотермарк
+    });
+
+    $('.generator-transparency__slider').on('slide', function (e, ui) {
+        // обновляет модель когда перемещается
+        SLIDER.updateModel(ui);
+        // дергает обновление вотермарка
+        // ...
     });
 });
