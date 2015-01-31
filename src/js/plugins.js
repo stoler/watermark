@@ -70,4 +70,5 @@ $(function(){
       PLACEGRID.setStyle();
       // обновляем вотермарк
     });
+
 });

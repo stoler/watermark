@@ -20,6 +20,7 @@ var model = (function () {
             'y': 1
         }
     };
+
 })();
 
 /*! jQuery UI - v1.11.1+CommonJS - 2014-09-17
@@ -3589,4 +3590,5 @@ $(function(){
       PLACEGRID.setStyle();
       // обновляем вотермарк
     });
+
 });
