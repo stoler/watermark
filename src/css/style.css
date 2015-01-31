@@ -1071,14 +1071,14 @@ place-grid
 .position-vertical {
   height: 100%;
   top: 0;
-  left: 50%;
+  left: 49px;
   width: 1px;
 }
 
 .position-horizontal {
   width: 100%;
   left: 0;
-  top: 50%;
+  top: 49px;
   height: 1px;
 }
 
