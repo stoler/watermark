@@ -1,8 +1,9 @@
 <?php
 session_start();
+
 if (isset($_GET['download']) && $_GET['download'] == 1) {
     require_once 'lib/Watermark.php';
-    Watermark::getInstance()->saveImg('http://watermark/upload/wm2.png', 'http://watermark/upload/img.png', 60,
+    Watermark::getInstance()->saveImg('http://'.$_SERVER['HTTP_HOST'].'/upload/wm2.png', 'http://'.$_SERVER['HTTP_HOST'].'/upload/img.png', 60,
         -20, -30, true, 40, 50);
     die();
 }
