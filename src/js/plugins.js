@@ -1,5 +1,9 @@
 $(function(){
-    var counterTimeout;
+    var counterTimeout,
+        // массив для определения пределов
+        // в которых может перемещаться 
+        // вотермарк
+        contSize = [];
 
     // style input
     $('.js-upload').styler();
@@ -7,9 +11,12 @@ $(function(){
     INPUTFIELD.init();
     PLACEGRID.init();
 
+    
+
     // инициализируем драггабл
+    contSize = DRAGGABLE.calculateContainer();
     $('.generator-picture__watermark').draggable({
-        containment: "parent"
+        containment: contSize
     });
    
     // инициализируем слайдер
@@ -91,7 +98,7 @@ $(function(){
         // заставляет обновиться инпут
         INPUTFIELD.setInput();
         // заставляет обновиться уотермарк
-        DRAGGABLE.setWatermark();
+        DRAGGABLE.setWatermark(true);
     });
 
     // хендлер для ввода с клавиатуры прямо в инпуты
@@ -102,7 +109,7 @@ $(function(){
       PLACEGRID.setStyle();
       PLACEGRID.setClass();
       // обновляем вотермарк
-      DRAGGABLE.setWatermark();
+      DRAGGABLE.setWatermark(true);
     });
 
     // хендлер для слайдера
@@ -132,7 +139,7 @@ $(function(){
         // сбрасывает положение слайдбара до правого положения (100%)
         SLIDER.setSlider();
         // вотермарк изменяется
-        DRAGGABLE.setWatermark();
+        DRAGGABLE.setWatermark(true);
         DRAGGABLE.setOpacity();
         // метод для инпут файлов чтобы сбрасывал
         // ...

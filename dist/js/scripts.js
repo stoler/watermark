@@ -3338,13 +3338,13 @@ var PLACEGRID = (function () {
             }
         },
         
-        // формирует класс исходя из величин координат
+        // находит порядковый номер окна, на основании модели
         getActiveGridClass = function () {
           // достает величины
           var
               x = model.coord.x,
               y = model.coord.y,
-              className = 0,
+              classNum = 0,
 
               watermark = $('.generator-picture__watermark'),
               images = $('.generator-picture__image'),
@@ -3372,23 +3372,23 @@ var PLACEGRID = (function () {
 
           // уровень по высоте
           if (y < centerY) {
-            className += 0;
+            classNum += 0;
           } else if ((y > centerY) && (y < (imageHeight - watermarkHeight))) {
-            className += 3;
+            classNum += 3;
           } else {
-            className += 6;
+            classNum += 6;
           }
 
           // уровень по горизонтали
           if (x < centerX) {
-            className += 0;
+            classNum += 0;
           } else if ((x > centerX) && (x < (imagesWidth - watermarkWidth))) {
-            className += 1;
+            classNum += 1;
           } else {
-            className += 2;
+            classNum += 2;
           }
 
-          return className;
+          return classNum;
 
         },
 
@@ -3571,13 +3571,39 @@ var DRAGGABLE = (function () {
       // model.coord.x = ui.position.left;
       // model.coord.y = ui.position.top;
     },
+
     // изменяет положение
-    setWatermark: function () {
-      watermark.css({top: model.coord.y, left: model.coord.x});
+    setWatermark: function (animation) {
+      if (animation) {
+        watermark.animate({top: model.coord.y, left: model.coord.x}, {duration: 500, queue: false});
+      } else {
+        watermark.css({top: model.coord.y, left: model.coord.x});
+      }
     },
     // изменяет опасити
     setOpacity: function () {
       watermark.css('opacity', model.alpha);
+    },
+
+    // рассчитывает величину
+    // контейнера внутри которого можно драгать
+    // вотермарк
+    calculateContainer: function () {
+      var
+          watermark = $('.generator-picture__watermark'),
+          // координаты прямоугольника окна в котором перемещаем вотермарк
+          draggableWindow = [217, 109, 872, 645],
+          // массив [x1, y1, x2, y2] для определения четырехуголника
+          // в котором можно дрегать вотермарк
+          resultArray = [];
+
+      resultArray.push(draggableWindow[0] - watermark.width());
+      resultArray.push(draggableWindow[1] - watermark.height());
+      resultArray.push(draggableWindow[2]);
+      resultArray.push(draggableWindow[3]);
+
+      return resultArray;
+
     }
   }
 })();
@@ -3597,7 +3623,11 @@ var RESET = (function () {
     }
 })();
 $(function(){
-    var counterTimeout;
+    var counterTimeout,
+        // массив для определения пределов
+        // в которых может перемещаться 
+        // вотермарк
+        contSize = [];
 
     // style input
     $('.js-upload').styler();
@@ -3605,9 +3635,12 @@ $(function(){
     INPUTFIELD.init();
     PLACEGRID.init();
 
+    
+
     // инициализируем драггабл
+    contSize = DRAGGABLE.calculateContainer();
     $('.generator-picture__watermark').draggable({
-        containment: "parent"
+        containment: contSize
     });
    
     // инициализируем слайдер
@@ -3689,7 +3722,7 @@ $(function(){
         // заставляет обновиться инпут
         INPUTFIELD.setInput();
         // заставляет обновиться уотермарк
-        DRAGGABLE.setWatermark();
+        DRAGGABLE.setWatermark(true);
     });
 
     // хендлер для ввода с клавиатуры прямо в инпуты
@@ -3700,7 +3733,7 @@ $(function(){
       PLACEGRID.setStyle();
       PLACEGRID.setClass();
       // обновляем вотермарк
-      DRAGGABLE.setWatermark();
+      DRAGGABLE.setWatermark(true);
     });
 
     // хендлер для слайдера
@@ -3730,7 +3763,7 @@ $(function(){
         // сбрасывает положение слайдбара до правого положения (100%)
         SLIDER.setSlider();
         // вотермарк изменяется
-        DRAGGABLE.setWatermark();
+        DRAGGABLE.setWatermark(true);
         DRAGGABLE.setOpacity();
         // метод для инпут файлов чтобы сбрасывал
         // ...
