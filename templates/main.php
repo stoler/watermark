@@ -22,9 +22,9 @@
         </ul>
         <ul class="social">
             <li class="social__item-share"><a href="">share<span></span></a></li>
-            <li class="social__item-fb"><a href="" onclick="Share.facebook('URL','TITLE','IMG_PATH','DESC')">facebook<span></span></a></li>
-            <li class="social__item-tw"><a href="" onclick="Share.twitter('URL','TITLE')">twitter<span></span></a></li>
-            <li class="social__item-vk"><a href="" onclick="Share.vkontakte('URL','TITLE','IMG_PATH','DESC')">vkontakte<span></span></a></li>
+            <li class="social__item-fb"><a href="#" class="social__btn" data-site="facebook">facebook<span></span></a></li>
+            <li class="social__item-tw"><a href="#" class="social__btn" data-site="twitter">twitter<span></span></a></li>
+            <li class="social__item-vk"><a href="#" class="social__btn" data-site="vkontakte">vkontakte<span></span></a></li>
         </ul>
     </div>
     <div class="main-generator">

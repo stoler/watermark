@@ -3817,4 +3817,10 @@ $(function(){
     $('.button-download').on('click', function () {
         SENDDATA.send();
     });
+
+    // социальный шаринг
+    $('.social__btn').on('click', function (e) {
+        e.preventDefault();
+        Share[$(this).data('site')]('URL','TITLE','IMG_PATH', 'DESC');
+    });
 });
