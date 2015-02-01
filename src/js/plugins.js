@@ -33,10 +33,14 @@ $(function(){
     $('#upload-picture').fileupload({
         dataType: 'json',
         done: function (e, data) {
-            $.each(data.result.files, function (index, file) {
-                $('.generator-picture__img').attr('src', '/upload/' + file.name);
-                model.files.image = file.name;
-            });
+            if (typeof data.result.files[0]['error'] == 'undefined') {
+                $.each(data.result.files, function (index, file) {
+                    $('.generator-picture__img').attr('src', '/upload/' + file.name);
+                    model.files.image = file.name;
+                });
+            } else {
+                alert('Error!');
+            }
         }
     });
 
@@ -44,10 +48,14 @@ $(function(){
     $('#upload-watermark').fileupload({
         dataType: 'json',
         done: function (e, data) {
-            $.each(data.result.files, function (index, file) {
-                $('.generator-picture__watermark').attr('src', '/upload/' + file.name);
-                model.files.watermark = file.name;
-            });
+            if (typeof data.result.files[0]['error'] == 'undefined') {
+                $.each(data.result.files, function (index, file) {
+                    $('.generator-picture__watermark').attr('src', '/upload/' + file.name);
+                    model.files.watermark = file.name;
+                });
+            } else {
+                alert('Error!');
+            }
         }
     });
 
