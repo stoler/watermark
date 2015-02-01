@@ -50,6 +50,7 @@ $(function(){
             });
         }
     });
+    DRAGGABLE.setOpacity();
 
     // хендлер для стрелок
     $('.crd-arrow-list__item').on('mousedown', function () {

@@ -14,7 +14,7 @@ var model = (function () {
             'watermark': ''
         },
         'gridType': 'mono',
-        'alpha': 1,
+        'alpha': .5,
         'margins': {
             'x': 1,
             'y': 1
@@ -3513,7 +3513,6 @@ var SLIDER = (function () {
     },
     // слайдер обновляется за счет модели
     setSlider: function() {
-      console.log('in setSlider');
       $('.generator-transparency__slider').slider('value', model.alpha * 100);
     }
   }
@@ -3624,7 +3623,7 @@ var RESET = (function () {
             model.files.image = '';
             model.files.watermark = '';
             model.gridType = 'mono';
-            model.alpha = 1;
+            model.alpha = .5;
             model.margins.x = 1;
             model.margins.y = 1;
             $('.jq-file__name').text('Файл не выбран');
@@ -3713,6 +3712,7 @@ $(function(){
             });
         }
     });
+    DRAGGABLE.setOpacity();
 
     // хендлер для стрелок
     $('.crd-arrow-list__item').on('mousedown', function () {
