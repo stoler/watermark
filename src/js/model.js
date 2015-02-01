@@ -9,7 +9,7 @@ var model = (function () {
             'watermark': ''
         },
         'gridType': 'mono',
-        'alpha': 1,
+        'alpha': .5,
         'margins': {
             'x': 1,
             'y': 1

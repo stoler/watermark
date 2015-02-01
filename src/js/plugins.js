@@ -58,6 +58,7 @@ $(function(){
             }
         }
     });
+    DRAGGABLE.setOpacity();
 
     // хендлер для стрелок
     $('.crd-arrow-list__item').on('mousedown', function () {
@@ -72,7 +73,7 @@ $(function(){
             // метод модуля грид, он сравнивается сам с моделью
             PLACEGRID.setStyle();
             PLACEGRID.setClass();
-        }, 50);
+        }, 70);
 
         $(this).on('mouseup', function () {
             clearInterval(counterTimeout);
@@ -115,6 +116,8 @@ $(function(){
     $('.crd-window__num').on('change', function () {
       // изменяем модель
       INPUTFIELD.updateModel($(this));
+      // обновляем инпут
+      INPUTFIELD.setInput();
       // обновляем грид
       PLACEGRID.setStyle();
       PLACEGRID.setClass();
