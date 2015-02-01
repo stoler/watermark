@@ -3485,6 +3485,14 @@ var INPUTFIELD = (function () {
         } else {
           variant = 'margins';
         }
+      },
+
+      // проверяет чтобы инпут был числом
+      validateInput = function (input) {
+        if (isNaN(input)) {
+          return 0;
+        }
+        return input;
       };
 
   return {
@@ -3499,9 +3507,8 @@ var INPUTFIELD = (function () {
     },
     updateModel: function () {
       checkVariant();
-      model[variant]['x'] = parseInt(windowX.val());
-      model[variant]['y'] = parseInt(windowY.val());
-      console.log('возвращаю модель ', model);
+      model[variant]['x'] = validateInput(parseInt(windowX.val()));
+      model[variant]['y'] = validateInput(parseInt(windowY.val()));
     }
   }
 })();
@@ -3770,6 +3777,8 @@ $(function(){
     $('.crd-window__num').on('change', function () {
       // изменяем модель
       INPUTFIELD.updateModel($(this));
+      // обновляем инпут
+      INPUTFIELD.setInput();
       // обновляем грид
       PLACEGRID.setStyle();
       PLACEGRID.setClass();

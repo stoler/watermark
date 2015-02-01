@@ -108,6 +108,8 @@ $(function(){
     $('.crd-window__num').on('change', function () {
       // изменяем модель
       INPUTFIELD.updateModel($(this));
+      // обновляем инпут
+      INPUTFIELD.setInput();
       // обновляем грид
       PLACEGRID.setStyle();
       PLACEGRID.setClass();
