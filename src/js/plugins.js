@@ -65,7 +65,7 @@ $(function(){
             // метод модуля грид, он сравнивается сам с моделью
             PLACEGRID.setStyle();
             PLACEGRID.setClass();
-        }, 50);
+        }, 70);
 
         $(this).on('mouseup', function () {
             clearInterval(counterTimeout);
