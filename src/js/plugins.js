@@ -35,6 +35,7 @@ $(function(){
         done: function (e, data) {
             $.each(data.result.files, function (index, file) {
                 $('.generator-picture__img').attr('src', '/upload/' + file.name);
+                model.files.image = file.name;
             });
         }
     });
@@ -45,6 +46,7 @@ $(function(){
         done: function (e, data) {
             $.each(data.result.files, function (index, file) {
                 $('.generator-picture__watermark').attr('src', '/upload/' + file.name);
+                model.files.watermark = file.name;
             });
         }
     });
@@ -146,6 +148,10 @@ $(function(){
         // грид должен инзменяться до первоначального значения
         PLACEGRID.setStyle();
         PLACEGRID.setClass();
-        
+    });
+
+    // отправка данных на сервер
+    $('.button-download').on('click', function () {
+        SENDDATA.send();
     });
 });

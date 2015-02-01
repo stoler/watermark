@@ -20,7 +20,6 @@ var model = (function () {
             'y': 1
         }
     };
-
 })();
 
 /*! jQuery UI - v1.11.1+CommonJS - 2014-09-17
@@ -3622,6 +3621,34 @@ var RESET = (function () {
         }
     }
 })();
+var SENDDATA = (function ($) {
+    var validateData = function () {
+        console.log($.trim(model.files.image).length,$.trim(model.files.watermark).length);
+
+        if ($.trim(model.files.image).length === 0 || $.trim(model.files.watermark).length === 0) {
+            return false;
+        }
+        return true;
+    };
+
+    return {
+        send: function () {
+            if (validateData()) {
+                $.ajax({
+                    url: "/",
+                    type: "POST",
+                    data: model
+                }).done(function () {
+                    console.log('Данные отправлены! Или нет.');
+                });
+            } else {
+                console.log('Ошибка при отправке данных');
+            }
+
+
+        }
+    };
+})(jQuery);
 $(function(){
     var counterTimeout,
         // массив для определения пределов
@@ -3659,6 +3686,7 @@ $(function(){
         done: function (e, data) {
             $.each(data.result.files, function (index, file) {
                 $('.generator-picture__img').attr('src', '/upload/' + file.name);
+                model.files.image = file.name;
             });
         }
     });
@@ -3669,6 +3697,7 @@ $(function(){
         done: function (e, data) {
             $.each(data.result.files, function (index, file) {
                 $('.generator-picture__watermark').attr('src', '/upload/' + file.name);
+                model.files.watermark = file.name;
             });
         }
     });
@@ -3770,6 +3799,10 @@ $(function(){
         // грид должен инзменяться до первоначального значения
         PLACEGRID.setStyle();
         PLACEGRID.setClass();
-        
+    });
+
+    // отправка данных на сервер
+    $('.button-download').on('click', function () {
+        SENDDATA.send();
     });
 });
