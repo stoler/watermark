@@ -29,16 +29,26 @@ var DRAGGABLE = (function () {
     calculateContainer: function () {
       var
           watermark = $('.generator-picture__watermark'),
-          // координаты прямоугольника окна в котором перемещаем вотермарк
-          draggableWindow = [217, 109, 872, 645],
+          image = $('.generator-picture__image'),
+          // координаты контейнера вотермарка
+          container = [
+            image.offset().left,
+            image.offset().top,
+            image.offset().left + image.width(),
+            image.offset().top + image.height(),
+          ],
+
           // массив [x1, y1, x2, y2] для определения четырехуголника
           // в котором можно дрегать вотермарк
           resultArray = [];
+      
+      
+      console.log(container);
 
-      resultArray.push(draggableWindow[0] - watermark.width());
-      resultArray.push(draggableWindow[1] - watermark.height());
-      resultArray.push(draggableWindow[2]);
-      resultArray.push(draggableWindow[3]);
+      resultArray.push(container[0] - watermark.width());
+      resultArray.push(container[1] - watermark.height());
+      resultArray.push(container[2]);
+      resultArray.push(container[3]);
 
       return resultArray;
 
