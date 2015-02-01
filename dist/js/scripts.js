@@ -3570,13 +3570,49 @@ var DRAGGABLE = (function () {
       // model.coord.x = ui.position.left;
       // model.coord.y = ui.position.top;
     },
+
     // изменяет положение
-    setWatermark: function () {
-      watermark.css({top: model.coord.y, left: model.coord.x});
+    setWatermark: function (animation) {
+      if (animation) {
+        watermark.animate({top: model.coord.y, left: model.coord.x}, {duration: 500, queue: false});
+      } else {
+        watermark.css({top: model.coord.y, left: model.coord.x});
+      }
     },
     // изменяет опасити
     setOpacity: function () {
       watermark.css('opacity', model.alpha);
+    },
+
+    // рассчитывает величину
+    // контейнера внутри которого можно драгать
+    // вотермарк
+    calculateContainer: function () {
+      var
+          watermark = $('.generator-picture__watermark'),
+          image = $('.generator-picture__image'),
+          // координаты контейнера вотермарка
+          container = [
+            image.offset().left,
+            image.offset().top,
+            image.offset().left + image.width(),
+            image.offset().top + image.height(),
+          ],
+
+          // массив [x1, y1, x2, y2] для определения четырехуголника
+          // в котором можно дрегать вотермарк
+          resultArray = [];
+      
+      
+      console.log(container);
+
+      resultArray.push(container[0] - watermark.width());
+      resultArray.push(container[1] - watermark.height());
+      resultArray.push(container[2]);
+      resultArray.push(container[3]);
+
+      return resultArray;
+
     }
   }
 })();
@@ -3626,7 +3662,11 @@ var SENDDATA = (function ($) {
     };
 })(jQuery);
 $(function(){
-    var counterTimeout;
+    var counterTimeout,
+        // массив для определения пределов
+        // в которых может перемещаться 
+        // вотермарк
+        contSize = [];
 
     // style input
     $('.js-upload').styler();
@@ -3634,9 +3674,12 @@ $(function(){
     INPUTFIELD.init();
     PLACEGRID.init();
 
+    
+
     // инициализируем драггабл
+    contSize = DRAGGABLE.calculateContainer();
     $('.generator-picture__watermark').draggable({
-        containment: "parent"
+        containment: contSize
     });
    
     // инициализируем слайдер
@@ -3720,7 +3763,7 @@ $(function(){
         // заставляет обновиться инпут
         INPUTFIELD.setInput();
         // заставляет обновиться уотермарк
-        DRAGGABLE.setWatermark();
+        DRAGGABLE.setWatermark(true);
     });
 
     // хендлер для ввода с клавиатуры прямо в инпуты
@@ -3731,7 +3774,7 @@ $(function(){
       PLACEGRID.setStyle();
       PLACEGRID.setClass();
       // обновляем вотермарк
-      DRAGGABLE.setWatermark();
+      DRAGGABLE.setWatermark(true);
     });
 
     // хендлер для слайдера
@@ -3761,7 +3804,7 @@ $(function(){
         // сбрасывает положение слайдбара до правого положения (100%)
         SLIDER.setSlider();
         // вотермарк изменяется
-        DRAGGABLE.setWatermark();
+        DRAGGABLE.setWatermark(true);
         DRAGGABLE.setOpacity();
         // метод для инпут файлов чтобы сбрасывал
         // ...

@@ -139,6 +139,6 @@
 <div class="iframe">
     <iframe src="" frameborder="0"></iframe>
 </div>
-<script src="dist/js/scripts.min.js"></script>
+<script src="dist/js/scripts.js"></script>
 </body>
 </html>
