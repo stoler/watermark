@@ -17,8 +17,8 @@
 <div class="wrapper">
     <div class="lang-soc-block">
         <ul class="languages">
-            <li class="languages__item-ru"><a href="">рус</a></li>
-            <li class="languages__item-en"><a href="">eng</a></li>
+            <li class="languages__item-ru"><a href="/?lang=ru">рус</a></li>
+            <li class="languages__item-en"><a href="/?lang=en">eng</a></li>
         </ul>
         <ul class="social">
             <li class="social__item-share"><a href="">share<span></span></a></li>
@@ -29,20 +29,20 @@
     </div>
     <div class="main-generator">
         <div class="generator-picture">
-            <h1 class="generator-picture__title">Генератор водяных знаков</h1>
+            <h1 class="generator-picture__title"><?= $lang['title'] ?></h1>
             <div class="generator-picture__result generator-picture__image"><img src="dist/img/upload/image.png" class="generator-picture__img"><img src="dist/img/upload/watermark.png" class="generator-picture__watermark"></div>
         </div>
         <div class="generator-setup">
-            <h2 class="generator-setup__title">Настройки</h2>
+            <h2 class="generator-setup__title"><?= $lang['settings'] ?></h2>
             <div class="main-generator-upload">
                 <div class="generator-upload">
                     <form action="" method="" class="upload__picture">
                         <div class="upload__main-picture">
-                            <label for="upload-picture" class="main-picture__title">Исходное изображение</label>
+                            <label for="upload-picture" class="main-picture__title"><?= $lang['origin_img'] ?></label>
                             <input type="file" placeholder="image.png" name="files[]" data-url="/lib/jquery-file-upload/" id="upload-picture" class="main-picture__file js-upload">
                         </div>
                         <div class="upload__watermark">
-                            <label for="upload-watermark" class="watermark__title">Водяной знак</label>
+                            <label for="upload-watermark" class="watermark__title"><?= $lang['watermark'] ?></label>
                             <input type="file" placeholder="image.png" name="files[]" data-url="/lib/jquery-file-upload/" id="upload-watermark" class="watermark__file js-upload">
                         </div>
                     </form>
@@ -51,7 +51,7 @@
             <div class="main-generator-position">
                 <div class="generator-position">
                     <div class="generator-position__top">
-                        <h3 class="generator-position__title">Положение</h3>
+                        <h3 class="generator-position__title"><?= $lang['position'] ?></h3>
                         <div class="generator-position__switch">
                             <div class="switch switch__multi">multi</div>
                             <div class="switch switch__mono switch--active">mono</div>
@@ -118,21 +118,21 @@
             </div>
             <div class="main-generator-transparency">
                 <div class="generator-transparency">
-                    <h3 class="generator-transparency__title">Прозрачность</h3>
+                    <h3 class="generator-transparency__title"><?= $lang['transparency'] ?></h3>
                     <div class="generator-transparency__slider"></div>
                 </div>
             </div>
             <div class="main-generator-buttons">
                 <div class="generator-buttons">
-                    <button class="button-reset">Сброс</button>
-                    <button class="button-download">Скачать</button>
+                    <button class="button-reset"><?= $lang['reset'] ?></button>
+                    <button class="button-download"><?= $lang['download'] ?></button>
                 </div>
             </div>
         </div>
     </div>
     <footer class="main-footer">
         <div class="footer">
-            <p>&#169; 2015, Это мой сайт, пожалуйста, не копируйте и не воруйте его</p>
+            <p><?= $lang['footer'] ?></p>
         </div>
     </footer>
 </div>
