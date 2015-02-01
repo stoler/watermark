@@ -73,13 +73,13 @@ var PLACEGRID = (function () {
             }
         },
         
-        // формирует класс исходя из величин координат
+        // находит порядковый номер окна, на основании модели
         getActiveGridClass = function () {
           // достает величины
           var
               x = model.coord.x,
               y = model.coord.y,
-              className = 0,
+              classNum = 0,
 
               watermark = $('.generator-picture__watermark'),
               images = $('.generator-picture__image'),
@@ -107,23 +107,23 @@ var PLACEGRID = (function () {
 
           // уровень по высоте
           if (y < centerY) {
-            className += 0;
+            classNum += 0;
           } else if ((y > centerY) && (y < (imageHeight - watermarkHeight))) {
-            className += 3;
+            classNum += 3;
           } else {
-            className += 6;
+            classNum += 6;
           }
 
           // уровень по горизонтали
           if (x < centerX) {
-            className += 0;
+            classNum += 0;
           } else if ((x > centerX) && (x < (imagesWidth - watermarkWidth))) {
-            className += 1;
+            classNum += 1;
           } else {
-            className += 2;
+            classNum += 2;
           }
 
-          return className;
+          return classNum;
 
         },
 
