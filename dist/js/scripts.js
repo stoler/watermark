@@ -3319,14 +3319,6 @@ var PLACEGRID = (function () {
             gridLines.each(function () {
                 $(this).hide();
             });
-            // присваиваем левому верхнему квадрату активность
-            squareOfGrid.first().addClass('square-td--active');
-
-            // подключаем возможность переключения активного квадрата
-            squareOfGrid.on('click', function () {
-                $('.square-td--active').removeClass('square-td--active');
-                $(this).addClass('square-td--active');
-            })
 
 
         },
@@ -3345,11 +3337,77 @@ var PLACEGRID = (function () {
                 })
             }
         },
+        
+        // формирует класс исходя из величин координат
+        getActiveGridClass = function () {
+          // достает величины
+          var
+              x = model.coord.x,
+              y = model.coord.y,
+              className = 0,
+
+              watermark = $('.generator-picture__watermark'),
+              images = $('.generator-picture__image'),
+              imagesWidth = images.width(),
+              imageHalfWidth = imagesWidth / 2,
+              watermarkWidth = watermark.width(),
+              watermarkHalfWidth = watermarkWidth/ 2,
+              imageHeight = images.height(),
+              imageHalfHeight = imageHeight / 2,
+              watermarkHeight = watermark.height(),
+              watermarkHalfHeight = watermarkHeight/ 2,
+              centerX = imageHalfWidth-watermarkHalfWidth,
+              centerY = imageHalfHeight-watermarkHalfHeight,
+              gridPosArr = [
+                  [0, 0],
+                  [0, centerX],
+                  [0, imagesWidth-watermarkWidth],
+                  [centerY, 0],
+                  [centerY, centerX],
+                  [centerY, imagesWidth-watermarkWidth],
+                  [imageHeight-watermarkHeight, 0],
+                  [imageHeight-watermarkHeight, centerX],
+                  [imageHeight-watermarkHeight, imagesWidth-watermarkWidth]
+              ];
+
+          // уровень по высоте
+          if (y < centerY) {
+            className += 0;
+          } else if ((y > centerY) && (y < (imageHeight - watermarkHeight))) {
+            className += 3;
+          } else {
+            className += 6;
+          }
+
+          // уровень по горизонтали
+          if (x < centerX) {
+            className += 0;
+          } else if ((x > centerX) && (x < (imagesWidth - watermarkWidth))) {
+            className += 1;
+          } else {
+            className += 2;
+          }
+
+          return className;
+
+        },
+
+        setClass = function () {
+          // ставит активность на класс
+          // на основании модели
+          if (model.gridType === 'mono') {
+            $('.square-td--active').removeClass('square-td--active');
+            squareOfGrid.eq(getActiveGridClass()).addClass('square-td--active');
+          }
+        },
 
         changeGrid = function (mode) {
             if (mode === 'mono') {
                 // запускает функцию из линии в квадрат
                 lineToSquare();
+                // подставить класс на правильный квадрат
+                // в соответствии с моделью
+                setClass();
             } else {
                 // запускает функцию из квадрата в линии
                 squareToLine();
@@ -3359,8 +3417,14 @@ var PLACEGRID = (function () {
     return {
         init: function () {
             state = 'mono';
-            lineToSquare();
+            // lineToSquare();
+            this.setStyle();
+            setClass();
         },
+
+        setClass: setClass,
+
+        // меняет стиль с мульти на моно и наоборот
         setStyle: function () {
             var
                 mode = model.gridType === 'mono' ? 'mono' : 'multi';
@@ -3447,9 +3511,12 @@ var SLIDER = (function () {
   return {
     updateModel: function (ui) {
       model.alpha = ui.value/100;
+    },
+    // слайдер обновляется за счет модели
+    setSlider: function() {
+      console.log('in setSlider');
+      $('.generator-transparency__slider').slider('value', model.alpha * 100);
     }
-    // todo
-    // слайдер обновляется за счет модели, вероятно лучше чтобы сбрасывался
   }
 })();
 var SWITCH = (function () {
@@ -3585,6 +3652,7 @@ $(function(){
             DRAGGABLE.setWatermark();
             // метод модуля грид, он сравнивается сам с моделью
             PLACEGRID.setStyle();
+            PLACEGRID.setClass();
         }, 50);
 
         $(this).on('mouseup', function () {
@@ -3609,13 +3677,15 @@ $(function(){
         // ...
     });
 
-
+    // хендлер для грида
     $('.generator-position__square').on('click', '.square-td', function () {
         // изменяет модель
         // только если моно режим
         if (model.gridType === 'mono') {
             PLACEGRID.updateModel($(this));
         }
+        // ставит класс
+        PLACEGRID.setClass();
         // заставляет обновиться инпут
         INPUTFIELD.setInput();
         // заставляет обновиться уотермарк
@@ -3628,6 +3698,7 @@ $(function(){
       INPUTFIELD.updateModel($(this));
       // обновляем грид
       PLACEGRID.setStyle();
+      PLACEGRID.setClass();
       // обновляем вотермарк
       DRAGGABLE.setWatermark();
     });
@@ -3647,12 +3718,25 @@ $(function(){
         // инпуты изменяются
         INPUTFIELD.setInput();
         // грид изменяется
-        // ...
+        PLACEGRID.setClass();
     });
 
     // сброс
     $('.button-reset').on('click', function(){
         RESET.resetApp();
         INPUTFIELD.setInput();
+        // сбрасывает свитч до моно
+        SWITCH.setSwitch();
+        // сбрасывает положение слайдбара до правого положения (100%)
+        SLIDER.setSlider();
+        // вотермарк изменяется
+        DRAGGABLE.setWatermark();
+        DRAGGABLE.setOpacity();
+        // метод для инпут файлов чтобы сбрасывал
+        // ...
+        // грид должен инзменяться до первоначального значения
+        PLACEGRID.setStyle();
+        PLACEGRID.setClass();
+        
     });
 });

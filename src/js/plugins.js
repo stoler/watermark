@@ -54,6 +54,7 @@ $(function(){
             DRAGGABLE.setWatermark();
             // метод модуля грид, он сравнивается сам с моделью
             PLACEGRID.setStyle();
+            PLACEGRID.setClass();
         }, 50);
 
         $(this).on('mouseup', function () {
@@ -78,13 +79,15 @@ $(function(){
         // ...
     });
 
-
+    // хендлер для грида
     $('.generator-position__square').on('click', '.square-td', function () {
         // изменяет модель
         // только если моно режим
         if (model.gridType === 'mono') {
             PLACEGRID.updateModel($(this));
         }
+        // ставит класс
+        PLACEGRID.setClass();
         // заставляет обновиться инпут
         INPUTFIELD.setInput();
         // заставляет обновиться уотермарк
@@ -97,6 +100,7 @@ $(function(){
       INPUTFIELD.updateModel($(this));
       // обновляем грид
       PLACEGRID.setStyle();
+      PLACEGRID.setClass();
       // обновляем вотермарк
       DRAGGABLE.setWatermark();
     });
@@ -116,12 +120,25 @@ $(function(){
         // инпуты изменяются
         INPUTFIELD.setInput();
         // грид изменяется
-        // ...
+        PLACEGRID.setClass();
     });
 
     // сброс
     $('.button-reset').on('click', function(){
         RESET.resetApp();
         INPUTFIELD.setInput();
+        // сбрасывает свитч до моно
+        SWITCH.setSwitch();
+        // сбрасывает положение слайдбара до правого положения (100%)
+        SLIDER.setSlider();
+        // вотермарк изменяется
+        DRAGGABLE.setWatermark();
+        DRAGGABLE.setOpacity();
+        // метод для инпут файлов чтобы сбрасывал
+        // ...
+        // грид должен инзменяться до первоначального значения
+        PLACEGRID.setStyle();
+        PLACEGRID.setClass();
+        
     });
 });
