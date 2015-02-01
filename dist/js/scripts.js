@@ -14,7 +14,7 @@ var model = (function () {
             'watermark': ''
         },
         'gridType': 'mono',
-        'alpha': 1,
+        'alpha': .5,
         'margins': {
             'x': 1,
             'y': 1
@@ -3485,6 +3485,14 @@ var INPUTFIELD = (function () {
         } else {
           variant = 'margins';
         }
+      },
+
+      // проверяет чтобы инпут был числом
+      validateInput = function (input) {
+        if (isNaN(input)) {
+          return 0;
+        }
+        return input;
       };
 
   return {
@@ -3499,9 +3507,8 @@ var INPUTFIELD = (function () {
     },
     updateModel: function () {
       checkVariant();
-      model[variant]['x'] = parseInt(windowX.val());
-      model[variant]['y'] = parseInt(windowY.val());
-      console.log('возвращаю модель ', model);
+      model[variant]['x'] = validateInput(parseInt(windowX.val()));
+      model[variant]['y'] = validateInput(parseInt(windowY.val()));
     }
   }
 })();
@@ -3513,7 +3520,6 @@ var SLIDER = (function () {
     },
     // слайдер обновляется за счет модели
     setSlider: function() {
-      console.log('in setSlider');
       $('.generator-transparency__slider').slider('value', model.alpha * 100);
     }
   }
@@ -3624,7 +3630,7 @@ var RESET = (function () {
             model.files.image = '';
             model.files.watermark = '';
             model.gridType = 'mono';
-            model.alpha = 1;
+            model.alpha = .5;
             model.margins.x = 1;
             model.margins.y = 1;
             $('.jq-file__name').text('Файл не выбран');
@@ -3713,6 +3719,7 @@ $(function(){
             });
         }
     });
+    DRAGGABLE.setOpacity();
 
     // хендлер для стрелок
     $('.crd-arrow-list__item').on('mousedown', function () {
@@ -3727,7 +3734,7 @@ $(function(){
             // метод модуля грид, он сравнивается сам с моделью
             PLACEGRID.setStyle();
             PLACEGRID.setClass();
-        }, 50);
+        }, 70);
 
         $(this).on('mouseup', function () {
             clearInterval(counterTimeout);
@@ -3770,6 +3777,8 @@ $(function(){
     $('.crd-window__num').on('change', function () {
       // изменяем модель
       INPUTFIELD.updateModel($(this));
+      // обновляем инпут
+      INPUTFIELD.setInput();
       // обновляем грид
       PLACEGRID.setStyle();
       PLACEGRID.setClass();

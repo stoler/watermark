@@ -6,7 +6,6 @@ var SLIDER = (function () {
     },
     // слайдер обновляется за счет модели
     setSlider: function() {
-      console.log('in setSlider');
       $('.generator-transparency__slider').slider('value', model.alpha * 100);
     }
   }
