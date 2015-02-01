@@ -436,7 +436,8 @@ h2 {
 .wrapper {
   width: 100%;
   min-width: 1200px;
-  position: relative; }
+  position: relative;
+  overflow: hidden; }
 
 .main-generator {
   width: 960px;
@@ -474,6 +475,10 @@ h2 {
   -moz-border-radius: 0 4px 4px 0;
   -webkit-border-radius: 0;
   border-radius: 0 4px 4px 0; }
+
+.big_img, .big_wm {
+  position: absolute;
+  right: -100000000px; }
 
 /*
 lang-soc

@@ -67,6 +67,7 @@ h5 {}
   width: 100%;
   min-width: 1200px;
   position: relative;
+  overflow: hidden;
 }
 
 .main-generator{
@@ -110,4 +111,9 @@ h5 {}
   background: url(../img/sprite.png) -265px -20px;
   background-color: $lightRedColor;
   @include border-radius(0 4px 4px 0);
+}
+
+.big_img, .big_wm {
+  position: absolute;
+  right: -100000000px;
 }

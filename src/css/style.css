@@ -539,6 +539,7 @@ h2 {
   width: 100%;
   min-width: 1200px;
   position: relative;
+  overflow: hidden;
 }
 
 .main-generator {
@@ -583,6 +584,11 @@ h2 {
   -moz-border-radius: 0 4px 4px 0;
   -webkit-border-radius: 0;
   border-radius: 0 4px 4px 0;
+}
+
+.big_img, .big_wm {
+  position: absolute;
+  right: -100000000px;
 }
 
 /*

@@ -1,5 +1,12 @@
 $(function(){
     var counterTimeout,
+        realImg = {
+            wmW: 0,
+            imgW: 0,
+            changeWatermarkSize: function (imgW, wmW) {
+                $('.generator-picture__watermark').width(wmW /(imgW / $('.generator-picture__img').width()));
+            }
+        },
         // массив для определения пределов
         // в которых может перемещаться 
         // вотермарк
@@ -10,8 +17,6 @@ $(function(){
 
     INPUTFIELD.init();
     PLACEGRID.init();
-
-    
 
     // инициализируем драггабл
     contSize = DRAGGABLE.calculateContainer();
@@ -28,14 +33,18 @@ $(function(){
     });
 
     // jquery upload
-
     // загрузка основного изображения
     $('#upload-picture').fileupload({
         dataType: 'json',
         done: function (e, data) {
             if (typeof data.result.files[0]['error'] == 'undefined') {
                 $.each(data.result.files, function (index, file) {
+                    console.log(file);
                     $('.generator-picture__img').attr('src', '/upload/' + file.name);
+                    $('.big_img').attr('src', '/upload/' + file.name).load(function () {
+                        realImg.imgW = $('.big_img').width();
+                        realImg.changeWatermarkSize(realImg.imgW, realImg.wmW);
+                    });
                     model.files.image = file.name;
                 });
             } else {
@@ -51,6 +60,10 @@ $(function(){
             if (typeof data.result.files[0]['error'] == 'undefined') {
                 $.each(data.result.files, function (index, file) {
                     $('.generator-picture__watermark').attr('src', '/upload/' + file.name);
+                    $('.big_wm').attr('src', '/upload/' + file.name).load(function () {
+                        realImg.wmW = $('.big_wm').width();
+                        realImg.changeWatermarkSize(realImg.imgW, realImg.wmW);
+                    });
                     model.files.watermark = file.name;
                 });
             } else {
@@ -136,7 +149,7 @@ $(function(){
     // хендлер для окна с возможностью драгабл
     $('.generator-picture__watermark').on('drag', function (e, ui) {
         // изменяет модель
-        DRAGGABLE.updateModel(ui)
+        DRAGGABLE.updateModel(ui);
         // инпуты изменяются
         INPUTFIELD.setInput();
         // грид изменяется
