@@ -20,7 +20,6 @@ var model = (function () {
             'y': 1
         }
     };
-
 })();
 
 /*! jQuery UI - v1.11.1+CommonJS - 2014-09-17
@@ -3338,13 +3337,13 @@ var PLACEGRID = (function () {
             }
         },
         
-        // формирует класс исходя из величин координат
+        // находит порядковый номер окна, на основании модели
         getActiveGridClass = function () {
           // достает величины
           var
               x = model.coord.x,
               y = model.coord.y,
-              className = 0,
+              classNum = 0,
 
               watermark = $('.generator-picture__watermark'),
               images = $('.generator-picture__image'),
@@ -3372,23 +3371,23 @@ var PLACEGRID = (function () {
 
           // уровень по высоте
           if (y < centerY) {
-            className += 0;
+            classNum += 0;
           } else if ((y > centerY) && (y < (imageHeight - watermarkHeight))) {
-            className += 3;
+            classNum += 3;
           } else {
-            className += 6;
+            classNum += 6;
           }
 
           // уровень по горизонтали
           if (x < centerX) {
-            className += 0;
+            classNum += 0;
           } else if ((x > centerX) && (x < (imagesWidth - watermarkWidth))) {
-            className += 1;
+            classNum += 1;
           } else {
-            className += 2;
+            classNum += 2;
           }
 
-          return className;
+          return classNum;
 
         },
 
@@ -3596,6 +3595,34 @@ var RESET = (function () {
         }
     }
 })();
+var SENDDATA = (function ($) {
+    var validateData = function () {
+        console.log($.trim(model.files.image).length,$.trim(model.files.watermark).length);
+
+        if ($.trim(model.files.image).length === 0 || $.trim(model.files.watermark).length === 0) {
+            return false;
+        }
+        return true;
+    };
+
+    return {
+        send: function () {
+            if (validateData()) {
+                $.ajax({
+                    url: "/",
+                    type: "POST",
+                    data: model
+                }).done(function () {
+                    console.log('Данные отправлены! Или нет.');
+                });
+            } else {
+                console.log('Ошибка при отправке данных');
+            }
+
+
+        }
+    };
+})(jQuery);
 $(function(){
     var counterTimeout;
 
@@ -3626,6 +3653,7 @@ $(function(){
         done: function (e, data) {
             $.each(data.result.files, function (index, file) {
                 $('.generator-picture__img').attr('src', '/upload/' + file.name);
+                model.files.image = file.name;
             });
         }
     });
@@ -3636,6 +3664,7 @@ $(function(){
         done: function (e, data) {
             $.each(data.result.files, function (index, file) {
                 $('.generator-picture__watermark').attr('src', '/upload/' + file.name);
+                model.files.watermark = file.name;
             });
         }
     });
@@ -3737,6 +3766,10 @@ $(function(){
         // грид должен инзменяться до первоначального значения
         PLACEGRID.setStyle();
         PLACEGRID.setClass();
-        
+    });
+
+    // отправка данных на сервер
+    $('.button-download').on('click', function () {
+        SENDDATA.send();
     });
 });
