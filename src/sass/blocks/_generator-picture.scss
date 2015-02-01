@@ -1,0 +1,43 @@
+/*
+generator-picture
+*/
+.generator-picture {
+  @extend .after-clear;
+  display: table-cell;
+  padding: 10px 25px 25px 25px;
+  background: $picBlockBgColor;
+  width: 650px;
+  margin: 0;
+}
+
+.generator-picture__result {
+  width: 651px;
+  height: 534px;
+  background: $whiteColor;
+  overflow: hidden;
+}
+
+.generator-picture__title {
+  margin: 0 0 53px 0;
+  line-height: 1.35em;
+}
+.generator-picture__image {
+  position: relative;
+  max-height: 534px;
+  line-height: 534px;
+}
+.generator-picture__watermark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: inline-block;
+}
+
+.generator-picture__watermark, .generator-picture__img {
+  max-width: 651px;
+  max-height: 534px;
+}
+
+.generator-picture__img {
+  vertical-align: middle;
+}

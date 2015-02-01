@@ -1,0 +1,3 @@
+npm install gulp gulp-concat gulp-rename gulp-sass gulp-uglify gulp-cssmin gulp-compass jade gulp-jade gulp-image-optimization gulp-connect opn gulp-livereload
+gem install sass
+gem install compass
