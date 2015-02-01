@@ -20,12 +20,25 @@ class Watermark {
 
         $img = WideImage::load($arResult['imgurl']);
         $watermark = WideImage::load($arResult['wmurl']);
-        $new = $img->merge($watermark, $arResult['posx'], $arResult['posy'], $arResult['alpha']);
+        $imgW = $img->getWidth();
+        $imgH = $img->getHeight();
+
+        $kx = $imgW / 651;
+        $ky = $imgH / 534;
+
+        if ($kx > $ky) {
+           $k = $kx;
+        } else {
+            $k = $ky;
+        }
+
+        $new = $img->merge($watermark, $arResult['posx']*$k, $arResult['posy']*$k, $arResult['alpha']);
         if ($arResult['multy']) {
             $wmW = $watermark->getWidth() + $arResult['horizontal_margin'];
             $wmH = $watermark->getHeight() + $arResult['vertical_margin'];
-            $col = ceil($img->getWidth()/$wmW);
-            $row = ceil($img->getHeight()/$wmH);
+
+            $col = ceil($imgW/$wmW);
+            $row = ceil($imgH/$wmH);
 
             for ($i=0; $i < $col; $i++) {
                 for ($j = 0; $j < $row; $j++) {
@@ -33,7 +46,7 @@ class Watermark {
                         continue;
                     }
 
-                    $new = $new->merge($watermark, $arResult['posx'] + $wmW * $i, $arResult['posy'] + $wmH * $j,
+                    $new = $new->merge($watermark, $arResult['posx']*$k + $wmW * $i, $arResult['posy']*$k + $wmH * $j,
                         $arResult['alpha']);
                 }
             }
@@ -43,7 +56,6 @@ class Watermark {
         header('Content-Transfer-Encoding: binary');
 
         echo($new);
-
 
         if (strlen(trim($strError)) > 0) {
             echo $strError;
