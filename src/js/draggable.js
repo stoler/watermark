@@ -10,8 +10,12 @@ var DRAGGABLE = (function () {
       // model.coord.y = ui.position.top;
     },
     // изменяет положение
-    setWatermark: function () {
-      watermark.css({top: model.coord.y, left: model.coord.x});
+    setWatermark: function (animation) {
+      if (animation) {
+        watermark.animate({top: model.coord.y, left: model.coord.x}, {duration: 500, queue: false});
+      } else {
+        watermark.css({top: model.coord.y, left: model.coord.x});
+      }
     },
     // изменяет опасити
     setOpacity: function () {

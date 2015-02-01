@@ -91,7 +91,7 @@ $(function(){
         // заставляет обновиться инпут
         INPUTFIELD.setInput();
         // заставляет обновиться уотермарк
-        DRAGGABLE.setWatermark();
+        DRAGGABLE.setWatermark(true);
     });
 
     // хендлер для ввода с клавиатуры прямо в инпуты
@@ -102,7 +102,7 @@ $(function(){
       PLACEGRID.setStyle();
       PLACEGRID.setClass();
       // обновляем вотермарк
-      DRAGGABLE.setWatermark();
+      DRAGGABLE.setWatermark(true);
     });
 
     // хендлер для слайдера
@@ -132,7 +132,7 @@ $(function(){
         // сбрасывает положение слайдбара до правого положения (100%)
         SLIDER.setSlider();
         // вотермарк изменяется
-        DRAGGABLE.setWatermark();
+        DRAGGABLE.setWatermark(true);
         DRAGGABLE.setOpacity();
         // метод для инпут файлов чтобы сбрасывал
         // ...
