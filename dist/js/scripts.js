@@ -3571,6 +3571,7 @@ var DRAGGABLE = (function () {
       // model.coord.x = ui.position.left;
       // model.coord.y = ui.position.top;
     },
+
     // изменяет положение
     setWatermark: function (animation) {
       if (animation) {
@@ -3582,6 +3583,27 @@ var DRAGGABLE = (function () {
     // изменяет опасити
     setOpacity: function () {
       watermark.css('opacity', model.alpha);
+    },
+
+    // рассчитывает величину
+    // контейнера внутри которого можно драгать
+    // вотермарк
+    calculateContainer: function () {
+      var
+          watermark = $('.generator-picture__watermark'),
+          // координаты прямоугольника окна в котором перемещаем вотермарк
+          draggableWindow = [217, 109, 872, 645],
+          // массив [x1, y1, x2, y2] для определения четырехуголника
+          // в котором можно дрегать вотермарк
+          resultArray = [];
+
+      resultArray.push(draggableWindow[0] - watermark.width());
+      resultArray.push(draggableWindow[1] - watermark.height());
+      resultArray.push(draggableWindow[2]);
+      resultArray.push(draggableWindow[3]);
+
+      return resultArray;
+
     }
   }
 })();
@@ -3601,7 +3623,11 @@ var RESET = (function () {
     }
 })();
 $(function(){
-    var counterTimeout;
+    var counterTimeout,
+        // массив для определения пределов
+        // в которых может перемещаться 
+        // вотермарк
+        contSize = [];
 
     // style input
     $('.js-upload').styler();
@@ -3609,9 +3635,12 @@ $(function(){
     INPUTFIELD.init();
     PLACEGRID.init();
 
+    
+
     // инициализируем драггабл
+    contSize = DRAGGABLE.calculateContainer();
     $('.generator-picture__watermark').draggable({
-        containment: "parent"
+        containment: contSize
     });
    
     // инициализируем слайдер
