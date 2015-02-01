@@ -476,7 +476,7 @@ h2 {
   -webkit-border-radius: 0;
   border-radius: 0 4px 4px 0; }
 
-.big_img, .big_wm {
+.big_img, .big_wm, .iframe {
   position: absolute;
   right: -100000000px; }
 
@@ -615,13 +615,15 @@ generator-picture
 .generator-picture__image {
   position: relative;
   max-height: 534px;
-  line-height: 534px; }
+  line-height: 534px;
+  height: auto; }
 
 .generator-picture__watermark {
   position: absolute;
   top: 0;
   left: 0;
-  display: inline-block; }
+  display: inline-block;
+  height: auto; }
 
 .generator-picture__watermark, .generator-picture__img {
   max-width: 651px;

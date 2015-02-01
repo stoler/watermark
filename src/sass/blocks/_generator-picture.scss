@@ -25,12 +25,14 @@ generator-picture
   position: relative;
   max-height: 534px;
   line-height: 534px;
+  height: auto;
 }
 .generator-picture__watermark {
   position: absolute;
   top: 0;
   left: 0;
   display: inline-block;
+  height: auto;
 }
 
 .generator-picture__watermark, .generator-picture__img {

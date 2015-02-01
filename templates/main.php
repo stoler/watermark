@@ -137,9 +137,9 @@
     </footer>
     <img class="big_wm" src="">
     <img class="big_img" src="">
-</div>
-<div class="iframe">
-    <iframe src="" frameborder="0"></iframe>
+    <div class="iframe">
+        <iframe src="" frameborder="0"></iframe>
+    </div>
 </div>
 <script src="dist/js/scripts.js"></script>
 </body>

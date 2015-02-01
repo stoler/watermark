@@ -3672,8 +3672,11 @@ $(function(){
         realImg = {
             wmW: 0,
             imgW: 0,
-            changeWatermarkSize: function (imgW, wmW) {
-                $('.generator-picture__watermark').width(wmW /(imgW / $('.generator-picture__img').width()));
+            wmH: 0,
+            imgH: 0,
+            changeWatermarkSize: function (imgW, wmW, imgH, wmH) {
+                $('.generator-picture__watermark').width(wmW /(imgW / $('.generator-picture__img').width()))
+                    .height(wmH /(imgH / $('.generator-picture__img').height()));
             }
         },
         // массив для определения пределов
@@ -3712,7 +3715,8 @@ $(function(){
                     $('.generator-picture__img').attr('src', '/upload/' + file.name);
                     $('.big_img').attr('src', '/upload/' + file.name).load(function () {
                         realImg.imgW = $('.big_img').width();
-                        realImg.changeWatermarkSize(realImg.imgW, realImg.wmW);
+                        realImg.imgH = $('.big_img').height();
+                        realImg.changeWatermarkSize(realImg.imgW, realImg.wmW, realImg.imgH, realImg.wmH);
                     });
                     model.files.image = file.name;
                 });
@@ -3731,7 +3735,8 @@ $(function(){
                     $('.generator-picture__watermark').attr('src', '/upload/' + file.name);
                     $('.big_wm').attr('src', '/upload/' + file.name).load(function () {
                         realImg.wmW = $('.big_wm').width();
-                        realImg.changeWatermarkSize(realImg.imgW, realImg.wmW);
+                        realImg.wmH = $('.big_wm').height();
+                        realImg.changeWatermarkSize(realImg.imgW, realImg.wmW, realImg.imgH, realImg.wmH);
                     });
                     model.files.watermark = file.name;
                 });
