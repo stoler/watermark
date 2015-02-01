@@ -11,18 +11,20 @@ var SENDDATA = (function ($) {
     return {
         send: function () {
             if (validateData()) {
+                console.log(JSON.stringify(model));
+                $("iframe").attr("src",'/?download=1&data=' + JSON.stringify(model));
+                /*
                 $.ajax({
                     url: "/",
-                    type: "POST",
-                    data: model
+                    type: "GET",
+                    data: {download:1, data: JSON.stringify(model)}
                 }).done(function () {
                     console.log('Данные отправлены! Или нет.');
                 });
+                */
             } else {
                 console.log('Ошибка при отправке данных');
             }
-
-
         }
     };
 })(jQuery);

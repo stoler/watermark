@@ -84,14 +84,11 @@ gulp.task('images', function (cb) {
 
 // Действия по умолчанию
 gulp.task('default', function () {
-    gulp.run('sass', 'scripts', 'jade', 'connect');
+    gulp.run('sass', 'scripts', 'connect');
     gulp.watch(["src/sass/**/*.scss"], function (event) {
         gulp.run('sass');
     });
     gulp.watch(["src/js/*.js"], function (event) {
         gulp.run('scripts');
-    });
-    gulp.watch(["src/jade/**/*.jade"], function (event) {
-        gulp.run('jade');
     });
 });
