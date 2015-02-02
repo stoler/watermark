@@ -1,4 +1,9 @@
 var RESET = (function () {
+    var
+        deleteImage = function () {
+            $('.generator-picture__watermark').remove();
+            $('.generator-picture__img').remove();
+        };
     return {
         init: function () {
             // сброс
@@ -17,6 +22,8 @@ var RESET = (function () {
                 // грид должен изменяться до первоначального значения
                 PLACEGRID.setStyle();
                 PLACEGRID.setClass();
+                // удаляет загруженные картинки
+                deleteImage();
             });
         },
         resetApp: function () {
@@ -28,6 +35,9 @@ var RESET = (function () {
             model.alpha = .5;
             model.margins.x = 1;
             model.margins.y = 1;
+            model.isActive = false;
+
+            // сбрасывает инпуты файлов
             $('.jq-file__name').text('Файл не выбран');
         }
     }

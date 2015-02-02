@@ -1,11 +1,8 @@
 var FILESINPT = (function () {
   var
       checkState = function () {
-        console.log('im in stateCheck!!!');
         if (model.files.image !== '' && model.files.watermark !== '') {
-          console.log('устанавливаю значение на тру!');
           model.isActive = true;
-          console.log('это модел.изАктив', model.isActive);
         }
       };
   return {
@@ -13,6 +10,10 @@ var FILESINPT = (function () {
       model.files[place] = file;
       console.log(model.files);
       checkState();
+    },
+    // берет данные из модели
+    updateSelf: function () {
+      $('.jq-file__name').val('');
     }
   }
 })();
