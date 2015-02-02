@@ -3,6 +3,17 @@ var DRAGGABLE = (function () {
        watermark = $('.generator-picture__watermark');
 
   return {
+    init: function () {
+      // хендлер для окна с возможностью драгабл
+      $('.generator-picture__watermark').on('drag', function (e, ui) {
+          // изменяет модель
+          DRAGGABLE.updateModel(ui);
+          // инпуты изменяются
+          INPUTFIELD.setInput();
+          // грид изменяется
+          PLACEGRID.setClass();
+      });
+    },
     updateModel: function (ui) {
       model.coord.x = parseInt((ui.position.left).toFixed(0));
       model.coord.y = parseInt((ui.position.top).toFixed(0));
