@@ -3608,6 +3608,7 @@ var DRAGGABLE = (function () {
       var
           watermark = $('.generator-picture__watermark'),
           image = $('.generator-picture__image'),
+
           // координаты контейнера вотермарка
           container = [
             image.offset().left,
@@ -3699,6 +3700,17 @@ $(function(){
     contSize = DRAGGABLE.calculateContainer();
     $('.generator-picture__watermark').draggable({
         containment: contSize
+    });
+
+    // хендлер для резайза окна (когда окно изменяется в размере, то
+    // пересчитывается контейнер в котором может перемещаться изображение)
+    $( window ).on('resize', function () {
+        // пересчитали блок
+        contSize = DRAGGABLE.calculateContainer();
+        // инициализировали новую область
+        $('.generator-picture__watermark').draggable({
+            containment: contSize
+        });
     });
    
     // инициализируем слайдер
@@ -3856,7 +3868,7 @@ $(function(){
         DRAGGABLE.setOpacity();
         // метод для инпут файлов чтобы сбрасывал
         // ...
-        // грид должен инзменяться до первоначального значения
+        // грид должен изменяться до первоначального значения
         PLACEGRID.setStyle();
         PLACEGRID.setClass();
     });
