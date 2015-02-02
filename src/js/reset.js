@@ -24,6 +24,22 @@ var RESET = (function () {
                 PLACEGRID.setClass();
                 // удаляет загруженные картинки
                 deleteImage();
+
+                // отключаются хендлеры и все возвращается в состоянии до
+                // инициализации
+                // ...
+                // инпуты отключаются
+                INPUTFIELD.deactivate();
+                // стрелки не нажимаются
+                COUNTERBTN.deactivate();
+                // грид не работает
+                PLACEGRID.deactivate();
+                // ползунок не двигается
+                SLIDER.deactivate();
+                // драг отключен
+                DRAGGABLE.disable();
+                // свитч отключен
+                SWITCH.disable();
             });
         },
         resetApp: function () {

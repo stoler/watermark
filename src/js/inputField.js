@@ -1,5 +1,6 @@
 var INPUTFIELD = (function () {
   var
+      inputWindow = $('.crd-window__num'),
       windowX = $('.crd-window__num--x'),
       windowY = $('.crd-window__num--y'),
       variant = 'coord',
@@ -23,7 +24,7 @@ var INPUTFIELD = (function () {
 
   return {
     init: function () {
-      $('.crd-window__num').each(function () {
+      inputWindow.each(function () {
         $(this).removeAttr('disabled');
       });
 
@@ -31,7 +32,7 @@ var INPUTFIELD = (function () {
       windowY.val(model[variant]['y']);
 
       // хендлер для ввода с клавиатуры прямо в инпуты
-      $('.crd-window__num').on('change', function () {
+      inputWindow.on('change', function () {
         // изменяем модель
         INPUTFIELD.updateModel($(this));
         // обновляем инпут
@@ -52,6 +53,13 @@ var INPUTFIELD = (function () {
       checkVariant();
       model[variant]['x'] = validateInput(parseInt(windowX.val()));
       model[variant]['y'] = validateInput(parseInt(windowY.val()));
+    },
+    deactivate: function () {
+      inputWindow.each(function () {
+        $(this).attr('disabled', true);
+      });
+      windowX.val('');
+      windowY.val('');
     }
   }
 })();

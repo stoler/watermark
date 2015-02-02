@@ -499,6 +499,9 @@ h2 {
   height: 50px;
   bottom: 50%; }
 
+.disable {
+  opacity: 0.5; }
+
 /*
 lang-soc
 */
@@ -542,10 +545,10 @@ lang-soc
 .social {
   position: relative;
   left: -43px;
-  -webkit-transition: left 0.5s ease-out 0s;
-  -moz-transition: left 0.5s ease-out 0s;
-  -o-transition: left 0.5s ease-out 0s;
-  transition: left 0.5s ease-out 0s; }
+  -webkit-transition: left 1s ease-out 0s;
+  -moz-transition: left 1s ease-out 0s;
+  -o-transition: left 1s ease-out 0s;
+  transition: left 1s ease-out 0s; }
 
 .social:hover {
   left: 0; }
@@ -755,8 +758,7 @@ switch
   height: 19px;
   display: inline-block;
   margin-right: 10px;
-  vertical-align: top;
-  cursor: pointer; }
+  vertical-align: top; }
 
 .switch:last-child, .switch__mono:last-child, .switch__multi:last-child {
   margin-right: 0; }
@@ -770,6 +772,9 @@ switch
 .switch__mono.switch--active:hover {
   background: url(../img/sprite.png) no-repeat -112px -56px; }
 
+.switch__mono--hover {
+  cursor: pointer; }
+
 .switch__mono--hover:hover {
   background: url(../img/sprite.png) no-repeat -84px -56px; }
 
@@ -781,6 +786,9 @@ switch
 
 .switch__multi.switch--active:hover {
   background: url(../img/sprite.png) no-repeat -196px -56px; }
+
+.switch__multi--hover {
+  cursor: pointer; }
 
 .switch__multi--hover:hover {
   background: url(../img/sprite.png) no-repeat -168px -56px; }
@@ -866,8 +874,14 @@ switch
 .crd-arrow-list__item--down:hover {
   background: url(../img/sprite.png) no-repeat -321px -22px; }
 
+.crd-arrow-list__item--up-no-hover {
+  cursor: default; }
+
 .crd-arrow-list__item--up-no-hover:hover {
   background: url(../img/sprite.png) no-repeat -300px 2px; }
+
+.crd-arrow-list__item--down-no-hover {
+  cursor: default; }
 
 .crd-arrow-list__item--down-no-hover:hover {
   background: url(../img/sprite.png) no-repeat -300px -22px; }
@@ -953,8 +967,10 @@ place-grid
   border-radius: 50%;
   top: -9px;
   margin-left: -11px;
-  cursor: pointer;
   outline: none; }
+
+.ui-slider-handle--hover {
+  cursor: pointer; }
 
 .ui-slider-handle--hover:hover {
   background: #f97e76; }
@@ -971,18 +987,24 @@ buttons
   display: inline-block;
   border-radius: 3px;
   color: #f1f1f5;
-  border: 0; }
+  border: 0;
+  outline: none; }
 
 .button-reset {
   background: #c1cfd9;
   width: 99px;
-  height: 42px;
-  outline: none; }
+  height: 42px; }
+
+.button-reset:hover {
+  background: #a3b1bb; }
 
 .button-download {
   background: #f97e76;
   width: 99px;
   height: 42px; }
+
+.button-download:hover {
+  background: #d97171; }
 
 /*
 footer
