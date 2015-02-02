@@ -26,6 +26,17 @@ $(function(){
     $('.generator-picture__watermark').draggable({
         containment: contSize
     });
+
+    // хендлер для резайза окна (когда окно изменяется в размере, то
+    // пересчитывается контейнер в котором может перемещаться изображение)
+    $( window ).on('resize', function () {
+        // пересчитали блок
+        contSize = DRAGGABLE.calculateContainer();
+        // инициализировали новую область
+        $('.generator-picture__watermark').draggable({
+            containment: contSize
+        });
+    });
    
     // инициализируем слайдер
     $('.generator-transparency__slider').slider({
@@ -174,7 +185,7 @@ $(function(){
         DRAGGABLE.setOpacity();
         // метод для инпут файлов чтобы сбрасывал
         // ...
-        // грид должен инзменяться до первоначального значения
+        // грид должен изменяться до первоначального значения
         PLACEGRID.setStyle();
         PLACEGRID.setClass();
     });
