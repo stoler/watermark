@@ -3743,6 +3743,11 @@ var DRAGGABLE = (function () {
   }
 })();
 var RESET = (function () {
+    var
+        deleteImage = function () {
+            $('.generator-picture__watermark').remove();
+            $('.generator-picture__img').remove();
+        };
     return {
         init: function () {
             // сброс
@@ -3761,6 +3766,8 @@ var RESET = (function () {
                 // грид должен изменяться до первоначального значения
                 PLACEGRID.setStyle();
                 PLACEGRID.setClass();
+                // удаляет загруженные картинки
+                deleteImage();
             });
         },
         resetApp: function () {
@@ -3772,6 +3779,9 @@ var RESET = (function () {
             model.alpha = .5;
             model.margins.x = 1;
             model.margins.y = 1;
+            model.isActive = false;
+
+            // сбрасывает инпуты файлов
             $('.jq-file__name').text('Файл не выбран');
         }
     }
@@ -3911,10 +3921,7 @@ $(function(){
     });
 
     function itsAlive () {
-        console.log('change!!!');
-        console.log('это моделАктив в хендлере инициализации', model.isActive);
         if (model.isActive) {
-          console.log('запускаю инициализации');
           INPUTFIELD.init();
           PLACEGRID.init();
           SWITCH.init();
@@ -3924,29 +3931,12 @@ $(function(){
           DRAGGABLE.init();
         }
     }
-    // $('.upload__picture').on('change', function () {
-    //     console.log('change!!!');
-    //     console.log('это моделАктив в хендлере инициализации', model.isActive);
-    //     if (model.isActive) {
-    //       console.log('запускаю инициализации');
-    //       INPUTFIELD.init();
-    //       PLACEGRID.init();
-    //       SWITCH.init();
-    //       COUNTERBTN.init();
-    //       SLIDER.init();
-    //       RESET.init();
-    //       DRAGGABLE.init();
-    //     }
-    // });
 });
 var FILESINPT = (function () {
   var
       checkState = function () {
-        console.log('im in stateCheck!!!');
         if (model.files.image !== '' && model.files.watermark !== '') {
-          console.log('устанавливаю значение на тру!');
           model.isActive = true;
-          console.log('это модел.изАктив', model.isActive);
         }
       };
   return {
@@ -3954,6 +3944,10 @@ var FILESINPT = (function () {
       model.files[place] = file;
       console.log(model.files);
       checkState();
+    },
+    // берет данные из модели
+    updateSelf: function () {
+      $('.jq-file__name').val('');
     }
   }
 })();
