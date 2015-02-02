@@ -64,6 +64,10 @@ var DRAGGABLE = (function () {
 
       return resultArray;
 
+    },
+
+    disable: function () {
+      $('.generator-picture__watermark').off('drag');
     }
   }
 })();
