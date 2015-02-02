@@ -54,6 +54,7 @@ gulp.task('scripts', function () {
         'src/js/jquery-ui.min.js',
         'src/js/draggable.js',
         'src/js/reset.js',
+        'src/js/tile.js',
         'src/js/sendData.js',
         'src/js/plugins.js',
         'src/js/filesInput.js'
