@@ -41,6 +41,12 @@ var SWITCH = (function () {
       } else {
         $('.switch__multi').addClass('switch--active');
       }
+    },
+    disable: function () {
+      $('.switch').each(function () {
+        $(this).removeClass('switch__multi--hover switch__mono--hover switch--active');
+      });
+      $('.switch').off('click');
     }
 
   };
