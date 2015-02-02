@@ -109,10 +109,7 @@ $(function(){
     });
 
     function itsAlive () {
-        console.log('change!!!');
-        console.log('это моделАктив в хендлере инициализации', model.isActive);
         if (model.isActive) {
-          console.log('запускаю инициализации');
           INPUTFIELD.init();
           PLACEGRID.init();
           SWITCH.init();
@@ -122,18 +119,4 @@ $(function(){
           DRAGGABLE.init();
         }
     }
-    // $('.upload__picture').on('change', function () {
-    //     console.log('change!!!');
-    //     console.log('это моделАктив в хендлере инициализации', model.isActive);
-    //     if (model.isActive) {
-    //       console.log('запускаю инициализации');
-    //       INPUTFIELD.init();
-    //       PLACEGRID.init();
-    //       SWITCH.init();
-    //       COUNTERBTN.init();
-    //       SLIDER.init();
-    //       RESET.init();
-    //       DRAGGABLE.init();
-    //     }
-    // });
 });
