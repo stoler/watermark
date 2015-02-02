@@ -13,6 +13,7 @@ var model = (function () {
         'margins': {
             'x': 1,
             'y': 1
-        }
+        },
+        'isActive': false
     };
 })();

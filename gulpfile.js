@@ -55,7 +55,8 @@ gulp.task('scripts', function () {
         'src/js/draggable.js',
         'src/js/reset.js',
         'src/js/sendData.js',
-        'src/js/plugins.js'
+        'src/js/plugins.js',
+        'src/js/filesInput.js'
     ])
         .pipe(concat('scripts.js'))
         .pipe(gulp.dest('dist/js'))

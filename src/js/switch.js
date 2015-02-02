@@ -1,6 +1,24 @@
 var SWITCH = (function () {
 
   return {
+    init: function () {
+      // хендлер для переключения режимов мульти/моно
+      $('.switch').on('click', function () {
+          // изменяем модель
+          SWITCH.changeSwitchInModel($(this));
+          // изменяет свой вид
+          SWITCH.changeStyle($(this));
+          // инпут должен обновиться
+          INPUTFIELD.setInput();
+          // грид должен обновиться
+          PLACEGRID.setStyle();
+          // watermark должен перестать двигаться и начать увеличивать марджин
+          // ...
+      });
+      $('.switch__mono').addClass('switch--active switch__mono--hover');
+      $('.switch__multi').addClass('switch__multi--hover');
+
+    },
     // изменяет значение gridType
     changeSwitchInModel: function (switchPosition) {
       if (switchPosition.hasClass('switch__mono')) {

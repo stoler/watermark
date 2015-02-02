@@ -25,12 +25,20 @@
   cursor: pointer;
   outline: none;
   
-  &:active{
-    background: $lightRedColor;
-  }
+  // &:active{
+    // background: $lightRedColor;
+  // }
   // firefox don't change color on mousedown in contrast to chrome
   // so need hover effect
+  // &:hover{
+    // background: $lightRedColor;
+  // }
+}
+.ui-slider-handle--hover{
   &:hover{
+    background: $lightRedColor;
+  }
+  &:active{
     background: $lightRedColor;
   }
 }
