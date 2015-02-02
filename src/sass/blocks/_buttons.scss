@@ -8,6 +8,7 @@ buttons
   border-radius: 3px;
   color: $generatorSetupBgColor;
   border: 0;
+  outline: none;
 }
 
 .button-reset {
@@ -15,10 +16,16 @@ buttons
   background: $silverOne;
   width: 99px;
   height: 42px;
+  &:hover{
+    background: $silverOneHover;
+  }
 }
 .button-download {
   @extend .btn;
   background: $lightRedColor;
   width: 99px;
   height: 42px;
+  &:hover{
+    background: $lightRedColorHover;
+  }
 }

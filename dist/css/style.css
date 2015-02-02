@@ -499,6 +499,9 @@ h2 {
   height: 50px;
   bottom: 50%; }
 
+.disable {
+  opacity: 0.5; }
+
 /*
 lang-soc
 */
@@ -542,10 +545,10 @@ lang-soc
 .social {
   position: relative;
   left: -43px;
-  -webkit-transition: left 0.5s ease-out 0s;
-  -moz-transition: left 0.5s ease-out 0s;
-  -o-transition: left 0.5s ease-out 0s;
-  transition: left 0.5s ease-out 0s; }
+  -webkit-transition: left 1s ease-out 0s;
+  -moz-transition: left 1s ease-out 0s;
+  -o-transition: left 1s ease-out 0s;
+  transition: left 1s ease-out 0s; }
 
 .social:hover {
   left: 0; }
@@ -962,17 +965,24 @@ buttons
   display: inline-block;
   border-radius: 3px;
   color: #f1f1f5;
-  border: 0; }
+  border: 0;
+  outline: none; }
 
 .button-reset {
   background: #c1cfd9;
   width: 99px;
   height: 42px; }
 
+.button-reset:hover {
+  background: #a3b1bb; }
+
 .button-download {
   background: #f97e76;
   width: 99px;
   height: 42px; }
+
+.button-download:hover {
+  background: #d97171; }
 
 /*
 footer
