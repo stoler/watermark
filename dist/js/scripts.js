@@ -22,6 +22,17 @@ var model = (function () {
     };
 })();
 
+var PRELOADER = (function () {
+    var $preloader = $('.preloader');
+    return {
+        show: function () {
+            $preloader.fadeIn(300);
+        },
+        hide: function () {
+            $preloader.fadeOut(400);
+        }
+    }
+})();
 /*! jQuery UI - v1.11.1+CommonJS - 2014-09-17
 * http://jqueryui.com
 * Includes: widget.js
@@ -3651,16 +3662,10 @@ var SENDDATA = (function ($) {
         send: function () {
             if (validateData()) {
                 console.log(JSON.stringify(model));
-                $("iframe").attr("src",'/?download=1&data=' + JSON.stringify(model));
-                /*
-                $.ajax({
-                    url: "/",
-                    type: "GET",
-                    data: {download:1, data: JSON.stringify(model)}
-                }).done(function () {
-                    console.log('Данные отправлены! Или нет.');
+                PRELOADER.show();
+                $("iframe").attr("src",'/?download=1&data=' + JSON.stringify(model)).ready(function () {
+                    PRELOADER.hide();
                 });
-                */
             } else {
                 console.log('Ошибка при отправке данных');
             }
@@ -3709,6 +3714,7 @@ $(function(){
     $('#upload-picture').fileupload({
         dataType: 'json',
         done: function (e, data) {
+            PRELOADER.hide();
             if (typeof data.result.files[0]['error'] == 'undefined') {
                 $.each(data.result.files, function (index, file) {
                     console.log(file);
@@ -3723,6 +3729,9 @@ $(function(){
             } else {
                 alert('Error!');
             }
+        },
+        send: function () {
+            PRELOADER.show();
         }
     });
 
@@ -3730,6 +3739,7 @@ $(function(){
     $('#upload-watermark').fileupload({
         dataType: 'json',
         done: function (e, data) {
+            PRELOADER.hide();
             if (typeof data.result.files[0]['error'] == 'undefined') {
                 $.each(data.result.files, function (index, file) {
                     $('.generator-picture__watermark').attr('src', '/upload/' + file.name);
@@ -3743,6 +3753,9 @@ $(function(){
             } else {
                 alert('Error!');
             }
+        },
+        send: function () {
+            PRELOADER.show();
         }
     });
     DRAGGABLE.setOpacity();

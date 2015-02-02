@@ -40,6 +40,7 @@ $(function(){
     $('#upload-picture').fileupload({
         dataType: 'json',
         done: function (e, data) {
+            PRELOADER.hide();
             if (typeof data.result.files[0]['error'] == 'undefined') {
                 $.each(data.result.files, function (index, file) {
                     console.log(file);
@@ -54,6 +55,9 @@ $(function(){
             } else {
                 alert('Error!');
             }
+        },
+        send: function () {
+            PRELOADER.show();
         }
     });
 
@@ -61,6 +65,7 @@ $(function(){
     $('#upload-watermark').fileupload({
         dataType: 'json',
         done: function (e, data) {
+            PRELOADER.hide();
             if (typeof data.result.files[0]['error'] == 'undefined') {
                 $.each(data.result.files, function (index, file) {
                     $('.generator-picture__watermark').attr('src', '/upload/' + file.name);
@@ -74,6 +79,9 @@ $(function(){
             } else {
                 alert('Error!');
             }
+        },
+        send: function () {
+            PRELOADER.show();
         }
     });
     DRAGGABLE.setOpacity();
