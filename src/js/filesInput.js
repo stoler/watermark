@@ -10,10 +10,6 @@ var FILESINPT = (function () {
       model.files[place] = file;
       console.log(model.files);
       checkState();
-    },
-    // берет данные из модели
-    updateSelf: function () {
-      $('.jq-file__name').val('');
     }
   }
 })();
