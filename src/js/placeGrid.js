@@ -222,6 +222,14 @@ var PLACEGRID = (function () {
             // toFixed чтобы не было значения в полпикселя
             model.coord.x = parseInt(gridPosArr[index][1].toFixed(0));
             model.coord.y = parseInt(gridPosArr[index][0].toFixed(0));
+        },
+        deactivate: function () {
+          lineToSquare();
+          $('.square-td--active').removeClass('square-td--active');
+          $('.square-td').each(function () {
+            $(this).removeClass('square-td--hover-enable');
+          });
+          $('.generator-position__square').off('click');
         }
     }
 })();

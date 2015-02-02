@@ -24,6 +24,17 @@ var SLIDER = (function () {
     // слайдер обновляется за счет модели
     setSlider: function() {
       $('.generator-transparency__slider').slider('value', model.alpha * 100);
+    },
+    deactivate: function () {
+      $('.generator-transparency__slider').slider({
+        min: 0,
+        max: 100,
+        value: model.alpha * 100,
+        range: 'min',
+        disabled: true
+      });
+
+      $('.ui-slider-handle').removeClass('ui-slider-handle--hover');
     }
   }
 })();

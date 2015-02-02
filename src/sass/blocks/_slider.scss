@@ -22,7 +22,7 @@
   border-radius: 50%;
   top: -9px;
   margin-left: -11px;
-  cursor: pointer;
+  
   outline: none;
   
   // &:active{
@@ -35,6 +35,7 @@
   // }
 }
 .ui-slider-handle--hover{
+  cursor: pointer;
   &:hover{
     background: $lightRedColor;
   }

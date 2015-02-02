@@ -1,5 +1,6 @@
 var COUNTERBTN = (function () {
   var
+      arrowsButtons = $('.crd-arrow-list__item'),
       // на сколько увеличивается значение при режиме моно
       monoStep = 1,
       // на сколько увеличивается значение при режиме мульти
@@ -7,7 +8,7 @@ var COUNTERBTN = (function () {
   return {
     init: function () {
       // хендлер для стрелок
-      $('.crd-arrow-list__item').on('mousedown', function () {
+      arrowsButtons.on('mousedown', function () {
           var _this = $(this);
           counterTimeout = setInterval(function () {
               // функция в модуле стрелок, она изменяет модель
@@ -28,9 +29,9 @@ var COUNTERBTN = (function () {
               clearInterval(counterTimeout);
           });
       });
-      $('.crd-arrow-list__item').each(function () {
+      arrowsButtons.each(function () {
         $(this).removeClass('crd-arrow-list__item--up-no-hover crd-arrow-list__item--down-no-hover');
-      })
+      });
     },
     // изменяет модель при нажатии на кнопку
     counterBtnModelChange: function (btn) {
@@ -51,6 +52,17 @@ var COUNTERBTN = (function () {
           model.margins[axis] = testValue;
         }
       }
+    },
+    deactivate: function () {
+      arrowsButtons.off('mousedown');
+      $('.crd-arrow-list__item--up').each(function () {
+        $(this).addClass('crd-arrow-list__item--up-no-hover');
+      });
+      $('.crd-arrow-list__item--down').each(function () {
+        $(this).addClass('crd-arrow-list__item--down-no-hover');
+      });
+
+
     }
   }
 })();
