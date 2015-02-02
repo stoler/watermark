@@ -1,0 +1,27 @@
+/*
+watermark
+*/
+
+.upload__watermark{
+  @extend .upload__main-picture;
+}
+
+.watermark__title{
+  @extend .main-picture__title;
+}
+
+.watermark__stylization{
+  @extend .main-picture__stylization;
+}
+
+.watermark__stylization-input{
+  @extend .main-picture__stylization-input;
+}
+
+.watermark__stylization-button{
+  @extend .main-picture__stylization-button;
+}
+
+.watermark__file{
+  @extend .main-picture__file;
+}
