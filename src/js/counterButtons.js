@@ -5,6 +5,33 @@ var COUNTERBTN = (function () {
       // на сколько увеличивается значение при режиме мульти
       multiStep = 1;
   return {
+    init: function () {
+      // хендлер для стрелок
+      $('.crd-arrow-list__item').on('mousedown', function () {
+          var _this = $(this);
+          counterTimeout = setInterval(function () {
+              // функция в модуле стрелок, она изменяет модель
+              COUNTERBTN.counterBtnModelChange(_this);
+              // метод модуля инпутов, он сравнивает себя с моделью и обновляется
+              INPUTFIELD.setInput();
+              // метод модуля уотермарк, он сравнивает себя с остальным
+              DRAGGABLE.setWatermark();
+              // метод модуля грид, он сравнивается сам с моделью
+              PLACEGRID.setStyle();
+              PLACEGRID.setClass();
+          }, 70);
+
+          $(this).on('mouseup', function () {
+              clearInterval(counterTimeout);
+          });
+          $(this).on('mouseout', function () {
+              clearInterval(counterTimeout);
+          });
+      });
+      $('.crd-arrow-list__item').each(function () {
+        $(this).removeClass('crd-arrow-list__item--up-no-hover crd-arrow-list__item--down-no-hover');
+      })
+    },
     // изменяет модель при нажатии на кнопку
     counterBtnModelChange: function (btn) {
       var
