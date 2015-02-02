@@ -13,6 +13,7 @@ var SWITCH = (function () {
           // грид должен обновиться
           PLACEGRID.setStyle();
           // watermark должен перестать двигаться и начать увеличивать марджин
+          TILE.showHide($(this))
           // ...
       });
       $('.switch__mono').addClass('switch--active switch__mono--hover');

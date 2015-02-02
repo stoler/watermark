@@ -19,6 +19,8 @@ var COUNTERBTN = (function () {
               // метод модуля грид, он сравнивается сам с моделью
               PLACEGRID.setStyle();
               PLACEGRID.setClass();
+              TILE.changeHorizontalGutter();
+              TILE.changeVerticalGutter();
           }, 70);
 
           $(this).on('mouseup', function () {

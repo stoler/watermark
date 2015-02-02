@@ -117,6 +117,7 @@ $(function(){
           SLIDER.init();
           RESET.init();
           DRAGGABLE.init();
+            TILE.init()
         }
     }
 });
