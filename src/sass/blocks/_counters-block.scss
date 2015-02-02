@@ -85,3 +85,15 @@ $counterNumFont: "SEGOEUIL";
     background: url(../img/sprite.png) no-repeat -321px -22px;
   }
 }
+.crd-arrow-list__item--up-no-hover{
+  cursor: default;
+  &:hover{
+    background: url(../img/sprite.png) no-repeat -300px 2px;
+  }
+}
+.crd-arrow-list__item--down-no-hover{
+  cursor: default;
+  &:hover{
+    background: url(../img/sprite.png) no-repeat -300px -22px;
+  }
+}

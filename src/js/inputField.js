@@ -1,5 +1,6 @@
 var INPUTFIELD = (function () {
   var
+      inputWindow = $('.crd-window__num'),
       windowX = $('.crd-window__num--x'),
       windowY = $('.crd-window__num--y'),
       variant = 'coord',
@@ -23,8 +24,25 @@ var INPUTFIELD = (function () {
 
   return {
     init: function () {
+      inputWindow.each(function () {
+        $(this).removeAttr('disabled');
+      });
+
       windowX.val(model[variant]['x']);
       windowY.val(model[variant]['y']);
+
+      // хендлер для ввода с клавиатуры прямо в инпуты
+      inputWindow.on('change', function () {
+        // изменяем модель
+        INPUTFIELD.updateModel($(this));
+        // обновляем инпут
+        INPUTFIELD.setInput();
+        // обновляем грид
+        PLACEGRID.setStyle();
+        PLACEGRID.setClass();
+        // обновляем вотермарк
+        DRAGGABLE.setWatermark(true);
+      });
     },
     setInput: function () {
       checkVariant();
@@ -35,6 +53,13 @@ var INPUTFIELD = (function () {
       checkVariant();
       model[variant]['x'] = validateInput(parseInt(windowX.val()));
       model[variant]['y'] = validateInput(parseInt(windowY.val()));
+    },
+    deactivate: function () {
+      inputWindow.each(function () {
+        $(this).attr('disabled', true);
+      });
+      windowX.val('');
+      windowY.val('');
     }
   }
 })();

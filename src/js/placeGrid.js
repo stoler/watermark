@@ -38,7 +38,7 @@ var PLACEGRID = (function () {
             // todo
             // выключаем ховер
             squareOfGrid.each(function () {
-                $(this).addClass('square-td--hover-disable');
+                $(this).removeClass('square-td--hover-enable');
             });
             // отключаем возможность выбора положения активного квадрата
             squareOfGrid.off('click');
@@ -48,7 +48,7 @@ var PLACEGRID = (function () {
         lineToSquare = function () {
             // подключаем ховер по квадратам
             squareOfGrid.each(function () {
-                $(this).removeClass('square-td--hover-disable');
+                $(this).addClass('square-td--hover-enable');
             });
             // прячем линии
             gridLines.each(function () {
@@ -152,17 +152,34 @@ var PLACEGRID = (function () {
     return {
         init: function () {
             state = 'mono';
-            // lineToSquare();
-            this.setStyle();
+            lineToSquare();
+            // this.setStyle();
             setClass();
+
+            // хендлер для грида
+            $('.generator-position__square').on('click', '.square-td', function () {
+              // изменяет модель
+              // только если моно режим
+              if (model.gridType === 'mono') {
+                 PLACEGRID.updateModel($(this));
+              }
+              // ставит класс
+              PLACEGRID.setClass();
+              // заставляет обновиться инпут
+              INPUTFIELD.setInput();
+              // заставляет обновиться уотермарк
+              DRAGGABLE.setWatermark(true);
+            });
+
         },
 
+        // устанавливает активный класс, сообразно модели
         setClass: setClass,
 
         // меняет стиль с мульти на моно и наоборот
         setStyle: function () {
             var
-                mode = model.gridType === 'mono' ? 'mono' : 'multi';
+                mode = model.gridType;
             // не запускать, если нажали по активной кнопке свитча
             if (mode !== state) {
                 state = mode;
@@ -205,6 +222,14 @@ var PLACEGRID = (function () {
             // toFixed чтобы не было значения в полпикселя
             model.coord.x = parseInt(gridPosArr[index][1].toFixed(0));
             model.coord.y = parseInt(gridPosArr[index][0].toFixed(0));
+        },
+        deactivate: function () {
+          lineToSquare();
+          $('.square-td--active').removeClass('square-td--active');
+          $('.square-td').each(function () {
+            $(this).removeClass('square-td--hover-enable');
+          });
+          $('.generator-position__square').off('click');
         }
     }
 })();

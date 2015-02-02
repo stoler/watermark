@@ -16,7 +16,6 @@ switch
   display: inline-block;
   margin-right: 10px;
   vertical-align: top;
-  cursor: pointer;
   &:last-child{
     margin-right: 0;
   }
@@ -25,27 +24,40 @@ switch
 .switch__mono{
   @extend .switch;
   background: url(../img/sprite.png) no-repeat -56px -56px;
-  &:hover{
-    background: url(../img/sprite.png) no-repeat -84px -56px;
-  }
+  // &:hover{
+  //   background: url(../img/sprite.png) no-repeat -84px -56px;
+  // }
   &.switch--active{
     background: url(../img/sprite.png) no-repeat -112px -56px;
-    // &:hover{
-    //   background: url(../img/sprite.png) no-repeat -112px -56px;
-    // }
+    &:hover{
+      background: url(../img/sprite.png) no-repeat -112px -56px;
+    }
   }
 }
 
+.switch__mono--hover {
+  cursor: pointer;
+  &:hover{
+    background: url(../img/sprite.png) no-repeat -84px -56px;
+  }
+}
 .switch__multi{
   @extend .switch;
   background: url(../img/sprite.png) no-repeat -140px -56px;
-  &:hover{
-    background: url(../img/sprite.png) no-repeat -168px -56px;
-  }
+  // &:hover{
+    // background: url(../img/sprite.png) no-repeat -168px -56px;
+  // }
   &.switch--active{
     background: url(../img/sprite.png) no-repeat -196px -56px;
-    // &:hover{
-    //   background: url(../img/sprite.png) no-repeat -196px -56px;
-    // }
+    &:hover{
+      background: url(../img/sprite.png) no-repeat -196px -56px;
+    }
+  }
+}
+
+.switch__multi--hover {
+  cursor: pointer;
+  &:hover{
+    background: url(../img/sprite.png) no-repeat -168px -56px;
   }
 }
