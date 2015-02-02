@@ -3247,6 +3247,7 @@ var Share = {
 };
 var COUNTERBTN = (function () {
   var
+      arrowsButtons = $('.crd-arrow-list__item'),
       // на сколько увеличивается значение при режиме моно
       monoStep = 1,
       // на сколько увеличивается значение при режиме мульти
@@ -3254,7 +3255,7 @@ var COUNTERBTN = (function () {
   return {
     init: function () {
       // хендлер для стрелок
-      $('.crd-arrow-list__item').on('mousedown', function () {
+      arrowsButtons.on('mousedown', function () {
           var _this = $(this);
           counterTimeout = setInterval(function () {
               // функция в модуле стрелок, она изменяет модель
@@ -3275,9 +3276,9 @@ var COUNTERBTN = (function () {
               clearInterval(counterTimeout);
           });
       });
-      $('.crd-arrow-list__item').each(function () {
+      arrowsButtons.each(function () {
         $(this).removeClass('crd-arrow-list__item--up-no-hover crd-arrow-list__item--down-no-hover');
-      })
+      });
     },
     // изменяет модель при нажатии на кнопку
     counterBtnModelChange: function (btn) {
@@ -3298,6 +3299,17 @@ var COUNTERBTN = (function () {
           model.margins[axis] = testValue;
         }
       }
+    },
+    deactivate: function () {
+      arrowsButtons.off('mousedown');
+      $('.crd-arrow-list__item--up').each(function () {
+        $(this).addClass('crd-arrow-list__item--up-no-hover');
+      });
+      $('.crd-arrow-list__item--down').each(function () {
+        $(this).addClass('crd-arrow-list__item--down-no-hover');
+      });
+
+
     }
   }
 })();
@@ -3525,11 +3537,20 @@ var PLACEGRID = (function () {
             // toFixed чтобы не было значения в полпикселя
             model.coord.x = parseInt(gridPosArr[index][1].toFixed(0));
             model.coord.y = parseInt(gridPosArr[index][0].toFixed(0));
+        },
+        deactivate: function () {
+          lineToSquare();
+          $('.square-td--active').removeClass('square-td--active');
+          $('.square-td').each(function () {
+            $(this).removeClass('square-td--hover-enable');
+          });
+          $('.generator-position__square').off('click');
         }
     }
 })();
 var INPUTFIELD = (function () {
   var
+      inputWindow = $('.crd-window__num'),
       windowX = $('.crd-window__num--x'),
       windowY = $('.crd-window__num--y'),
       variant = 'coord',
@@ -3553,7 +3574,7 @@ var INPUTFIELD = (function () {
 
   return {
     init: function () {
-      $('.crd-window__num').each(function () {
+      inputWindow.each(function () {
         $(this).removeAttr('disabled');
       });
 
@@ -3561,7 +3582,7 @@ var INPUTFIELD = (function () {
       windowY.val(model[variant]['y']);
 
       // хендлер для ввода с клавиатуры прямо в инпуты
-      $('.crd-window__num').on('change', function () {
+      inputWindow.on('change', function () {
         // изменяем модель
         INPUTFIELD.updateModel($(this));
         // обновляем инпут
@@ -3582,6 +3603,13 @@ var INPUTFIELD = (function () {
       checkVariant();
       model[variant]['x'] = validateInput(parseInt(windowX.val()));
       model[variant]['y'] = validateInput(parseInt(windowY.val()));
+    },
+    deactivate: function () {
+      inputWindow.each(function () {
+        $(this).attr('disabled', true);
+      });
+      windowX.val('');
+      windowY.val('');
     }
   }
 })();
@@ -3611,6 +3639,17 @@ var SLIDER = (function () {
     // слайдер обновляется за счет модели
     setSlider: function() {
       $('.generator-transparency__slider').slider('value', model.alpha * 100);
+    },
+    deactivate: function () {
+      $('.generator-transparency__slider').slider({
+        min: 0,
+        max: 100,
+        value: model.alpha * 100,
+        range: 'min',
+        disabled: true
+      });
+
+      $('.ui-slider-handle').removeClass('ui-slider-handle--hover');
     }
   }
 })();
@@ -3656,6 +3695,12 @@ var SWITCH = (function () {
       } else {
         $('.switch__multi').addClass('switch--active');
       }
+    },
+    disable: function () {
+      $('.switch').each(function () {
+        $(this).removeClass('switch__multi--hover switch__mono--hover switch--active');
+      });
+      $('.switch').off('click');
     }
 
   };
@@ -3739,6 +3784,10 @@ var DRAGGABLE = (function () {
 
       return resultArray;
 
+    },
+
+    disable: function () {
+      $('.generator-picture__watermark').off('drag');
     }
   }
 })();
@@ -3768,6 +3817,22 @@ var RESET = (function () {
                 PLACEGRID.setClass();
                 // удаляет загруженные картинки
                 deleteImage();
+
+                // отключаются хендлеры и все возвращается в состоянии до
+                // инициализации
+                // ...
+                // инпуты отключаются
+                INPUTFIELD.deactivate();
+                // стрелки не нажимаются
+                COUNTERBTN.deactivate();
+                // грид не работает
+                PLACEGRID.deactivate();
+                // ползунок не двигается
+                SLIDER.deactivate();
+                // драг отключен
+                DRAGGABLE.disable();
+                // свитч отключен
+                SWITCH.disable();
             });
         },
         resetApp: function () {
@@ -3944,10 +4009,6 @@ var FILESINPT = (function () {
       model.files[place] = file;
       console.log(model.files);
       checkState();
-    },
-    // берет данные из модели
-    updateSelf: function () {
-      $('.jq-file__name').val('');
     }
   }
 })();
