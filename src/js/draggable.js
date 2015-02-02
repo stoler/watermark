@@ -30,6 +30,7 @@ var DRAGGABLE = (function () {
       var
           watermark = $('.generator-picture__watermark'),
           image = $('.generator-picture__image'),
+
           // координаты контейнера вотермарка
           container = [
             image.offset().left,
