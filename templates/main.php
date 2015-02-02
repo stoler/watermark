@@ -54,14 +54,14 @@
                         <h3 class="generator-position__title"><?= $lang['position'] ?></h3>
                         <div class="generator-position__switch">
                             <div class="switch switch__multi">multi</div>
-                            <div class="switch switch__mono switch--active">mono</div>
+                            <div class="switch switch__mono">mono</div>
                         </div>
                     </div>
                     <div class="generator-position__bottom">
                         <div class="generator-position__main-square">
                             <div class="generator-position__square">
                                 <div class="square-tr">
-                                    <div class="square-td square-td--active"></div>
+                                    <div class="square-td"></div>
                                     <div class="square-td"></div>
                                     <div class="square-td"></div>
                                 </div>
@@ -86,13 +86,13 @@
                                 </div>
                                 <div class="generator-position-coordinates__window">
                                     <div class="crd-window">
-                                        <input type="text" name="x-axis" value="0" class="crd-window__num crd-window__num--x">
+                                        <input type="text" name="x-axis" disabled class="crd-window__num crd-window__num--x">
                                     </div>
                                 </div>
                                 <div class="generator-position-coordinates__arrow-list">
                                     <div class="crd-arrow-list">
-                                        <div class="crd-arrow-list__item crd-arrow-list__item--x crd-arrow-list__item--up"></div>
-                                        <div class="crd-arrow-list__item crd-arrow-list__item--x crd-arrow-list__item--down"></div>
+                                        <div class="crd-arrow-list__item crd-arrow-list__item--x crd-arrow-list__item--up crd-arrow-list__item--up-no-hover"></div>
+                                        <div class="crd-arrow-list__item crd-arrow-list__item--x crd-arrow-list__item--down crd-arrow-list__item--down-no-hover"></div>
                                     </div>
                                 </div>
                             </div>
@@ -102,13 +102,13 @@
                                 </div>
                                 <div class="generator-position-coordinates__window">
                                     <div class="crd-window">
-                                        <input type="text" name="y-axis" value="0" class="crd-window__num crd-window__num--y">
+                                        <input type="text" name="y-axis" disabled class="crd-window__num crd-window__num--y">
                                     </div>
                                 </div>
                                 <div class="generator-position-coordinates__arrow-list">
                                     <div class="crd-arrow-list">
-                                        <div class="crd-arrow-list__item crd-arrow-list__item--y crd-arrow-list__item--up"></div>
-                                        <div class="crd-arrow-list__item crd-arrow-list__item--y crd-arrow-list__item--down"></div>
+                                        <div class="crd-arrow-list__item crd-arrow-list__item--y crd-arrow-list__item--up crd-arrow-list__item--up-no-hover"></div>
+                                        <div class="crd-arrow-list__item crd-arrow-list__item--y crd-arrow-list__item--down crd-arrow-list__item--down-no-hover"></div>
                                     </div>
                                 </div>
                             </div>
@@ -140,6 +140,9 @@
     <div class="iframe">
         <iframe src="" frameborder="0"></iframe>
     </div>
+</div>
+<div class="preloader">
+    <img src="/dist/img/ajax-loader.gif" alt="" class="preloader__image"/>
 </div>
 <script src="dist/js/scripts.js"></script>
 </body>

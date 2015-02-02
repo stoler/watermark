@@ -12,16 +12,10 @@ var SENDDATA = (function ($) {
         send: function () {
             if (validateData()) {
                 console.log(JSON.stringify(model));
-                $("iframe").attr("src",'/?download=1&data=' + JSON.stringify(model));
-                /*
-                $.ajax({
-                    url: "/",
-                    type: "GET",
-                    data: {download:1, data: JSON.stringify(model)}
-                }).done(function () {
-                    console.log('Данные отправлены! Или нет.');
+                PRELOADER.show();
+                $("iframe").attr("src",'/?download=1&data=' + JSON.stringify(model)).ready(function () {
+                    PRELOADER.hide();
                 });
-                */
             } else {
                 console.log('Ошибка при отправке данных');
             }

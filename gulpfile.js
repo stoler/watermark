@@ -40,6 +40,7 @@ gulp.task('scripts', function () {
     gulp.src([
         'src/js/jquery-1.11.1.min.js',
         'src/js/model.js',
+        'src/js/preloader.js',
         'src/js/jquery.ui.widget.js',
         'src/js/jquery.iframe-transport.js',
         'src/js/jquery.fileupload.js',
@@ -54,7 +55,8 @@ gulp.task('scripts', function () {
         'src/js/draggable.js',
         'src/js/reset.js',
         'src/js/sendData.js',
-        'src/js/plugins.js'
+        'src/js/plugins.js',
+        'src/js/filesInput.js'
     ])
         .pipe(concat('scripts.js'))
         .pipe(gulp.dest('dist/js'))

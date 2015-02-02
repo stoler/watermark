@@ -32,9 +32,6 @@ place-grid
   display: table-cell;
   width: 33.333%;
   border: 1px solid $sliderRangeColor;
-  &:hover{
-    background: $silverOne;
-  }
 }
 .square-td--active{
   background: $lightRedColor;
@@ -43,9 +40,9 @@ place-grid
   }
 }
 
-.square-td--hover-disable{
+.square-td--hover-enable{
   &:hover{
-    background: $placeGridColor;
+    background: $silverOne;
   }
 }
 

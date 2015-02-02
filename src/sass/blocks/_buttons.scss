@@ -15,6 +15,7 @@ buttons
   background: $silverOne;
   width: 99px;
   height: 42px;
+  outline: none;
 }
 .button-download {
   @extend .btn;

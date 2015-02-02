@@ -23,8 +23,25 @@ var INPUTFIELD = (function () {
 
   return {
     init: function () {
+      $('.crd-window__num').each(function () {
+        $(this).removeAttr('disabled');
+      });
+
       windowX.val(model[variant]['x']);
       windowY.val(model[variant]['y']);
+
+      // хендлер для ввода с клавиатуры прямо в инпуты
+      $('.crd-window__num').on('change', function () {
+        // изменяем модель
+        INPUTFIELD.updateModel($(this));
+        // обновляем инпут
+        INPUTFIELD.setInput();
+        // обновляем грид
+        PLACEGRID.setStyle();
+        PLACEGRID.setClass();
+        // обновляем вотермарк
+        DRAGGABLE.setWatermark(true);
+      });
     },
     setInput: function () {
       checkVariant();
