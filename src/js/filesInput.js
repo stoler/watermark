@@ -8,7 +8,6 @@ var FILESINPT = (function () {
   return {
     setModel: function (place, file) {
       model.files[place] = file;
-      console.log(model.files);
       checkState();
     }
   }
