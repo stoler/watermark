@@ -748,7 +748,11 @@ generator-picture
 .generator-picture__wrap-result {
   position: relative;
   height: 534px;
+  width: 651px;
   background: #ffffff;
+  background: #fff;
+  overflow: hidden;
+  display: inline-block;
 }
 .generator-picture__wrap-result:before {
   content: '';
@@ -772,7 +776,12 @@ generator-picture
 }
 
 .generator-picture__result {
+<<<<<<< HEAD
   width: 651px;
+=======
+  display: inline-block;
+  background: #ffffff;
+>>>>>>> a01bc511bf23ca324a97af642ac24b9a50c38412
   overflow: hidden;
 }
 
