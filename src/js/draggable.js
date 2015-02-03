@@ -20,6 +20,7 @@ var DRAGGABLE = (function () {
           // грид изменяется
           PLACEGRID.setClass();
       });
+
       // хендлер для резайза окна (когда окно изменяется в размере, то
       // пересчитывается контейнер в котором может перемещаться изображение)
       $( window ).on('resize', function () {
@@ -32,6 +33,11 @@ var DRAGGABLE = (function () {
       });
       this.setOpacity();
 
+
+        $('.generator-picture__tile').on('drag', function (e, ui) {
+            // изменяет модель при перетаскивании сетки 'замостить'
+            DRAGGABLE.updateModel(ui);
+        });
     },
     updateModel: function (ui) {
       model.coord.x = parseInt((ui.position.left).toFixed(0));

@@ -1,18 +1,21 @@
 var TILE = (function () {
+    // инициализируем глобальные переменные
     var tile = $('.generator-picture__tile'),
-
         watermark,
         image,
-        watermarkWidth = 0, watermarkHeight,
+        watermarkWidth = 0,
+        watermarkHeight,
         watermarkSrc,
-        imageWidth = 0, imageHeight;
+        imageWidth = 0,
+        imageHeight;
 
     return {
         initImage: function () {
+            // получаем основную картинку и её размеры
             image = $('.generator-picture__img'),
             imageWidth = image.width();
             imageHeight = image.width();
-            console.log(imageWidth)
+            //console.log(imageWidth)
             TILE.initTile()
             //itemInRow = Math.floor(imageWidth / watermarkWidth) + 1,
             //rows = Math.floor(imageHeight / watermarkHeight) + 1;
@@ -20,16 +23,19 @@ var TILE = (function () {
 
         },
         initWatermark: function() {
+            // получаем марку и её размеры
             watermark = $('.generator-picture__watermark'),
             watermarkWidth = watermark.width();
             watermarkHeight = watermark.width();
             watermarkSrc = watermark.attr('src');
-            console.log(watermarkHeight, watermarkWidth,watermarkSrc );
+            //console.log(watermarkHeight, watermarkWidth,watermarkSrc );
             TILE.initTile()
         },
         initTile: function() {
+            // удаляем предыдущий мост и создаем новую сетку 'замостить'
             $('.generator-picture__tile-row').remove()
-            $('.tile__image').remove()
+            $('.tile__image').remove();
+
             if (watermarkWidth > 0 & imageWidth > 0) {
                 //alert(true)
                 var itemInRow = Math.floor(imageWidth / watermarkWidth) + 1,
@@ -47,6 +53,7 @@ var TILE = (function () {
                 ;
             }
         },
+        // скрываем/показываем сетку замости
         showHide: function (elem) {
             var _this = elem;
             if (_this.hasClass('switch__multi')) {
@@ -59,13 +66,16 @@ var TILE = (function () {
                 tile.hide();
             }
         },
+        // изменяем прозрачность
         changeOpacity: function () {
             tile.css('opacity', model.alpha);
         },
+        // изменяем вертикальный отступ
         changeVerticalGutter: function () {
             var tileRow = $('.generator-picture__tile-row');
             tileRow.css({marginBottom: model.margins.x});
         },
+        // изменяем горизонтальный отстпуп
         changeHorizontalGutter: function () {
             var tileImage = $('.tile__image');
             tileImage.css({marginRight: model.margins.y});
