@@ -13,6 +13,11 @@ var DRAGGABLE = (function () {
           // грид изменяется
           PLACEGRID.setClass();
       });
+
+        $('.generator-picture__tile').on('drag', function (e, ui) {
+            // изменяет модель при перетаскивании сетки 'замостить'
+            DRAGGABLE.updateModel(ui);
+        });
     },
     updateModel: function (ui) {
       model.coord.x = parseInt((ui.position.left).toFixed(0));
