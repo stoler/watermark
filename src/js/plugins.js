@@ -1,31 +1,13 @@
 // $(function(){
-    var counterTimeout,
-        // массив для определения пределов
-        // в которых может перемещаться 
-        // вотермарк
-        contSize = [];
+    var counterTimeout;
 
     // style input
     $('.js-upload').styler();
 
-    // инициализируем драггабл
-    contSize = DRAGGABLE.calculateContainer();
-    $('.generator-picture__watermark').draggable({
-        containment: contSize
-    });
 
     FILESINPT.init();
 
-    // хендлер для резайза окна (когда окно изменяется в размере, то
-    // пересчитывается контейнер в котором может перемещаться изображение)
-    $( window ).on('resize', function () {
-        // пересчитали блок
-        contSize = DRAGGABLE.calculateContainer();
-        // инициализировали новую область
-        $('.generator-picture__watermark').draggable({
-            containment: contSize
-        });
-    });
+
    
     // инициализируем слайдер
     $('.generator-transparency__slider').slider({
@@ -56,7 +38,6 @@
           // добавляет возможность ховера для нижних кнопок
           $('.button-reset').addClass('button-reset--hover');
           $('.button-download').addClass('button-download--hover');
-
 
           INPUTFIELD.init();
           PLACEGRID.init();
