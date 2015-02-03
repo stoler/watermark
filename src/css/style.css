@@ -611,7 +611,7 @@ h2 {
 }
 
 .disable {
-  opacity: 0.5;
+  opacity: 0.2;
 }
 
 /*
@@ -1192,17 +1192,27 @@ buttons
   background: #c1cfd9;
   width: 99px;
   height: 42px;
+  cursor: default;
 }
-.button-reset:hover {
+
+.button-reset--hover {
+  cursor: pointer;
+}
+.button-reset--hover:hover {
   background: #a3b1bb;
 }
 
 .button-download {
+  cursor: default;
   background: #f97e76;
   width: 99px;
   height: 42px;
 }
-.button-download:hover {
+
+.button-download--hover {
+  cursor: pointer;
+}
+.button-download--hover:hover {
   background: #d97171;
 }
 
