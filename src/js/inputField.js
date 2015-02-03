@@ -57,8 +57,9 @@ var INPUTFIELD = (function () {
                 // обновляем вотермарк
                 DRAGGABLE.setWatermark(true);
             });
-
-            inputWindow.on('keyup', function (e) {
+            
+            // будет работать с зажатой кнопкой
+            inputWindow.on('keypress', function (e) {
                 var
                     key = e.keyCode;
 

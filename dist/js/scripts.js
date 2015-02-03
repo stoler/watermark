@@ -3699,8 +3699,9 @@ var INPUTFIELD = (function () {
                 // обновляем вотермарк
                 DRAGGABLE.setWatermark(true);
             });
-
-            inputWindow.on('keyup', function (e) {
+            
+            // будет работать с зажатой кнопкой
+            inputWindow.on('keypress', function (e) {
                 var
                     key = e.keyCode;
 
@@ -3875,7 +3876,6 @@ var DRAGGABLE = (function () {
           // грид изменяется
           PLACEGRID.setClass();
       });
-<<<<<<< HEAD
       // хендлер для резайза окна (когда окно изменяется в размере, то
       // пересчитывается контейнер в котором может перемещаться изображение)
       $( window ).on('resize', function () {
@@ -3888,13 +3888,11 @@ var DRAGGABLE = (function () {
       });
       this.setOpacity();
 
-=======
 
         $('.generator-picture__tile').on('drag', function (e, ui) {
             // изменяет модель при перетаскивании сетки 'замостить'
             DRAGGABLE.updateModel(ui);
         });
->>>>>>> 1450e8270f317547b10dd1337c61bfa4ba276946
     },
     updateModel: function (ui) {
       model.coord.x = parseInt((ui.position.left).toFixed(0));
@@ -3957,8 +3955,13 @@ var DRAGGABLE = (function () {
 var RESET = (function () {
     var
         deleteImage = function () {
+            // убираем вотермарк
             $('.generator-picture__watermark').remove();
+            // убираем фоновое изображение
             $('.generator-picture__img').remove();
+            // убираем контейнер, который содержит размноженные изображения
+            // вотермарка
+            $('.generator-picture__tile-row').remove();
         };
     return {
         init: function () {
@@ -4071,7 +4074,9 @@ var FILESINPT = (function () {
           dataType: 'json',
           done: function (e, data) {
               PRELOADER.hide();
-              if (typeof data.result.files[0]['error'] == 'undefined') {
+              // проверяет в том числе и не был ли загружен уже один файл, если загружен,
+              // то не будет грузить
+              if (typeof data.result.files[0]['error'] === 'undefined' && model.files.image === '') {
                   $.each(data.result.files, function (index, file) {
                       // $('.generator-picture__img').attr('src', '/upload/' + file.name);
                       $('<img>').addClass('generator-picture__img').attr('src', '/upload/' + file.name)
@@ -4087,11 +4092,15 @@ var FILESINPT = (function () {
                       itsAlive();
                   });
               } else {
-                  alert('Error!');
+                  console.log('Error!');
               }
           },
           send: function () {
+            // не будет показывать прелоадер, если мы уже выбрали файл
+            // и он загружен в приложение
+            if (model.files.image === '') {
               PRELOADER.show();
+            }
           }
       });
 
@@ -4100,7 +4109,7 @@ var FILESINPT = (function () {
           dataType: 'json',
           done: function (e, data) {
               PRELOADER.hide();
-              if (typeof data.result.files[0]['error'] == 'undefined') {
+              if (typeof data.result.files[0]['error'] == 'undefined' && model.files.watermark === '') {
                   $.each(data.result.files, function (index, file) {
                       // $('.generator-picture__watermark').attr('src', '/upload/' + file.name);
                       $('<img>').addClass('generator-picture__watermark').attr('src', '/upload/' + file.name)
@@ -4122,11 +4131,15 @@ var FILESINPT = (function () {
 
                   });
               } else {
-                  alert('Error!');
+                  console.log('Error!');
               }
           },
           send: function () {
+            // не будет показывать прелоадер, если мы уже выбрали файл
+            // и он загружен в приложение
+            if (model.files.watermark === '') {
               PRELOADER.show();
+            }
           }
       });
 
@@ -4138,7 +4151,6 @@ var FILESINPT = (function () {
     updateInputField: function (place) {
       if (place === 'upload-picture') {
         // добавит текст в div с названием картинки
-        console.log('зашел');
         $('#upload-picture-styler .jq-file__name').text(model.files.image);
       } else if (place = 'upload-watermark') {
         // добавить текст в div с вотермарком
@@ -4164,7 +4176,6 @@ var FILESINPT = (function () {
     });
 
     FILESINPT.init();
-
 
     // хендлер для резайза окна (когда окно изменяется в размере, то
     // пересчитывается контейнер в котором может перемещаться изображение)
@@ -4201,6 +4212,9 @@ var FILESINPT = (function () {
         Share[$(this).data('site')]('URL','TITLE','IMG_PATH', 'DESC');
     });
 
+    RESET.init();
+    
+
     function itsAlive () {
         if (model.isActive) {
           // удаляет опасити с боковой панели
@@ -4215,7 +4229,7 @@ var FILESINPT = (function () {
           SWITCH.init();
           COUNTERBTN.init();
           SLIDER.init();
-          RESET.init();
+          // RESET.init();
           DRAGGABLE.init();
         }
     }

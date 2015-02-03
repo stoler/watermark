@@ -51,6 +51,9 @@
         Share[$(this).data('site')]('URL','TITLE','IMG_PATH', 'DESC');
     });
 
+    RESET.init();
+    
+
     function itsAlive () {
         if (model.isActive) {
           // удаляет опасити с боковой панели
@@ -65,7 +68,7 @@
           SWITCH.init();
           COUNTERBTN.init();
           SLIDER.init();
-          RESET.init();
+          // RESET.init();
           DRAGGABLE.init();
         }
     }
