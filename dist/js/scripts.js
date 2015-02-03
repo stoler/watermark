@@ -3954,8 +3954,13 @@ var DRAGGABLE = (function () {
 var RESET = (function () {
     var
         deleteImage = function () {
+            // убираем вотермарк
             $('.generator-picture__watermark').remove();
+            // убираем фоновое изображение
             $('.generator-picture__img').remove();
+            // убираем контейнер, который содержит размноженные изображения
+            // вотермарка
+            $('.generator-picture__tile-row').remove();
         };
     return {
         init: function () {
@@ -4068,7 +4073,9 @@ var FILESINPT = (function () {
           dataType: 'json',
           done: function (e, data) {
               PRELOADER.hide();
-              if (typeof data.result.files[0]['error'] == 'undefined') {
+              // проверяет в том числе и не был ли загружен уже один файл, если загружен,
+              // то не будет грузить
+              if (typeof data.result.files[0]['error'] === 'undefined' && model.files.image === '') {
                   $.each(data.result.files, function (index, file) {
                       // $('.generator-picture__img').attr('src', '/upload/' + file.name);
                       $('<img>').addClass('generator-picture__img').attr('src', '/upload/' + file.name)
@@ -4084,11 +4091,15 @@ var FILESINPT = (function () {
                       itsAlive();
                   });
               } else {
-                  alert('Error!');
+                  console.log('Error!');
               }
           },
           send: function () {
+            // не будет показывать прелоадер, если мы уже выбрали файл
+            // и он загружен в приложение
+            if (model.files.image === '') {
               PRELOADER.show();
+            }
           }
       });
 
@@ -4097,7 +4108,7 @@ var FILESINPT = (function () {
           dataType: 'json',
           done: function (e, data) {
               PRELOADER.hide();
-              if (typeof data.result.files[0]['error'] == 'undefined') {
+              if (typeof data.result.files[0]['error'] == 'undefined' && model.files.watermark === '') {
                   $.each(data.result.files, function (index, file) {
                       // $('.generator-picture__watermark').attr('src', '/upload/' + file.name);
                       $('<img>').addClass('generator-picture__watermark').attr('src', '/upload/' + file.name)
@@ -4119,11 +4130,15 @@ var FILESINPT = (function () {
 
                   });
               } else {
-                  alert('Error!');
+                  console.log('Error!');
               }
           },
           send: function () {
+            // не будет показывать прелоадер, если мы уже выбрали файл
+            // и он загружен в приложение
+            if (model.files.watermark === '') {
               PRELOADER.show();
+            }
           }
       });
 
@@ -4135,7 +4150,6 @@ var FILESINPT = (function () {
     updateInputField: function (place) {
       if (place === 'upload-picture') {
         // добавит текст в div с названием картинки
-        console.log('зашел');
         $('#upload-picture-styler .jq-file__name').text(model.files.image);
       } else if (place = 'upload-watermark') {
         // добавить текст в div с вотермарком

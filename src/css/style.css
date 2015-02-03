@@ -777,7 +777,6 @@ generator-picture
 
 .generator-picture__result {
   display: inline-block;
-  background: #ffffff;
   overflow: hidden;
 }
 
