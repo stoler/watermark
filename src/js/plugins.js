@@ -1,9 +1,5 @@
 // $(function(){
-    var counterTimeout,
-        // массив для определения пределов
-        // в которых может перемещаться 
-        // вотермарк
-        contSize = [];
+    var counterTimeout;
 
     // style input
     $('.js-upload').styler();
@@ -55,6 +51,9 @@
         Share[$(this).data('site')]('URL','TITLE','IMG_PATH', 'DESC');
     });
 
+    RESET.init();
+    
+
     function itsAlive () {
         if (model.isActive) {
           // удаляет опасити с боковой панели
@@ -64,13 +63,12 @@
           $('.button-reset').addClass('button-reset--hover');
           $('.button-download').addClass('button-download--hover');
 
-
           INPUTFIELD.init();
           PLACEGRID.init();
           SWITCH.init();
           COUNTERBTN.init();
           SLIDER.init();
-          RESET.init();
+          // RESET.init();
           DRAGGABLE.init();
         }
     }

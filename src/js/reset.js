@@ -1,8 +1,13 @@
 var RESET = (function () {
     var
         deleteImage = function () {
+            // убираем вотермарк
             $('.generator-picture__watermark').remove();
+            // убираем фоновое изображение
             $('.generator-picture__img').remove();
+            // убираем контейнер, который содержит размноженные изображения
+            // вотермарка
+            $('.generator-picture__tile-row').remove();
         };
     return {
         init: function () {

@@ -32,8 +32,8 @@
             <h1 class="generator-picture__title"><?= $lang['title'] ?></h1>
             <div class="generator-picture__wrap-result">
                 <div class="generator-picture__result generator-picture__image">
-                    <img src="dist/img/upload/image.png" class="generator-picture__img">
-                    <img src="dist/img/upload/watermark.png" class="generator-picture__watermark">
+                    <!-- <img src="dist/img/upload/image.png" class="generator-picture__img"> -->
+                    <!-- <img src="dist/img/upload/watermark.png" class="generator-picture__watermark"> -->
                     <div class="generator-picture__tile"></div>
                 </div>
             </div>
@@ -128,8 +128,8 @@
                     <div class="generator-transparency__slider"></div>
                 </div>
             </div>
-            <div class="main-generator-buttons disable">
-                <div class="generator-buttons">
+            <div class="main-generator-buttons">
+                <div class="generator-buttons disable">
                     <button class="button-reset"><?= $lang['reset'] ?></button>
                     <button class="button-download"><?= $lang['download'] ?></button>
                 </div>

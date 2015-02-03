@@ -3699,8 +3699,9 @@ var INPUTFIELD = (function () {
                 // обновляем вотермарк
                 DRAGGABLE.setWatermark(true);
             });
-
-            inputWindow.on('keyup', function (e) {
+            
+            // будет работать с зажатой кнопкой
+            inputWindow.on('keypress', function (e) {
                 var
                     key = e.keyCode;
 
@@ -3856,9 +3857,16 @@ var n=t.apply(this,arguments);return n.mode="hide",this.effect.call(this,n)}}(e.
 var DRAGGABLE = (function () {
   var
        watermark = $('.generator-picture__watermark');
+       // contSize = [];
 
   return {
     init: function () {
+      // contSize = this.calculateContainer();
+      // console.log(contSize);
+      $('.generator-picture__watermark').draggable({
+          containment: 'window'
+      });
+
       // хендлер для окна с возможностью драгабл
       $('.generator-picture__watermark').on('drag', function (e, ui) {
           // изменяет модель
@@ -3868,6 +3876,18 @@ var DRAGGABLE = (function () {
           // грид изменяется
           PLACEGRID.setClass();
       });
+      // хендлер для резайза окна (когда окно изменяется в размере, то
+      // пересчитывается контейнер в котором может перемещаться изображение)
+      $( window ).on('resize', function () {
+          // пересчитали блок
+          contSize = DRAGGABLE.calculateContainer();
+          // инициализировали новую область
+          $('.generator-picture__watermark').draggable({
+              containment: contSize
+          });
+      });
+      this.setOpacity();
+
 
         $('.generator-picture__tile').on('drag', function (e, ui) {
             // изменяет модель при перетаскивании сетки 'замостить'
@@ -3879,19 +3899,20 @@ var DRAGGABLE = (function () {
       model.coord.y = parseInt((ui.position.top).toFixed(0));
       // model.coord.x = ui.position.left;
       // model.coord.y = ui.position.top;
+      console.log(model.coord);
     },
 
     // изменяет положение
     setWatermark: function (animation) {
       if (animation) {
-        watermark.animate({top: model.coord.y, left: model.coord.x}, {duration: 500, queue: false});
+        $('.generator-picture__watermark').animate({top: model.coord.y, left: model.coord.x}, {duration: 500, queue: false});
       } else {
-        watermark.css({top: model.coord.y, left: model.coord.x});
+        $('.generator-picture__watermark').css({top: model.coord.y, left: model.coord.x});
       }
     },
     // изменяет опасити
     setOpacity: function () {
-      watermark.css('opacity', model.alpha);
+      $('.generator-picture__watermark').css('opacity', model.alpha);
     },
 
     // рассчитывает величину
@@ -3902,26 +3923,27 @@ var DRAGGABLE = (function () {
           watermark = $('.generator-picture__watermark'),
           image = $('.generator-picture__image'),
 
+
           // координаты контейнера вотермарка
           container = [
-            image.offset().left,
-            image.offset().top,
+            image.offset().left - $('.generator-picture__watermark').width(),
+            image.offset().top - $('.generator-picture__watermark').height(),
             image.offset().left + image.width(),
-            image.offset().top + image.height(),
-          ],
+            image.offset().top + image.height()
+          ];
 
           // массив [x1, y1, x2, y2] для определения четырехуголника
           // в котором можно дрегать вотермарк
-          resultArray = [];
+          // resultArray = [];
       
-      
+      return container;
 
-      resultArray.push(container[0] - watermark.width());
-      resultArray.push(container[1] - watermark.height());
-      resultArray.push(container[2]);
-      resultArray.push(container[3]);
+      // resultArray.push(container[0] - $('.generator-picture__watermark').width());
+      // resultArray.push(container[1] - $('.generator-picture__watermark').height());
+      // resultArray.push(container[2]);
+      // resultArray.push(container[3]);
 
-      return resultArray;
+      // return resultArray;
 
     },
 
@@ -3933,8 +3955,13 @@ var DRAGGABLE = (function () {
 var RESET = (function () {
     var
         deleteImage = function () {
+            // убираем вотермарк
             $('.generator-picture__watermark').remove();
+            // убираем фоновое изображение
             $('.generator-picture__img').remove();
+            // убираем контейнер, который содержит размноженные изображения
+            // вотермарка
+            $('.generator-picture__tile-row').remove();
         };
     return {
         init: function () {
@@ -4047,9 +4074,13 @@ var FILESINPT = (function () {
           dataType: 'json',
           done: function (e, data) {
               PRELOADER.hide();
-              if (typeof data.result.files[0]['error'] == 'undefined') {
+              // проверяет в том числе и не был ли загружен уже один файл, если загружен,
+              // то не будет грузить
+              if (typeof data.result.files[0]['error'] === 'undefined' && model.files.image === '') {
                   $.each(data.result.files, function (index, file) {
-                      $('.generator-picture__img').attr('src', '/upload/' + file.name);
+                      // $('.generator-picture__img').attr('src', '/upload/' + file.name);
+                      $('<img>').addClass('generator-picture__img').attr('src', '/upload/' + file.name)
+                          .appendTo('.generator-picture__image');
                       $('.big_img').attr('src', '/upload/' + file.name).load(function () {
                           imgW = $('.big_img').width();
                           imgH = $('.big_img').height();
@@ -4061,11 +4092,15 @@ var FILESINPT = (function () {
                       itsAlive();
                   });
               } else {
-                  alert('Error!');
+                  console.log('Error!');
               }
           },
           send: function () {
+            // не будет показывать прелоадер, если мы уже выбрали файл
+            // и он загружен в приложение
+            if (model.files.image === '') {
               PRELOADER.show();
+            }
           }
       });
 
@@ -4074,9 +4109,11 @@ var FILESINPT = (function () {
           dataType: 'json',
           done: function (e, data) {
               PRELOADER.hide();
-              if (typeof data.result.files[0]['error'] == 'undefined') {
+              if (typeof data.result.files[0]['error'] == 'undefined' && model.files.watermark === '') {
                   $.each(data.result.files, function (index, file) {
-                      $('.generator-picture__watermark').attr('src', '/upload/' + file.name);
+                      // $('.generator-picture__watermark').attr('src', '/upload/' + file.name);
+                      $('<img>').addClass('generator-picture__watermark').attr('src', '/upload/' + file.name)
+                          .appendTo('.generator-picture__image');
                       $('.big_wm').attr('src', '/upload/' + file.name).load(function () {
                           wmW = $('.big_wm').width();
                           wmH = $('.big_wm').height();
@@ -4094,11 +4131,15 @@ var FILESINPT = (function () {
 
                   });
               } else {
-                  alert('Error!');
+                  console.log('Error!');
               }
           },
           send: function () {
+            // не будет показывать прелоадер, если мы уже выбрали файл
+            // и он загружен в приложение
+            if (model.files.watermark === '') {
               PRELOADER.show();
+            }
           }
       });
 
@@ -4110,7 +4151,6 @@ var FILESINPT = (function () {
     updateInputField: function (place) {
       if (place === 'upload-picture') {
         // добавит текст в div с названием картинки
-        console.log('зашел');
         $('#upload-picture-styler .jq-file__name').text(model.files.image);
       } else if (place = 'upload-watermark') {
         // добавить текст в div с вотермарком
@@ -4120,11 +4160,7 @@ var FILESINPT = (function () {
   }
 })();
 // $(function(){
-    var counterTimeout,
-        // массив для определения пределов
-        // в которых может перемещаться 
-        // вотермарк
-        contSize = [];
+    var counterTimeout;
 
     // style input
     $('.js-upload').styler();
@@ -4176,6 +4212,9 @@ var FILESINPT = (function () {
         Share[$(this).data('site')]('URL','TITLE','IMG_PATH', 'DESC');
     });
 
+    RESET.init();
+    
+
     function itsAlive () {
         if (model.isActive) {
           // удаляет опасити с боковой панели
@@ -4185,13 +4224,12 @@ var FILESINPT = (function () {
           $('.button-reset').addClass('button-reset--hover');
           $('.button-download').addClass('button-download--hover');
 
-
           INPUTFIELD.init();
           PLACEGRID.init();
           SWITCH.init();
           COUNTERBTN.init();
           SLIDER.init();
-          RESET.init();
+          // RESET.init();
           DRAGGABLE.init();
         }
     }

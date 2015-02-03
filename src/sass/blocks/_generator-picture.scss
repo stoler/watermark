@@ -35,7 +35,7 @@ generator-picture
 
 .generator-picture__result {
   display: inline-block;
-  background: $whiteColor;
+  // background: $whiteColor;
   overflow: hidden;
 }
 
@@ -45,8 +45,8 @@ generator-picture
 }
 .generator-picture__image {
   position: relative;
-  max-height: 534px;
-  height: auto;
+  width: 651px;
+  height: 534px;
 }
 .generator-picture__watermark {
   position: absolute;
@@ -54,6 +54,7 @@ generator-picture
   left: 0;
   display: inline-block;
   height: auto;
+  width: auto;
 }
 
 .generator-picture__watermark, .generator-picture__img {
