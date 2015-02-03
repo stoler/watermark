@@ -109,6 +109,12 @@ $(function(){
 
     function itsAlive () {
         if (model.isActive) {
+          $('.disable').removeClass('disable');
+
+          $('.button-reset').addClass('button-reset--hover');
+          $('.button-download').addClass('button-download--hover');
+
+
           INPUTFIELD.init();
           PLACEGRID.init();
           SWITCH.init();
