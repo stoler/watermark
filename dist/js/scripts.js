@@ -3201,6 +3201,10 @@ var widget = $.widget;
 
     };
 }));
+/**
+ * Created by stoler on 03.02.15.
+ */
+
 var Share = {
     vkontakte: function(purl, ptitle, pimg, text) {
         var url  = 'http://vkontakte.ru/share.php?';
