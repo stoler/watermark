@@ -38,6 +38,7 @@ var DRAGGABLE = (function () {
       model.coord.y = parseInt((ui.position.top).toFixed(0));
       // model.coord.x = ui.position.left;
       // model.coord.y = ui.position.top;
+      console.log(model.coord);
     },
 
     // изменяет положение
