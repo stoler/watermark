@@ -821,6 +821,7 @@ generator-picture
 }
 
 .generator-picture__tile-row {
+  text-align: left;
   line-height: normal;
 }
 
