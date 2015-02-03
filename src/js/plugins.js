@@ -52,7 +52,6 @@ $(function(){
             PRELOADER.hide();
             if (typeof data.result.files[0]['error'] == 'undefined') {
                 $.each(data.result.files, function (index, file) {
-                    console.log(file);
                     $('.generator-picture__img').attr('src', '/upload/' + file.name);
                     $('.big_img').attr('src', '/upload/' + file.name).load(function () {
                         realImg.imgW = $('.big_img').width();
@@ -110,6 +109,12 @@ $(function(){
 
     function itsAlive () {
         if (model.isActive) {
+          $('.disable').removeClass('disable');
+
+          $('.button-reset').addClass('button-reset--hover');
+          $('.button-download').addClass('button-download--hover');
+
+
           INPUTFIELD.init();
           PLACEGRID.init();
           SWITCH.init();

@@ -3242,7 +3242,12 @@ var Share = {
     },
 
     popup: function(url) {
-        window.open(url,'','toolbar=0,status=0,width=626,height=436');
+        var shareWindowWidth = 650,
+            shareWindowHeight = 500,
+            marginLeft = screen.availWidth / 2 - shareWindowWidth / 2,
+            marginTop = screen.availHeight / 2 - shareWindowHeight / 2;
+
+        window.open(url,'_blank', 'toolbar=0,status=0,width=650,height=500,left=' + marginLeft + ', top=' + marginTop);
     }
 };
 var COUNTERBTN = (function () {
@@ -3551,69 +3556,105 @@ var PLACEGRID = (function () {
     }
 })();
 var INPUTFIELD = (function () {
-  var
-      inputWindow = $('.crd-window__num'),
-      windowX = $('.crd-window__num--x'),
-      windowY = $('.crd-window__num--y'),
-      variant = 'coord',
+    var
+        inputWindow = $('.crd-window__num'),
+        windowX = $('.crd-window__num--x'),
+        windowY = $('.crd-window__num--y'),
+        variant = 'coord',
 
-      // изменяем координаты или величину марджина?
-      checkVariant = function () {
-        if (model.gridType === 'mono') {
-          variant = 'coord';
-        } else {
-          variant = 'margins';
+    // проверяет чтобы ввод при мульти-режиме
+    // было >= 1
+        validInput = function (val) {
+            if (variant === 'coord') {
+                return val;
+            }
+
+            if (val >= 1) {
+                return val;
+            } else {
+                return 1;
+            }
+        },
+
+    // изменяем координаты или величину марджина?
+        checkVariant = function () {
+            if (model.gridType === 'mono') {
+                variant = 'coord';
+            } else {
+                variant = 'margins';
+            }
+        },
+
+    // проверяет чтобы инпут был числом
+        validateInput = function (input) {
+            if (isNaN(input)) {
+                return 0;
+            }
+            return input;
+        };
+
+    return {
+        init: function () {
+            inputWindow.each(function () {
+                $(this).removeAttr('disabled');
+            });
+
+            windowX.val(model[variant]['x']);
+            windowY.val(model[variant]['y']);
+
+            // хендлер для ввода с клавиатуры прямо в инпуты
+            inputWindow.on('input', function () {
+                // изменяем модель
+                INPUTFIELD.updateModel($(this));
+                // обновляем инпут
+                INPUTFIELD.setInput();
+                // обновляем грид
+                PLACEGRID.setStyle();
+                PLACEGRID.setClass();
+                // обновляем вотермарк
+                DRAGGABLE.setWatermark(true);
+            });
+
+            inputWindow.on('keypress', function (e) {
+                var
+                    key = e.keyCode;
+
+                if (key === 38) {
+                    INPUTFIELD.keyUpdateModel($(this), 1);
+                } else if (key === 40) {
+                    INPUTFIELD.keyUpdateModel($(this), -1);
+                }
+                INPUTFIELD.setInput();
+                PLACEGRID.setStyle();
+                PLACEGRID.setClass();
+                DRAGGABLE.setWatermark();
+            });
+        },
+        setInput: function () {
+            checkVariant();
+            windowX.val(model[variant]['x']);
+            windowY.val(model[variant]['y']);
+        },
+        updateModel: function () {
+            checkVariant();
+            model[variant]['x'] = validateInput(parseInt(windowX.val()));
+            model[variant]['y'] = validateInput(parseInt(windowY.val()));
+        },
+        keyUpdateModel: function (inpWin, direction) {
+            checkVariant();
+            var
+                coordination = inpWin.hasClass('crd-window__num--x') ? 'x' : 'y';
+
+            model[variant][coordination] = validInput(model[variant][coordination] += direction);
+        },
+        deactivate: function () {
+            inputWindow.each(function () {
+                $(this).attr('disabled', true);
+            });
+            windowX.val('');
+            windowY.val('');
         }
-      },
-
-      // проверяет чтобы инпут был числом
-      validateInput = function (input) {
-        if (isNaN(input)) {
-          return 0;
-        }
-        return input;
-      };
-
-  return {
-    init: function () {
-      inputWindow.each(function () {
-        $(this).removeAttr('disabled');
-      });
-
-      windowX.val(model[variant]['x']);
-      windowY.val(model[variant]['y']);
-
-      // хендлер для ввода с клавиатуры прямо в инпуты
-      inputWindow.on('keyup', function () {
-        // изменяем модель
-        INPUTFIELD.updateModel($(this));
-        // обновляем инпут
-        INPUTFIELD.setInput();
-        // обновляем грид
-        PLACEGRID.setStyle();
-        PLACEGRID.setClass();
-        // обновляем вотермарк
-        DRAGGABLE.setWatermark(true);
-      });
-    },
-    setInput: function () {
-      checkVariant();
-      windowX.val(model[variant]['x']);
-      windowY.val(model[variant]['y']);
-    },
-    updateModel: function () {
-      checkVariant();
-      model[variant]['x'] = validateInput(parseInt(windowX.val()));
-      model[variant]['y'] = validateInput(parseInt(windowY.val()));
-    },
-    deactivate: function () {
-      inputWindow.each(function () {
-        $(this).attr('disabled', true);
-      });
-      windowX.val('');
-      windowY.val('');
     }
-  }
 })();
 var SLIDER = (function () {
   // ...
@@ -3779,7 +3820,6 @@ var DRAGGABLE = (function () {
           resultArray = [];
       
       
-      console.log(container);
 
       resultArray.push(container[0] - watermark.width());
       resultArray.push(container[1] - watermark.height());
@@ -3837,6 +3877,14 @@ var RESET = (function () {
                 DRAGGABLE.disable();
                 // свитч отключен
                 SWITCH.disable();
+
+                $('.button-reset--hover').removeClass('button-reset--hover');
+                $('.button-download--hover').removeClass('button-download--hover');
+
+                // боковая панель становится очень сильно прозрачной
+                $('.main-generator-buttons').addClass('disable');
+                $('.main-generator-transparency').addClass('disable');
+                $('.main-generator-position').addClass('disable');
             });
         },
         resetApp: function () {
@@ -3995,7 +4043,6 @@ $(function(){
             PRELOADER.hide();
             if (typeof data.result.files[0]['error'] == 'undefined') {
                 $.each(data.result.files, function (index, file) {
-                    console.log(file);
                     $('.generator-picture__img').attr('src', '/upload/' + file.name);
                     $('.big_img').attr('src', '/upload/' + file.name).load(function () {
                         realImg.imgW = $('.big_img').width();
@@ -4053,6 +4100,12 @@ $(function(){
 
     function itsAlive () {
         if (model.isActive) {
+          $('.disable').removeClass('disable');
+
+          $('.button-reset').addClass('button-reset--hover');
+          $('.button-download').addClass('button-download--hover');
+
+
           INPUTFIELD.init();
           PLACEGRID.init();
           SWITCH.init();
@@ -4074,7 +4127,6 @@ var FILESINPT = (function () {
   return {
     setModel: function (place, file) {
       model.files[place] = file;
-      console.log(model.files);
       checkState();
     }
   }
