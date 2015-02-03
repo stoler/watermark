@@ -1,0 +1,69 @@
+/*
+place-grid
+*/
+
+.generator-position__main-square{
+  position: relative;
+  float: left;
+  width: 101px;
+  height: 101px;
+  text-align: center;
+  overflow: hidden;
+  vertical-align: middle;
+}
+
+.generator-position__square{
+  display: table;
+  width: 100px;
+  height: 100px;
+  background: $placeGridColor;
+  border-collapse: collapse;
+  border: 1px solid $sliderRangeColor;
+  overflow: hidden;
+  border-radius: 3px;
+}
+
+.square-tr{
+  display: table-row;
+  border: 1px solid $sliderRangeColor;
+}
+
+.square-td {
+  display: table-cell;
+  width: 33.333%;
+  border: 1px solid $sliderRangeColor;
+}
+.square-td--active{
+  background: $lightRedColor;
+  &:hover{
+    background: $lightRedColor;
+  }
+}
+
+.square-td--hover-enable{
+  &:hover{
+    background: $silverOne;
+  }
+}
+
+
+.multi-line{
+  position: absolute;
+  background: $lightRedColor;
+  display: inline-block;
+  display: none;
+}
+
+.position-vertical{
+  height: 100%;
+  top: 0;
+  left: 49px;
+  width: 1px;
+}
+
+.position-horizontal{
+  width: 100%;
+  left: 0;
+  top: 49px;
+  height: 1px;
+}

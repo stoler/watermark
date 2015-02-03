@@ -1,0 +1,8 @@
+materials/*
+upload/*
+node_modules/*
+.sass-cache/*
+.idea/*
+npm-debug.log
+.htaccess
+gulpfile.js
