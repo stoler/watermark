@@ -1,0 +1,114 @@
+doctype html
+html(lang="ru")
+  head
+    meta(charset="UTF-8")
+    meta(name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE")
+    meta(content="telephone=no" name="format-detection")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    meta(rel="icon" type="image/vnd.microsoft.icon" href="favicon.ico")
+    link(rel="SHORTCUT ICON" href="favicon.ico")
+    title watermark
+    meta(http-equiv="X-UA-Compatible" content="IE=edge")
+    meta(name="description" content="")
+    link(rel="stylesheet" href="dist/css/style.min.css")
+    <!--[if lt IE 9]><script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  body
+    div.wrapper
+      div.lang-soc-block
+        ul.languages
+          li.languages__item-ru
+            a(href="") рус
+          li.languages__item-en
+            a(href="") eng
+        ul.social
+          li.social__item-share
+            a(href="") share
+              span
+          li.social__item-fb
+            a(href="", onclick="Share.facebook('URL','TITLE','IMG_PATH','DESC')") facebook
+              span
+          li.social__item-tw
+            a(href="", onclick="Share.twitter('URL','TITLE')") twitter
+              span
+          li.social__item-vk
+            a(href="", onclick="Share.vkontakte('URL','TITLE','IMG_PATH','DESC')") vkontakte
+              span
+      div.main-generator
+        div.generator-picture
+          h1.generator-picture__title Генератор водяных знаков
+          div.generator-picture__result.generator-picture__image
+            img(src='dist/img/upload/image.png').generator-picture__img
+            img(src='dist/img/upload/watermark.png').generator-picture__watermark
+        div.generator-setup
+          h2.generator-setup__title Настройки
+          div.main-generator-upload
+            div.generator-upload
+              form(action="" method="").upload__picture
+                div.upload__main-picture
+                  label(for="upload-picture").main-picture__title Исходное изображение
+                  input(type="file" placeholder="image.png", name="files[]" data-url="/lib/jquery-file-upload/")#upload-picture.main-picture__file.js-upload
+                div.upload__watermark
+                  label(for="upload-watermark").watermark__title Водяной знак
+                  input(type="file" placeholder="image.png", name="files[]" data-url="/lib/jquery-file-upload/")#upload-watermark.watermark__file.js-upload
+          div.main-generator-position
+            div.generator-position
+              div.generator-position__top
+                h3.generator-position__title Положение
+                div.generator-position__switch
+                  div.switch.switch__multi multi
+                  //- a(href="#").switch.switch__multi multi
+                  div.switch.switch__mono.switch--active mono
+                  //- a(href="#").switch.switch__mono.switch--active mono
+              div.generator-position__bottom
+                div.generator-position__main-square
+                  div.generator-position__square
+                    div.square-tr
+                      div.square-td.square-td--active
+                      div.square-td
+                      div.square-td
+                    div.square-tr
+                      div.square-td
+                      div.square-td
+                      div.square-td
+                    div.square-tr
+                      div.square-td
+                      div.square-td
+                      div.square-td
+                  div.multi-line.position-vertical
+                  div.multi-line.position-horizontal
+                div.generator-position__coordinates
+                  div.generator-position-coordinates.clearfix
+                    div.generator-position-coordinates__axis
+                      div.crd-axis.crd-axis--x.crd-axis--letter
+                    div.generator-position-coordinates__window
+                      div.crd-window
+                        input(type="text" name="x-axis" value="0").crd-window__num.crd-window__num--x
+                    div.generator-position-coordinates__arrow-list
+                      div.crd-arrow-list
+                        div.crd-arrow-list__item.crd-arrow-list__item--x.crd-arrow-list__item--up
+                        div.crd-arrow-list__item.crd-arrow-list__item--x.crd-arrow-list__item--down
+                  div.generator-position-coordinates.clearfix
+                    div.generator-position-coordinates__axis
+                      div.crd-axis.crd-axis--y.crd-axis--letter
+                    div.generator-position-coordinates__window
+                      div.crd-window
+                        input(type="text" name="y-axis" value="0").crd-window__num.crd-window__num--y
+                    div.generator-position-coordinates__arrow-list
+                      div.crd-arrow-list
+                        div.crd-arrow-list__item.crd-arrow-list__item--y.crd-arrow-list__item--up
+                        div.crd-arrow-list__item.crd-arrow-list__item--y.crd-arrow-list__item--down
+          div.main-generator-transparency
+            div.generator-transparency
+              h3.generator-transparency__title Прозрачность
+              //- generated by jquery ui slider
+              div.generator-transparency__slider
+          div.main-generator-buttons
+            div.generator-buttons
+              button.button-reset Сброс
+              button.button-download Скачать
+
+      footer.main-footer
+        div.footer
+          p &#169; 2015, Это мой сайт, пожалуйста, не копируйте и не воруйте его
+    script(src="dist/js/scripts.js")
+    //- script(src="dist/js/scripts.min.js")
