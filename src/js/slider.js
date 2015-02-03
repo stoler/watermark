@@ -8,6 +8,8 @@ var SLIDER = (function () {
           SLIDER.updateModel(ui);
           // дергает обновление вотермарка
           DRAGGABLE.setOpacity();
+          // изменяем прозрачность сетки 'замостить'
+          TILE.changeOpacity();
       });
       $('.generator-transparency__slider').slider({
         min: 0,
