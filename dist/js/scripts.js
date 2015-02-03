@@ -3989,18 +3989,8 @@ var SENDDATA = (function ($) {
         }
     };
 })(jQuery);
-$(function(){
+// $(function(){
     var counterTimeout,
-        realImg = {
-            wmW: 0,
-            imgW: 0,
-            wmH: 0,
-            imgH: 0,
-            changeWatermarkSize: function (imgW, wmW, imgH, wmH) {
-                $('.generator-picture__watermark').width(wmW /(imgW / $('.generator-picture__img').width()))
-                    .height(wmH /(imgH / $('.generator-picture__img').height()));
-            }
-        },
         // массив для определения пределов
         // в которых может перемещаться 
         // вотермарк
@@ -4014,6 +4004,8 @@ $(function(){
     $('.generator-picture__watermark').draggable({
         containment: contSize
     });
+
+    FILESINPT.init();
 
     // хендлер для резайза окна (когда окно изменяется в размере, то
     // пересчитывается контейнер в котором может перемещаться изображение)
@@ -4035,57 +4027,6 @@ $(function(){
         disabled: true
     });
 
-    // jquery upload
-    // загрузка основного изображения
-    $('#upload-picture').fileupload({
-        dataType: 'json',
-        done: function (e, data) {
-            PRELOADER.hide();
-            if (typeof data.result.files[0]['error'] == 'undefined') {
-                $.each(data.result.files, function (index, file) {
-                    $('.generator-picture__img').attr('src', '/upload/' + file.name);
-                    $('.big_img').attr('src', '/upload/' + file.name).load(function () {
-                        realImg.imgW = $('.big_img').width();
-                        realImg.imgH = $('.big_img').height();
-                        realImg.changeWatermarkSize(realImg.imgW, realImg.wmW, realImg.imgH, realImg.wmH);
-                    });
-                    FILESINPT.setModel('image', file.name);
-                    itsAlive();
-                });
-            } else {
-                alert('Error!');
-            }
-        },
-        send: function () {
-            PRELOADER.show();
-        }
-    });
-
-    // загрузка вотермарка
-    $('#upload-watermark').fileupload({
-        dataType: 'json',
-        done: function (e, data) {
-            PRELOADER.hide();
-            if (typeof data.result.files[0]['error'] == 'undefined') {
-                $.each(data.result.files, function (index, file) {
-                    $('.generator-picture__watermark').attr('src', '/upload/' + file.name);
-                    $('.big_wm').attr('src', '/upload/' + file.name).load(function () {
-                        realImg.wmW = $('.big_wm').width();
-                        realImg.wmH = $('.big_wm').height();
-                        realImg.changeWatermarkSize(realImg.imgW, realImg.wmW, realImg.imgH, realImg.wmH);
-                    });
-                    FILESINPT.setModel('watermark', file.name);
-                    itsAlive();
-                    DRAGGABLE.setOpacity();
-                });
-            } else {
-                alert('Error!');
-            }
-        },
-        send: function () {
-            PRELOADER.show();
-        }
-    });
     
     // отправка данных на сервер
     $('.button-download').on('click', function () {
@@ -4100,8 +4041,10 @@ $(function(){
 
     function itsAlive () {
         if (model.isActive) {
+          // удаляет опасити с боковой панели
           $('.disable').removeClass('disable');
 
+          // добавляет возможность ховера для нижних кнопок
           $('.button-reset').addClass('button-reset--hover');
           $('.button-download').addClass('button-download--hover');
 
@@ -4116,18 +4059,96 @@ $(function(){
             TILE.init()
         }
     }
-});
+// });
 var FILESINPT = (function () {
   var
+      wmW = 0,
+      imgW = 0,
+      wmH = 0,
+      imgH = 0,
+
+      changeWatermarkSize = function (imgW, wmW, imgH, wmH) {
+          $('.generator-picture__watermark').width(wmW /(imgW / $('.generator-picture__img').width()))
+              .height(wmH /(imgH / $('.generator-picture__img').height()));
+      },
+
       checkState = function () {
         if (model.files.image !== '' && model.files.watermark !== '') {
           model.isActive = true;
         }
       };
   return {
+    init: function () {
+      // jquery upload
+      // загрузка основного изображения
+      $('#upload-picture').fileupload({
+          dataType: 'json',
+          done: function (e, data) {
+              PRELOADER.hide();
+              if (typeof data.result.files[0]['error'] == 'undefined') {
+                  $.each(data.result.files, function (index, file) {
+                      $('.generator-picture__img').attr('src', '/upload/' + file.name);
+                      $('.big_img').attr('src', '/upload/' + file.name).load(function () {
+                          imgW = $('.big_img').width();
+                          imgH = $('.big_img').height();
+                          changeWatermarkSize(imgW, wmW, imgH, wmH);
+                      });
+                      FILESINPT.setModel('image', file.name);
+                      FILESINPT.updateInputField('upload-picture');
+                      itsAlive();
+                  });
+              } else {
+                  alert('Error!');
+              }
+          },
+          send: function () {
+              PRELOADER.show();
+          }
+      });
+
+      // загрузка вотермарка
+      $('#upload-watermark').fileupload({
+          dataType: 'json',
+          done: function (e, data) {
+              PRELOADER.hide();
+              if (typeof data.result.files[0]['error'] == 'undefined') {
+                  $.each(data.result.files, function (index, file) {
+                      $('.generator-picture__watermark').attr('src', '/upload/' + file.name);
+                      $('.big_wm').attr('src', '/upload/' + file.name).load(function () {
+                          wmW = $('.big_wm').width();
+                          wmH = $('.big_wm').height();
+                          changeWatermarkSize(imgW, wmW, imgH, wmH);
+                      });
+                      // изменяет модель сообразно имени файла
+                      FILESINPT.setModel('watermark', file.name);
+                      // изменяет поле, содержащее имя файла в разметке
+                      FILESINPT.updateInputField('upload-watermark');
+                      itsAlive();
+                      DRAGGABLE.setOpacity();
+                  });
+              } else {
+                  alert('Error!');
+              }
+          },
+          send: function () {
+              PRELOADER.show();
+          }
+      });
+
+    },
     setModel: function (place, file) {
       model.files[place] = file;
       checkState();
+    },
+    updateInputField: function (place) {
+      if (place === 'upload-picture') {
+        // добавит текст в div с названием картинки
+        console.log('зашел');
+        $('#upload-picture-styler .jq-file__name').text(model.files.image);
+      } else if (place = 'upload-watermark') {
+        // добавить текст в div с вотермарком
+        $('#upload-watermark-styler .jq-file__name').text(model.files.watermark);
+      }
     }
   }
 })();
