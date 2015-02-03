@@ -3201,6 +3201,80 @@ var widget = $.widget;
 
     };
 }));
+var TILE = (function () {
+    var tile = $('.generator-picture__tile'),
+
+        watermark,
+        image,
+        watermarkWidth = 0, watermarkHeight,
+        watermarkSrc,
+        imageWidth = 0, imageHeight;
+
+    return {
+        initImage: function () {
+            image = $('.generator-picture__img'),
+            imageWidth = image.width();
+            imageHeight = image.width();
+            console.log(imageWidth)
+            TILE.initTile()
+            //itemInRow = Math.floor(imageWidth / watermarkWidth) + 1,
+            //rows = Math.floor(imageHeight / watermarkHeight) + 1;
+
+
+        },
+        initWatermark: function() {
+            watermark = $('.generator-picture__watermark'),
+            watermarkWidth = watermark.width();
+            watermarkHeight = watermark.width();
+            watermarkSrc = watermark.attr('src');
+            console.log(watermarkHeight, watermarkWidth,watermarkSrc );
+            TILE.initTile()
+        },
+        initTile: function() {
+            $('.generator-picture__tile-row').remove()
+            $('.tile__image').remove()
+            if (watermarkWidth > 0 & imageWidth > 0) {
+                //alert(true)
+                var itemInRow = Math.floor(imageWidth / watermarkWidth) + 1,
+                    rows = Math.floor(imageHeight / watermarkHeight) + 1;
+                //alert(watermark.width(),image.width())
+                for (i = 0; i < rows; i++) {
+                    //alert(true)
+                    tile.append("<div class='generator-picture__tile-row'>");
+                }
+                ;
+                for (i = 0; i < itemInRow; i++) {
+                    //alert(false)
+                    $('.generator-picture__tile-row').append("<img src='" + watermarkSrc + "' class='tile__image'>");
+                }
+                ;
+            }
+        },
+        showHide: function (elem) {
+            var _this = elem;
+            if (_this.hasClass('switch__multi')) {
+                watermark.hide();
+                tile.show();
+
+            }
+            else {
+                watermark.show();
+                tile.hide();
+            }
+        },
+        changeOpacity: function () {
+            tile.css('opacity', model.alpha);
+        },
+        changeVerticalGutter: function () {
+            var tileRow = $('.generator-picture__tile-row');
+            tileRow.css({marginBottom: model.margins.x});
+        },
+        changeHorizontalGutter: function () {
+            var tileImage = $('.tile__image');
+            tileImage.css({marginRight: model.margins.y});
+        }
+    }
+})();
 var Share = {
     vkontakte: function(purl, ptitle, pimg, text) {
         var url  = 'http://vkontakte.ru/share.php?';
@@ -3272,6 +3346,8 @@ var COUNTERBTN = (function () {
               // метод модуля грид, он сравнивается сам с моделью
               PLACEGRID.setStyle();
               PLACEGRID.setClass();
+              TILE.changeHorizontalGutter();
+              TILE.changeVerticalGutter();
           }, 70);
 
           $(this).on('mouseup', function () {
@@ -3613,7 +3689,7 @@ var INPUTFIELD = (function () {
         DRAGGABLE.setWatermark(true);
       });
 
-      inputWindow.on('keypress', function (e) {
+      inputWindow.on('keyup', function (e) {
         var
             key = e.keyCode;
 
@@ -3626,6 +3702,8 @@ var INPUTFIELD = (function () {
         PLACEGRID.setStyle();
         PLACEGRID.setClass();
         DRAGGABLE.setWatermark();
+          TILE.changeHorizontalGutter();
+          TILE.changeVerticalGutter();
       });
     },
     setInput: function () {
@@ -3664,6 +3742,7 @@ var SLIDER = (function () {
           SLIDER.updateModel(ui);
           // дергает обновление вотермарка
           DRAGGABLE.setOpacity();
+          TILE.changeOpacity();
       });
       $('.generator-transparency__slider').slider({
         min: 0,
@@ -3708,6 +3787,7 @@ var SWITCH = (function () {
           INPUTFIELD.setInput();
           // грид должен обновиться
           PLACEGRID.setStyle();
+          TILE.showHide($(this))
           // watermark должен перестать двигаться и начать увеличивать марджин
           // ...
       });
@@ -3958,6 +4038,7 @@ var FILESINPT = (function () {
                       });
                       FILESINPT.setModel('image', file.name);
                       FILESINPT.updateInputField('upload-picture');
+                      TILE.initImage()
                       itsAlive();
                   });
               } else {
@@ -3981,13 +4062,17 @@ var FILESINPT = (function () {
                           wmW = $('.big_wm').width();
                           wmH = $('.big_wm').height();
                           changeWatermarkSize(imgW, wmW, imgH, wmH);
+                          TILE.initWatermark();
                       });
                       // изменяет модель сообразно имени файла
                       FILESINPT.setModel('watermark', file.name);
                       // изменяет поле, содержащее имя файла в разметке
                       FILESINPT.updateInputField('upload-watermark');
+
+                      //alert(true);
                       itsAlive();
                       DRAGGABLE.setOpacity();
+
                   });
               } else {
                   alert('Error!');
@@ -4028,6 +4113,9 @@ var FILESINPT = (function () {
     // инициализируем драггабл
     contSize = DRAGGABLE.calculateContainer();
     $('.generator-picture__watermark').draggable({
+        containment: contSize
+    });
+    $('.generator-picture__tile').draggable({
         containment: contSize
     });
 

@@ -45,6 +45,7 @@ gulp.task('scripts', function () {
         'src/js/jquery.iframe-transport.js',
         'src/js/jquery.fileupload.js',
         'src/js/jquery.formstyler.js',
+        'src/js/multyWatermark.js',
         'src/js/socialSharing.js',
         'src/js/counterButtons.js',
         'src/js/placeGrid.js',
