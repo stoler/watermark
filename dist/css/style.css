@@ -671,6 +671,17 @@ generator-picture
 .generator-picture__img {
   vertical-align: middle; }
 
+.generator-picture__tile {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+  width: 10000px;
+  opacity: 0.5; }
+
+.generator-picture__tile-row {
+  line-height: normal; }
+
 /*
 generator-setup
 */

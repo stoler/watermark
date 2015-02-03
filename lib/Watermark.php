@@ -33,7 +33,7 @@ class Watermark {
         }
 
         $new = $img->merge($watermark, $arResult['posx']*$k, $arResult['posy']*$k, $arResult['alpha']);
-        if ($arResult['multy']) {
+        if ($arResult['multi']) {
             $wmW = $watermark->getWidth() + $arResult['horizontal_margin'];
             $wmH = $watermark->getHeight() + $arResult['vertical_margin'];
 
@@ -80,7 +80,7 @@ class Watermark {
             'alpha' => ((int)($objData->alpha * 100) < 100 ? (int)($objData->alpha * 100) : 100),
             'posx' => (int)$objData->coord->x,
             'posy' => (int)$objData->coord->y,
-            'multy' => (($objData->gridType == 'multy')? 1 : 0),
+            'multi' => (($objData->gridType == 'multi')? 1 : 0),
             'vertical_margin' => (int)$objData->margins->y,
             'horizontal_margin' => (int)$objData->margins->x,
             'imgurl' => $_SERVER['DOCUMENT_ROOT'].'/upload/'.$objData->files->image,

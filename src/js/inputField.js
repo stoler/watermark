@@ -58,7 +58,7 @@ var INPUTFIELD = (function () {
         DRAGGABLE.setWatermark(true);
       });
 
-      inputWindow.on('keypress', function (e) {
+      inputWindow.on('keyup', function (e) {
         var
             key = e.keyCode;
 
@@ -71,6 +71,8 @@ var INPUTFIELD = (function () {
         PLACEGRID.setStyle();
         PLACEGRID.setClass();
         DRAGGABLE.setWatermark();
+          TILE.changeHorizontalGutter();
+          TILE.changeVerticalGutter();
       });
     },
     setInput: function () {

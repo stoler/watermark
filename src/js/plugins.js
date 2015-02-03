@@ -13,6 +13,9 @@
     $('.generator-picture__watermark').draggable({
         containment: contSize
     });
+    $('.generator-picture__tile').draggable({
+        containment: contSize
+    });
 
     FILESINPT.init();
 
