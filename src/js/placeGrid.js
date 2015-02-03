@@ -108,7 +108,7 @@ var PLACEGRID = (function () {
           // уровень по высоте
           if (y < centerY) {
             classNum += 0;
-          } else if ((y > centerY) && (y < (imageHeight - watermarkHeight))) {
+          } else if ((y >= centerY) && (y < (imageHeight - watermarkHeight))) {
             classNum += 3;
           } else {
             classNum += 6;
@@ -117,7 +117,7 @@ var PLACEGRID = (function () {
           // уровень по горизонтали
           if (x < centerX) {
             classNum += 0;
-          } else if ((x > centerX) && (x < (imagesWidth - watermarkWidth))) {
+          } else if ((x >= centerX) && (x < (imagesWidth - watermarkWidth))) {
             classNum += 1;
           } else {
             classNum += 2;

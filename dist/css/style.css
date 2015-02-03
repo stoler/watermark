@@ -622,7 +622,9 @@ generator-picture
   background: #ffffff;
   background: #fff;
   overflow: hidden;
-  display: inline-block; }
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center; }
 
 .generator-picture__wrap-result:before {
   content: '';
@@ -943,16 +945,17 @@ place-grid
 .square-td {
   display: table-cell;
   width: 33.333%;
-  border: 1px solid #9eb2c0; }
+  border: 1px solid #9eb2c0;
+  cursor: pointer; }
+
+.square-td--hover-enable:hover {
+  background: #c1cfd9; }
 
 .square-td--active {
   background: #f97e76; }
 
 .square-td--active:hover {
-  background: #f97e76; }
-
-.square-td--hover-enable:hover {
-  background: #c1cfd9; }
+  background: #f97e76 !important; }
 
 .multi-line {
   position: absolute;

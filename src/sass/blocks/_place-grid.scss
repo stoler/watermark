@@ -32,20 +32,21 @@ place-grid
   display: table-cell;
   width: 33.333%;
   border: 1px solid $sliderRangeColor;
+  cursor: pointer;
 }
-.square-td--active{
-  background: $lightRedColor;
-  &:hover{
-    background: $lightRedColor;
-  }
-}
+
 
 .square-td--hover-enable{
   &:hover{
     background: $silverOne;
   }
 }
-
+.square-td--active{
+  background: $lightRedColor;
+  &:hover{
+    background: $lightRedColor!important;
+  }
+}
 
 .multi-line{
   position: absolute;
