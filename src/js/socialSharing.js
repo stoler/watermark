@@ -39,11 +39,6 @@ var Share = {
     },
 
     popup: function(url) {
-        var shareWindowWidth = 650,
-            shareWindowHeight = 500,
-            marginLeft = screen.availWidth / 2 - shareWindowWidth / 2,
-            marginTop = screen.availHeight / 2 - shareWindowHeight / 2;
-
-        window.open(url,'_blank', 'toolbar=0,status=0,width=650,height=500,left=' + marginLeft + ', top=' + marginTop);
+        window.open(url,'','toolbar=0,status=0,width=626,height=436');
     }
 };

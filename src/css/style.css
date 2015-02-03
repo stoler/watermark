@@ -490,17 +490,19 @@ th {
 html {
   width: 100%;
   min-width: 1200px;
-  height: 100%;
   min-height: 100%;
   display: table;
 }
 
 body {
-  background: url("../img/backgroung.jpg") no-repeat fixed center center/cover transparent;
+  background: url(../img/backgroung.jpg) 0 0 no-repeat;
   font-family: 'robotolight';
   font-weight: 300;
   color: #2e3641;
-  background-size: cover;
+  -moz-background-size: 100%;
+  -webkit-background-size: 100%;
+  -o-background-size: 100%;
+  background-size: 100%;
   width: 100%;
   display: table-cell;
   vertical-align: middle;
@@ -611,7 +613,7 @@ h2 {
 }
 
 .disable {
-  opacity: 0.2;
+  opacity: 0.5;
 }
 
 /*
@@ -745,24 +747,6 @@ lang-soc
 /*
 generator-picture
 */
-.generator-picture__wrap-result {
-  position: relative;
-  line-height: 534px;
-  height: 534px;
-}
-.generator-picture__wrap-result:before {
-  content: '';
-  background: url(../img/sprite.png) -401px 0 no-repeat;
-  width: 99px;
-  height: 99px;
-  margin: auto;
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-}
-
 .generator-picture {
   display: table-cell;
   padding: 10px 25px 25px 25px;
@@ -1223,27 +1207,17 @@ buttons
   background: #c1cfd9;
   width: 99px;
   height: 42px;
-  cursor: default;
 }
-
-.button-reset--hover {
-  cursor: pointer;
-}
-.button-reset--hover:hover {
+.button-reset:hover {
   background: #a3b1bb;
 }
 
 .button-download {
-  cursor: default;
   background: #f97e76;
   width: 99px;
   height: 42px;
 }
-
-.button-download--hover {
-  cursor: pointer;
-}
-.button-download--hover:hover {
+.button-download:hover {
   background: #d97171;
 }
 
