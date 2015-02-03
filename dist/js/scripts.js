@@ -4135,7 +4135,9 @@ var FILESINPT = (function () {
         containment: contSize
     });
     // инициализируем драггабл сетки 'замостить'
-    $('.generator-picture__tile').draggable();
+    $('.generator-picture__tile').draggable({
+        containment: contSize
+    });
 
     FILESINPT.init();
 
@@ -4146,6 +4148,9 @@ var FILESINPT = (function () {
         contSize = DRAGGABLE.calculateContainer();
         // инициализировали новую область
         $('.generator-picture__watermark').draggable({
+            containment: contSize
+        });
+        $('.generator-picture__tile').draggable({
             containment: contSize
         });
     });
