@@ -81,8 +81,8 @@ class Watermark {
             'posx' => (int)$objData->coord->x,
             'posy' => (int)$objData->coord->y,
             'multi' => (($objData->gridType == 'multi')? 1 : 0),
-            'vertical_margin' => (int)$objData->margins->y,
-            'horizontal_margin' => (int)$objData->margins->x,
+            'vertical_margin' => (int)$objData->margins->x,
+            'horizontal_margin' => (int)$objData->margins->y,
             'imgurl' => $_SERVER['DOCUMENT_ROOT'].'/upload/'.$objData->files->image,
             'wmurl' => $_SERVER['DOCUMENT_ROOT'].'/upload/'.$objData->files->watermark
         );

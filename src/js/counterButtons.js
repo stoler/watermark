@@ -10,20 +10,20 @@ var COUNTERBTN = (function () {
       // хендлер для стрелок
       arrowsButtons.on('mousedown', function () {
           var _this = $(this);
-          counterTimeout = setInterval(function () {
-              // функция в модуле стрелок, она изменяет модель
-              COUNTERBTN.counterBtnModelChange(_this);
-              // метод модуля инпутов, он сравнивает себя с моделью и обновляется
-              INPUTFIELD.setInput();
-              // метод модуля уотермарк, он сравнивает себя с остальным
-              DRAGGABLE.setWatermark();
-              // метод модуля грид, он сравнивается сам с моделью
-              PLACEGRID.setStyle();
-              PLACEGRID.setClass();
-              // изменяем отступы в сетки 'замостить'
-              TILE.changeHorizontalGutter();
-              TILE.changeVerticalGutter();
-          }, 70);
+              counterTimeout = setInterval(function () {
+                  // функция в модуле стрелок, она изменяет модель
+                  COUNTERBTN.counterBtnModelChange(_this);
+                  // метод модуля инпутов, он сравнивает себя с моделью и обновляется
+                  INPUTFIELD.setInput();
+                  // метод модуля уотермарк, он сравнивает себя с остальным
+                  DRAGGABLE.setWatermark();
+                  // метод модуля грид, он сравнивается сам с моделью
+                  PLACEGRID.setStyle();
+                  PLACEGRID.setClass();
+                  // изменяем отступы в сетки 'замостить'
+                  TILE.changeHorizontalGutter();
+                  TILE.changeVerticalGutter();
+              }, 70);
 
           $(this).on('mouseup', function () {
               clearInterval(counterTimeout);

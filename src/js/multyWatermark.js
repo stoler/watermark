@@ -32,25 +32,24 @@ var TILE = (function () {
             TILE.initTile()
         },
         initTile: function() {
+            var $tile__image = $('.tile__image');
             // удаляем предыдущий мост и создаем новую сетку 'замостить'
-            $('.generator-picture__tile-row').remove()
-            $('.tile__image').remove();
+            $('.generator-picture__tile-row').remove();
+            $tile__image.remove();
 
-            if (watermarkWidth > 0 & imageWidth > 0) {
-                console.log(watermarkWidth, imageWidth)
+            if (watermarkWidth > 0 && imageWidth > 0) {
+                console.log(watermarkWidth, watermarkHeight)
                 var itemInRow = Math.floor(imageWidth / watermarkWidth) + 1,
                     rows = Math.floor(imageHeight / watermarkHeight) + 1;
                 //alert(watermark.width(),image.width())
-                for (i = 0; i < rows; i++) {
+                for (var i = 0; i < rows; i++) {
                     //alert(true)
                     tile.append("<div class='generator-picture__tile-row'>");
                 }
-                ;
                 for (i = 0; i < itemInRow; i++) {
                     //alert(false)
-                    $('.generator-picture__tile-row').append("<img src='" + watermarkSrc + "' class='tile__image'>");
+                    $('.generator-picture__tile-row').append("<img src='" + watermarkSrc + "' class='tile__image' width='"+ watermarkWidth +"' height='"+ watermarkHeight +"'>");
                 }
-                ;
             }
         },
         // скрываем/показываем сетку замости
