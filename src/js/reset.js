@@ -40,14 +40,6 @@ var RESET = (function () {
                 DRAGGABLE.disable();
                 // свитч отключен
                 SWITCH.disable();
-
-                $('.button-reset--hover').removeClass('button-reset--hover');
-                $('.button-download--hover').removeClass('button-download--hover');
-
-                // боковая панель становится очень сильно прозрачной
-                $('.main-generator-buttons').addClass('disable');
-                $('.main-generator-transparency').addClass('disable');
-                $('.main-generator-position').addClass('disable');
             });
         },
         resetApp: function () {

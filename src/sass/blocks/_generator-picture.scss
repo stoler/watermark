@@ -1,26 +1,6 @@
 /*
 generator-picture
 */
-
-.generator-picture__wrap-result{
-  position: relative;
-  line-height: 534px;
-  height: 534px;
-  &:before{
-    content: '';
-    background: url(../img/sprite.png) -401px 0 no-repeat;
-    width: 99px;
-    height: 99px;
-    margin: auto;
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-//    z-index: 1;
-  }
-}
-
 .generator-picture {
   @extend .after-clear;
   display: table-cell;

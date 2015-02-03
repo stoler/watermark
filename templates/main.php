@@ -30,12 +30,10 @@
     <div class="main-generator">
         <div class="generator-picture">
             <h1 class="generator-picture__title"><?= $lang['title'] ?></h1>
-            <div class="generator-picture__wrap-result">
-                <div class="generator-picture__result generator-picture__image">
-                    <img src="dist/img/upload/image.png" class="generator-picture__img">
-                    <img src="dist/img/upload/watermark.png" class="generator-picture__watermark">
-                    <div class="generator-picture__tile"></div>
-                </div>
+            <div class="generator-picture__result generator-picture__image">
+                <img src="dist/img/upload/image.png" class="generator-picture__img">
+                <img src="dist/img/upload/watermark.png" class="generator-picture__watermark">
+                <div class="generator-picture__tile"></div>
             </div>
         </div>
         <div class="generator-setup">
@@ -54,7 +52,7 @@
                     </form>
                 </div>
             </div>
-            <div class="main-generator-position disable">
+            <div class="main-generator-position">
                 <div class="generator-position">
                     <div class="generator-position__top">
                         <h3 class="generator-position__title"><?= $lang['position'] ?></h3>
@@ -122,13 +120,13 @@
                     </div>
                 </div>
             </div>
-            <div class="main-generator-transparency disable">
+            <div class="main-generator-transparency">
                 <div class="generator-transparency">
                     <h3 class="generator-transparency__title"><?= $lang['transparency'] ?></h3>
                     <div class="generator-transparency__slider"></div>
                 </div>
             </div>
-            <div class="main-generator-buttons disable">
+            <div class="main-generator-buttons">
                 <div class="generator-buttons">
                     <button class="button-reset"><?= $lang['reset'] ?></button>
                     <button class="button-download"><?= $lang['download'] ?></button>
