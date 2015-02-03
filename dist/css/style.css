@@ -615,6 +615,23 @@ lang-soc
 /*
 generator-picture
 */
+.generator-picture__wrap-result {
+  position: relative;
+  line-height: 534px;
+  height: 534px; }
+
+.generator-picture__wrap-result:before {
+  content: '';
+  background: url(../img/sprite.png) -401px 0 no-repeat;
+  width: 99px;
+  height: 99px;
+  margin: auto;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0; }
+
 .generator-picture {
   display: table-cell;
   padding: 10px 25px 25px 25px;
