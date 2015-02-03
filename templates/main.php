@@ -30,7 +30,11 @@
     <div class="main-generator">
         <div class="generator-picture">
             <h1 class="generator-picture__title"><?= $lang['title'] ?></h1>
-            <div class="generator-picture__result generator-picture__image"><img src="dist/img/upload/image.png" class="generator-picture__img"><img src="dist/img/upload/watermark.png" class="generator-picture__watermark"></div>
+            <div class="generator-picture__result generator-picture__image">
+                <img src="dist/img/upload/image.png" class="generator-picture__img">
+                <img src="dist/img/upload/watermark.png" class="generator-picture__watermark">
+                <div class="generator-picture__tile"></div>
+            </div>
         </div>
         <div class="generator-setup">
             <h2 class="generator-setup__title"><?= $lang['settings'] ?></h2>

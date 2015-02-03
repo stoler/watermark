@@ -32,7 +32,7 @@ var INPUTFIELD = (function () {
       windowY.val(model[variant]['y']);
 
       // хендлер для ввода с клавиатуры прямо в инпуты
-      inputWindow.on('change', function () {
+      inputWindow.on('keyup', function () {
         // изменяем модель
         INPUTFIELD.updateModel($(this));
         // обновляем инпут
