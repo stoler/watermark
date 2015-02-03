@@ -748,7 +748,11 @@ generator-picture
 .generator-picture__wrap-result {
   position: relative;
   height: 534px;
+  width: 651px;
   background: #ffffff;
+  background: #fff;
+  overflow: hidden;
+  display: inline-block;
 }
 .generator-picture__wrap-result:before {
   content: '';
@@ -772,7 +776,7 @@ generator-picture
 }
 
 .generator-picture__result {
-  width: 651px;
+  display: inline-block;
   background: #ffffff;
   overflow: hidden;
 }

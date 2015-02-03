@@ -5,7 +5,11 @@ generator-picture
 .generator-picture__wrap-result{
   position: relative;
   height: 534px;
+  width: 651px;
   background: $whiteColor;
+  background: #fff;
+  overflow: hidden;
+  display: inline-block;
   &:before{
     content: '';
     background: url(../img/sprite.png) -401px 0 no-repeat;
@@ -30,7 +34,7 @@ generator-picture
 }
 
 .generator-picture__result {
-  width: 651px;
+  display: inline-block;
   background: $whiteColor;
   overflow: hidden;
 }
