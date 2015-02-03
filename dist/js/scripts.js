@@ -3762,9 +3762,16 @@ var n=t.apply(this,arguments);return n.mode="hide",this.effect.call(this,n)}}(e.
 var DRAGGABLE = (function () {
   var
        watermark = $('.generator-picture__watermark');
+       // contSize = [];
 
   return {
     init: function () {
+      // contSize = this.calculateContainer();
+      // console.log(contSize);
+      $('.generator-picture__watermark').draggable({
+          containment: 'window'
+      });
+
       // хендлер для окна с возможностью драгабл
       $('.generator-picture__watermark').on('drag', function (e, ui) {
           // изменяет модель
@@ -3774,6 +3781,18 @@ var DRAGGABLE = (function () {
           // грид изменяется
           PLACEGRID.setClass();
       });
+      // хендлер для резайза окна (когда окно изменяется в размере, то
+      // пересчитывается контейнер в котором может перемещаться изображение)
+      $( window ).on('resize', function () {
+          // пересчитали блок
+          contSize = DRAGGABLE.calculateContainer();
+          // инициализировали новую область
+          $('.generator-picture__watermark').draggable({
+              containment: contSize
+          });
+      });
+      this.setOpacity();
+
     },
     updateModel: function (ui) {
       model.coord.x = parseInt((ui.position.left).toFixed(0));
@@ -3785,14 +3804,14 @@ var DRAGGABLE = (function () {
     // изменяет положение
     setWatermark: function (animation) {
       if (animation) {
-        watermark.animate({top: model.coord.y, left: model.coord.x}, {duration: 500, queue: false});
+        $('.generator-picture__watermark').animate({top: model.coord.y, left: model.coord.x}, {duration: 500, queue: false});
       } else {
-        watermark.css({top: model.coord.y, left: model.coord.x});
+        $('.generator-picture__watermark').css({top: model.coord.y, left: model.coord.x});
       }
     },
     // изменяет опасити
     setOpacity: function () {
-      watermark.css('opacity', model.alpha);
+      $('.generator-picture__watermark').css('opacity', model.alpha);
     },
 
     // рассчитывает величину
@@ -3803,26 +3822,27 @@ var DRAGGABLE = (function () {
           watermark = $('.generator-picture__watermark'),
           image = $('.generator-picture__image'),
 
+
           // координаты контейнера вотермарка
           container = [
-            image.offset().left,
-            image.offset().top,
+            image.offset().left - $('.generator-picture__watermark').width(),
+            image.offset().top - $('.generator-picture__watermark').height(),
             image.offset().left + image.width(),
-            image.offset().top + image.height(),
-          ],
+            image.offset().top + image.height()
+          ];
 
           // массив [x1, y1, x2, y2] для определения четырехуголника
           // в котором можно дрегать вотермарк
-          resultArray = [];
+          // resultArray = [];
       
-      
+      return container;
 
-      resultArray.push(container[0] - watermark.width());
-      resultArray.push(container[1] - watermark.height());
-      resultArray.push(container[2]);
-      resultArray.push(container[3]);
+      // resultArray.push(container[0] - $('.generator-picture__watermark').width());
+      // resultArray.push(container[1] - $('.generator-picture__watermark').height());
+      // resultArray.push(container[2]);
+      // resultArray.push(container[3]);
 
-      return resultArray;
+      // return resultArray;
 
     },
 
@@ -3950,7 +3970,9 @@ var FILESINPT = (function () {
               PRELOADER.hide();
               if (typeof data.result.files[0]['error'] == 'undefined') {
                   $.each(data.result.files, function (index, file) {
-                      $('.generator-picture__img').attr('src', '/upload/' + file.name);
+                      // $('.generator-picture__img').attr('src', '/upload/' + file.name);
+                      $('<img>').addClass('generator-picture__img').attr('src', '/upload/' + file.name)
+                          .appendTo('.generator-picture__image');
                       $('.big_img').attr('src', '/upload/' + file.name).load(function () {
                           imgW = $('.big_img').width();
                           imgH = $('.big_img').height();
@@ -3976,7 +3998,9 @@ var FILESINPT = (function () {
               PRELOADER.hide();
               if (typeof data.result.files[0]['error'] == 'undefined') {
                   $.each(data.result.files, function (index, file) {
-                      $('.generator-picture__watermark').attr('src', '/upload/' + file.name);
+                      // $('.generator-picture__watermark').attr('src', '/upload/' + file.name);
+                      $('<img>').addClass('generator-picture__watermark').attr('src', '/upload/' + file.name)
+                          .appendTo('.generator-picture__image');
                       $('.big_wm').attr('src', '/upload/' + file.name).load(function () {
                           wmW = $('.big_wm').width();
                           wmH = $('.big_wm').height();
@@ -3987,7 +4011,7 @@ var FILESINPT = (function () {
                       // изменяет поле, содержащее имя файла в разметке
                       FILESINPT.updateInputField('upload-watermark');
                       itsAlive();
-                      DRAGGABLE.setOpacity();
+                      // DRAGGABLE.setOpacity();
                   });
               } else {
                   alert('Error!');
@@ -4016,33 +4040,15 @@ var FILESINPT = (function () {
   }
 })();
 // $(function(){
-    var counterTimeout,
-        // массив для определения пределов
-        // в которых может перемещаться 
-        // вотермарк
-        contSize = [];
+    var counterTimeout;
 
     // style input
     $('.js-upload').styler();
 
-    // инициализируем драггабл
-    contSize = DRAGGABLE.calculateContainer();
-    $('.generator-picture__watermark').draggable({
-        containment: contSize
-    });
 
     FILESINPT.init();
 
-    // хендлер для резайза окна (когда окно изменяется в размере, то
-    // пересчитывается контейнер в котором может перемещаться изображение)
-    $( window ).on('resize', function () {
-        // пересчитали блок
-        contSize = DRAGGABLE.calculateContainer();
-        // инициализировали новую область
-        $('.generator-picture__watermark').draggable({
-            containment: contSize
-        });
-    });
+
    
     // инициализируем слайдер
     $('.generator-transparency__slider').slider({
@@ -4073,7 +4079,6 @@ var FILESINPT = (function () {
           // добавляет возможность ховера для нижних кнопок
           $('.button-reset').addClass('button-reset--hover');
           $('.button-download').addClass('button-download--hover');
-
 
           INPUTFIELD.init();
           PLACEGRID.init();

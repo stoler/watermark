@@ -25,7 +25,9 @@ var FILESINPT = (function () {
               PRELOADER.hide();
               if (typeof data.result.files[0]['error'] == 'undefined') {
                   $.each(data.result.files, function (index, file) {
-                      $('.generator-picture__img').attr('src', '/upload/' + file.name);
+                      // $('.generator-picture__img').attr('src', '/upload/' + file.name);
+                      $('<img>').addClass('generator-picture__img').attr('src', '/upload/' + file.name)
+                          .appendTo('.generator-picture__image');
                       $('.big_img').attr('src', '/upload/' + file.name).load(function () {
                           imgW = $('.big_img').width();
                           imgH = $('.big_img').height();
@@ -51,7 +53,9 @@ var FILESINPT = (function () {
               PRELOADER.hide();
               if (typeof data.result.files[0]['error'] == 'undefined') {
                   $.each(data.result.files, function (index, file) {
-                      $('.generator-picture__watermark').attr('src', '/upload/' + file.name);
+                      // $('.generator-picture__watermark').attr('src', '/upload/' + file.name);
+                      $('<img>').addClass('generator-picture__watermark').attr('src', '/upload/' + file.name)
+                          .appendTo('.generator-picture__image');
                       $('.big_wm').attr('src', '/upload/' + file.name).load(function () {
                           wmW = $('.big_wm').width();
                           wmH = $('.big_wm').height();
@@ -62,7 +66,7 @@ var FILESINPT = (function () {
                       // изменяет поле, содержащее имя файла в разметке
                       FILESINPT.updateInputField('upload-watermark');
                       itsAlive();
-                      DRAGGABLE.setOpacity();
+                      // DRAGGABLE.setOpacity();
                   });
               } else {
                   alert('Error!');
