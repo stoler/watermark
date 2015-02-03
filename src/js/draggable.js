@@ -55,7 +55,6 @@ var DRAGGABLE = (function () {
           resultArray = [];
       
       
-      console.log(container);
 
       resultArray.push(container[0] - watermark.width());
       resultArray.push(container[1] - watermark.height());

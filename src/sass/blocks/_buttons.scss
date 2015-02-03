@@ -16,6 +16,15 @@ buttons
   background: $silverOne;
   width: 99px;
   height: 42px;
+  cursor: default;
+  // &:hover{
+    // background: $silverOneHover;
+  // }
+}
+
+.button-reset--hover{
+  cursor: pointer;
+  
   &:hover{
     background: $silverOneHover;
   }
@@ -23,9 +32,18 @@ buttons
 
 .button-download {
   @extend .btn;
+  cursor: default;
+
   background: $lightRedColor;
   width: 99px;
   height: 42px;
+  // &:hover{
+    // background: $lightRedColorHover;
+  // }
+}
+
+.button-download--hover{
+  cursor: pointer;
   &:hover{
     background: $lightRedColorHover;
   }
