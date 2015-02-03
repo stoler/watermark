@@ -4,8 +4,8 @@ generator-picture
 
 .generator-picture__wrap-result{
   position: relative;
-  line-height: 534px;
   height: 534px;
+  background: $whiteColor;
   &:before{
     content: '';
     background: url(../img/sprite.png) -401px 0 no-repeat;
@@ -31,7 +31,6 @@ generator-picture
 
 .generator-picture__result {
   width: 651px;
-  height: 534px;
   background: $whiteColor;
   overflow: hidden;
 }
@@ -43,7 +42,6 @@ generator-picture
 .generator-picture__image {
   position: relative;
   max-height: 534px;
-  line-height: 534px;
   height: auto;
 }
 .generator-picture__watermark {

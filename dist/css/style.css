@@ -617,8 +617,8 @@ generator-picture
 */
 .generator-picture__wrap-result {
   position: relative;
-  line-height: 534px;
-  height: 534px; }
+  height: 534px;
+  background: #ffffff; }
 
 .generator-picture__wrap-result:before {
   content: '';
@@ -641,7 +641,6 @@ generator-picture
 
 .generator-picture__result {
   width: 651px;
-  height: 534px;
   background: #ffffff;
   overflow: hidden; }
 
@@ -652,7 +651,6 @@ generator-picture
 .generator-picture__image {
   position: relative;
   max-height: 534px;
-  line-height: 534px;
   height: auto; }
 
 .generator-picture__watermark {
