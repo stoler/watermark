@@ -13,6 +13,7 @@
     $('.generator-picture__watermark').draggable({
         containment: contSize
     });
+    // инициализируем драггабл сетки 'замостить'
     $('.generator-picture__tile').draggable({
         containment: contSize
     });
@@ -26,6 +27,9 @@
         contSize = DRAGGABLE.calculateContainer();
         // инициализировали новую область
         $('.generator-picture__watermark').draggable({
+            containment: contSize
+        });
+        $('.generator-picture__tile').draggable({
             containment: contSize
         });
     });
