@@ -23,6 +23,7 @@ var SWITCH = (function () {
     },
     // изменяет значение gridType
     changeSwitchInModel: function (switchPosition) {
+      $('.generator-picture__tile,.generator-picture__watermark').css({'left':model.coord.x + 'px', 'top':model.coord.y + 'px'});
       if (switchPosition.hasClass('switch__mono')) {
         model.gridType = 'mono';
       } else {

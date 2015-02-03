@@ -37,8 +37,8 @@ class Watermark {
             $wmW = $watermark->getWidth() + $arResult['horizontal_margin'];
             $wmH = $watermark->getHeight() + $arResult['vertical_margin'];
 
-            $col = ceil($imgW/$wmW);
-            $row = ceil($imgH/$wmH);
+            $col = ceil($imgW/$wmW)+2;
+            $row = ceil($imgH/$wmH)+2;
 
             for ($i=0; $i < $col; $i++) {
                 for ($j = 0; $j < $row; $j++) {

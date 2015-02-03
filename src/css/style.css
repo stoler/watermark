@@ -825,6 +825,10 @@ generator-picture
   line-height: normal;
 }
 
+.tile__image {
+  margin: 0 0 -5px 0;
+}
+
 /*
 generator-setup
 */
