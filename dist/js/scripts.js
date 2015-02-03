@@ -3699,8 +3699,9 @@ var INPUTFIELD = (function () {
                 // обновляем вотермарк
                 DRAGGABLE.setWatermark(true);
             });
-
-            inputWindow.on('keyup', function (e) {
+            
+            // будет работать с зажатой кнопкой
+            inputWindow.on('keypress', function (e) {
                 var
                     key = e.keyCode;
 
@@ -4211,6 +4212,9 @@ var FILESINPT = (function () {
         Share[$(this).data('site')]('URL','TITLE','IMG_PATH', 'DESC');
     });
 
+    RESET.init();
+    
+
     function itsAlive () {
         if (model.isActive) {
           // удаляет опасити с боковой панели
@@ -4225,7 +4229,7 @@ var FILESINPT = (function () {
           SWITCH.init();
           COUNTERBTN.init();
           SLIDER.init();
-          RESET.init();
+          // RESET.init();
           DRAGGABLE.init();
         }
     }

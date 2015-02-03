@@ -128,8 +128,8 @@
                     <div class="generator-transparency__slider"></div>
                 </div>
             </div>
-            <div class="main-generator-buttons disable">
-                <div class="generator-buttons">
+            <div class="main-generator-buttons">
+                <div class="generator-buttons disable">
                     <button class="button-reset"><?= $lang['reset'] ?></button>
                     <button class="button-download"><?= $lang['download'] ?></button>
                 </div>
