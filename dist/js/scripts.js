@@ -3201,6 +3201,90 @@ var widget = $.widget;
 
     };
 }));
+var TILE = (function () {
+    // инициализируем глобальные переменные
+    var tile = $('.generator-picture__tile'),
+        watermark,
+        image,
+        watermarkWidth = 0,
+        watermarkHeight,
+        watermarkSrc,
+        imageWidth = 0,
+        imageHeight;
+
+    return {
+        initImage: function () {
+            // получаем основную картинку и её размеры
+            image = $('.generator-picture__img'),
+            imageWidth = image.width();
+            imageHeight = image.width();
+            //console.log(imageWidth)
+            TILE.initTile()
+            //itemInRow = Math.floor(imageWidth / watermarkWidth) + 1,
+            //rows = Math.floor(imageHeight / watermarkHeight) + 1;
+
+
+        },
+        initWatermark: function() {
+            // получаем марку и её размеры
+            watermark = $('.generator-picture__watermark'),
+            watermarkWidth = watermark.width();
+            watermarkHeight = watermark.width();
+            watermarkSrc = watermark.attr('src');
+            //console.log(watermarkHeight, watermarkWidth,watermarkSrc );
+            TILE.initTile()
+        },
+        initTile: function() {
+            // удаляем предыдущий мост и создаем новую сетку 'замостить'
+            $('.generator-picture__tile-row').remove()
+            $('.tile__image').remove();
+
+            if (watermarkWidth > 0 & imageWidth > 0) {
+                //alert(true)
+                var itemInRow = Math.floor(imageWidth / watermarkWidth) + 1,
+                    rows = Math.floor(imageHeight / watermarkHeight) + 1;
+                //alert(watermark.width(),image.width())
+                for (i = 0; i < rows; i++) {
+                    //alert(true)
+                    tile.append("<div class='generator-picture__tile-row'>");
+                }
+                ;
+                for (i = 0; i < itemInRow; i++) {
+                    //alert(false)
+                    $('.generator-picture__tile-row').append("<img src='" + watermarkSrc + "' class='tile__image'>");
+                }
+                ;
+            }
+        },
+        // скрываем/показываем сетку замости
+        showHide: function (elem) {
+            var _this = elem;
+            if (_this.hasClass('switch__multi')) {
+                watermark.hide();
+                tile.show();
+
+            }
+            else {
+                watermark.show();
+                tile.hide();
+            }
+        },
+        // изменяем прозрачность
+        changeOpacity: function () {
+            tile.css('opacity', model.alpha);
+        },
+        // изменяем вертикальный отступ
+        changeVerticalGutter: function () {
+            var tileRow = $('.generator-picture__tile-row');
+            tileRow.css({marginBottom: model.margins.x});
+        },
+        // изменяем горизонтальный отстпуп
+        changeHorizontalGutter: function () {
+            var tileImage = $('.tile__image');
+            tileImage.css({marginRight: model.margins.y});
+        }
+    }
+})();
 var Share = {
     vkontakte: function(purl, ptitle, pimg, text) {
         var url  = 'http://vkontakte.ru/share.php?';
@@ -3272,6 +3356,9 @@ var COUNTERBTN = (function () {
               // метод модуля грид, он сравнивается сам с моделью
               PLACEGRID.setStyle();
               PLACEGRID.setClass();
+              // изменяем отступы в сетки 'замостить'
+              TILE.changeHorizontalGutter();
+              TILE.changeVerticalGutter();
           }, 70);
 
           $(this).on('mouseup', function () {
@@ -3554,105 +3641,108 @@ var PLACEGRID = (function () {
     }
 })();
 var INPUTFIELD = (function () {
-  var
-      inputWindow = $('.crd-window__num'),
-      windowX = $('.crd-window__num--x'),
-      windowY = $('.crd-window__num--y'),
-      variant = 'coord',
+    var
+        inputWindow = $('.crd-window__num'),
+        windowX = $('.crd-window__num--x'),
+        windowY = $('.crd-window__num--y'),
+        variant = 'coord',
 
-      // проверяет чтобы ввод при мульти-режиме
-      // было >= 1
-      validInput = function (val) {
-        if (variant === 'coord') {
-          return val;
+    // проверяет чтобы ввод при мульти-режиме
+    // было >= 1
+        validInput = function (val) {
+            if (variant === 'coord') {
+                return val;
+            }
+
+            if (val >= 1) {
+                return val;
+            } else {
+                return 1;
+            }
+        },
+
+    // изменяем координаты или величину марджина?
+        checkVariant = function () {
+            if (model.gridType === 'mono') {
+                variant = 'coord';
+            } else {
+                variant = 'margins';
+            }
+        },
+
+    // проверяет чтобы инпут был числом
+        validateInput = function (input) {
+            if (isNaN(input)) {
+                return 0;
+            }
+            return input;
+        };
+
+    return {
+        init: function () {
+            inputWindow.each(function () {
+                $(this).removeAttr('disabled');
+            });
+
+            windowX.val(model[variant]['x']);
+            windowY.val(model[variant]['y']);
+
+            // хендлер для ввода с клавиатуры прямо в инпуты
+            inputWindow.on('input', function () {
+                // изменяем модель
+                INPUTFIELD.updateModel($(this));
+                // обновляем инпут
+                INPUTFIELD.setInput();
+                // обновляем грид
+                PLACEGRID.setStyle();
+                PLACEGRID.setClass();
+                // обновляем вотермарк
+                DRAGGABLE.setWatermark(true);
+            });
+
+            inputWindow.on('keyup', function (e) {
+                var
+                    key = e.keyCode;
+
+                if (key === 38) {
+                    INPUTFIELD.keyUpdateModel($(this), 1);
+                } else if (key === 40) {
+                    INPUTFIELD.keyUpdateModel($(this), -1);
+                }
+                INPUTFIELD.setInput();
+                PLACEGRID.setStyle();
+                PLACEGRID.setClass();
+                DRAGGABLE.setWatermark();
+                // изменяем отступы в сетки 'замостить'
+                TILE.changeHorizontalGutter();
+                TILE.changeVerticalGutter();
+            });
+        },
+        setInput: function () {
+            checkVariant();
+            windowX.val(model[variant]['x']);
+            windowY.val(model[variant]['y']);
+        },
+        updateModel: function () {
+            checkVariant();
+            model[variant]['x'] = validateInput(parseInt(windowX.val()));
+            model[variant]['y'] = validateInput(parseInt(windowY.val()));
+        },
+        keyUpdateModel: function (inpWin, direction) {
+            checkVariant();
+            var
+                coordination = inpWin.hasClass('crd-window__num--x') ? 'x' : 'y';
+
+            model[variant][coordination] = validInput(model[variant][coordination] += direction);
+        },
+        deactivate: function () {
+            inputWindow.each(function () {
+                $(this).attr('disabled', true);
+            });
+            windowX.val('');
+            windowY.val('');
         }
-
-        if (val >= 1) {
-          return val;
-        } else {
-          return 1;
-        }
-      },
-
-      // изменяем координаты или величину марджина?
-      checkVariant = function () {
-        if (model.gridType === 'mono') {
-          variant = 'coord';
-        } else {
-          variant = 'margins';
-        }
-      },
-
-      // проверяет чтобы инпут был числом
-      validateInput = function (input) {
-        if (isNaN(input)) {
-          return 0;
-        }
-        return input;
-      };
-
-  return {
-    init: function () {
-      inputWindow.each(function () {
-        $(this).removeAttr('disabled');
-      });
-
-      windowX.val(model[variant]['x']);
-      windowY.val(model[variant]['y']);
-
-      // хендлер для ввода с клавиатуры прямо в инпуты
-      inputWindow.on('input', function () {
-        // изменяем модель
-        INPUTFIELD.updateModel($(this));
-        // обновляем инпут
-        INPUTFIELD.setInput();
-        // обновляем грид
-        PLACEGRID.setStyle();
-        PLACEGRID.setClass();
-        // обновляем вотермарк
-        DRAGGABLE.setWatermark(true);
-      });
-
-      inputWindow.on('keypress', function (e) {
-        var
-            key = e.keyCode;
-
-        if (key === 38) {
-          INPUTFIELD.keyUpdateModel($(this), 1);
-        } else if (key === 40) {
-          INPUTFIELD.keyUpdateModel($(this), -1);
-        }
-        INPUTFIELD.setInput();
-        PLACEGRID.setStyle();
-        PLACEGRID.setClass();
-        DRAGGABLE.setWatermark();
-      });
-    },
-    setInput: function () {
-      checkVariant();
-      windowX.val(model[variant]['x']);
-      windowY.val(model[variant]['y']);
-    },
-    updateModel: function () {
-      checkVariant();
-      model[variant]['x'] = validateInput(parseInt(windowX.val()));
-      model[variant]['y'] = validateInput(parseInt(windowY.val()));
-    },
-    keyUpdateModel: function (inpWin, direction) {
-      checkVariant(); 
-      var
-          coordination = inpWin.hasClass('crd-window__num--x') ? 'x' : 'y';
-          
-      model[variant][coordination] = validInput(model[variant][coordination] += direction);
-    },
-    deactivate: function () {
-      inputWindow.each(function () {
-        $(this).attr('disabled', true);
-      });
-      windowX.val('');
-      windowY.val('');
     }
-  }
 })();
 var SLIDER = (function () {
   // ...
@@ -3664,6 +3754,8 @@ var SLIDER = (function () {
           SLIDER.updateModel(ui);
           // дергает обновление вотермарка
           DRAGGABLE.setOpacity();
+          // изменяем прозрачность сетки 'замостить'
+          TILE.changeOpacity();
       });
       $('.generator-transparency__slider').slider({
         min: 0,
@@ -3708,6 +3800,8 @@ var SWITCH = (function () {
           INPUTFIELD.setInput();
           // грид должен обновиться
           PLACEGRID.setStyle();
+          //показываем/скрываем сетку 'замостить'
+          TILE.showHide($(this))
           // watermark должен перестать двигаться и начать увеличивать марджин
           // ...
       });
@@ -3774,6 +3868,11 @@ var DRAGGABLE = (function () {
           // грид изменяется
           PLACEGRID.setClass();
       });
+
+        $('.generator-picture__tile').on('drag', function (e, ui) {
+            // изменяет модель при перетаскивании сетки 'замостить'
+            DRAGGABLE.updateModel(ui);
+        });
     },
     updateModel: function (ui) {
       model.coord.x = parseInt((ui.position.left).toFixed(0));
@@ -3958,6 +4057,7 @@ var FILESINPT = (function () {
                       });
                       FILESINPT.setModel('image', file.name);
                       FILESINPT.updateInputField('upload-picture');
+                      TILE.initImage()
                       itsAlive();
                   });
               } else {
@@ -3981,13 +4081,17 @@ var FILESINPT = (function () {
                           wmW = $('.big_wm').width();
                           wmH = $('.big_wm').height();
                           changeWatermarkSize(imgW, wmW, imgH, wmH);
+                          TILE.initWatermark();
                       });
                       // изменяет модель сообразно имени файла
                       FILESINPT.setModel('watermark', file.name);
                       // изменяет поле, содержащее имя файла в разметке
                       FILESINPT.updateInputField('upload-watermark');
+
+                      //alert(true);
                       itsAlive();
                       DRAGGABLE.setOpacity();
+
                   });
               } else {
                   alert('Error!');
@@ -4030,6 +4134,10 @@ var FILESINPT = (function () {
     $('.generator-picture__watermark').draggable({
         containment: contSize
     });
+    // инициализируем драггабл сетки 'замостить'
+    $('.generator-picture__tile').draggable({
+        containment: contSize
+    });
 
     FILESINPT.init();
 
@@ -4040,6 +4148,9 @@ var FILESINPT = (function () {
         contSize = DRAGGABLE.calculateContainer();
         // инициализировали новую область
         $('.generator-picture__watermark').draggable({
+            containment: contSize
+        });
+        $('.generator-picture__tile').draggable({
             containment: contSize
         });
     });
