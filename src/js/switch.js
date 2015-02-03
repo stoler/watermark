@@ -12,6 +12,7 @@ var SWITCH = (function () {
           INPUTFIELD.setInput();
           // грид должен обновиться
           PLACEGRID.setStyle();
+          TILE.showHide($(this))
           // watermark должен перестать двигаться и начать увеличивать марджин
           // ...
       });

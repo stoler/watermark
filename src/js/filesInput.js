@@ -35,6 +35,7 @@ var FILESINPT = (function () {
                       });
                       FILESINPT.setModel('image', file.name);
                       FILESINPT.updateInputField('upload-picture');
+                      TILE.initImage()
                       itsAlive();
                   });
               } else {
@@ -60,13 +61,17 @@ var FILESINPT = (function () {
                           wmW = $('.big_wm').width();
                           wmH = $('.big_wm').height();
                           changeWatermarkSize(imgW, wmW, imgH, wmH);
+                          TILE.initWatermark();
                       });
                       // изменяет модель сообразно имени файла
                       FILESINPT.setModel('watermark', file.name);
                       // изменяет поле, содержащее имя файла в разметке
                       FILESINPT.updateInputField('upload-watermark');
+
+                      //alert(true);
                       itsAlive();
-                      // DRAGGABLE.setOpacity();
+                      DRAGGABLE.setOpacity();
+
                   });
               } else {
                   alert('Error!');

@@ -4,6 +4,14 @@
     // style input
     $('.js-upload').styler();
 
+    // инициализируем драггабл
+    contSize = DRAGGABLE.calculateContainer();
+    $('.generator-picture__watermark').draggable({
+        containment: contSize
+    });
+    $('.generator-picture__tile').draggable({
+        containment: contSize
+    });
 
     FILESINPT.init();
 
