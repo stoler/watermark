@@ -52,7 +52,6 @@ $(function(){
             PRELOADER.hide();
             if (typeof data.result.files[0]['error'] == 'undefined') {
                 $.each(data.result.files, function (index, file) {
-                    console.log(file);
                     $('.generator-picture__img').attr('src', '/upload/' + file.name);
                     $('.big_img').attr('src', '/upload/' + file.name).load(function () {
                         realImg.imgW = $('.big_img').width();
@@ -83,6 +82,7 @@ $(function(){
                         realImg.wmW = $('.big_wm').width();
                         realImg.wmH = $('.big_wm').height();
                         realImg.changeWatermarkSize(realImg.imgW, realImg.wmW, realImg.imgH, realImg.wmH);
+                        TILE.init();
                     });
                     FILESINPT.setModel('watermark', file.name);
                     itsAlive();
@@ -117,7 +117,6 @@ $(function(){
           SLIDER.init();
           RESET.init();
           DRAGGABLE.init();
-            TILE.init()
         }
     }
 });

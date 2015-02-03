@@ -4,9 +4,9 @@ var TILE = (function () {
         image = $('.generator-picture__img'),
         watermark = $('.generator-picture__watermark');
 
-
     return {
         init: function () {
+            console.log(11111111);
             var
                 imageWidth = image.width(),
                 imageHeight = image.width(),
@@ -15,17 +15,19 @@ var TILE = (function () {
                 watermarkSrc = watermark.attr('src'),
                 itemInRow = Math.floor(imageWidth / watermarkWidth) + 1,
                 rows = Math.floor(imageHeight / watermarkHeight) + 1;
-            // добовляем строки в сетку в зависимости от высоты картинки
-            for (i = 0; i < rows; i++) {
-                tile.append("<div class='generator-picture__tile-row'>");
-            }
-            ;
+            // добавляем строки в сетку в зависимости от высоты картинки
 
-            // добовляем картинки в строку в зависимости от ширины основной картинки
-            for (i = 0; i < itemInRow; i++) {
-                $('.generator-picture__tile-row').append("<img src='" + watermarkSrc + "' class='tile__image'>");
+            if (watermarkWidth > 0 && watermarkHeight > 0) {
+                for (var i = 0; i < rows; i++) {
+                    tile.append("<div class='generator-picture__tile-row'>");
+                }
+
+                // добавляем картинки в строку в зависимости от ширины основной картинки
+                for (i = 0; i < itemInRow; i++) {
+                    $('.generator-picture__tile-row').append("<img src='" + watermarkSrc + "' class='tile__image'>");
+                }
             }
-            ;
+
         },
 
         // Показываем или скрываем сетку .generator-picture__tile
@@ -34,7 +36,6 @@ var TILE = (function () {
             if (_this.hasClass('switch__multi')) {
                 watermark.hide();
                 tile.show();
-
             }
             else {
                 watermark.show();
