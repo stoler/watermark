@@ -13,9 +13,8 @@
     $('.generator-picture__watermark').draggable({
         containment: contSize
     });
-    $('.generator-picture__tile').draggable({
-        containment: contSize
-    });
+    // инициализируем драггабл сетки 'замостить'
+    $('.generator-picture__tile').draggable();
 
     FILESINPT.init();
 
