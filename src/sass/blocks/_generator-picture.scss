@@ -9,7 +9,9 @@ generator-picture
   background: $whiteColor;
   background: #fff;
   overflow: hidden;
-  display: inline-block;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
   &:before{
     content: '';
     background: url(../img/sprite.png) -401px 0 no-repeat;
