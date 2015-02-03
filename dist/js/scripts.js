@@ -3217,7 +3217,7 @@ var TILE = (function () {
             // получаем основную картинку и её размеры
             image = $('.generator-picture__img'),
             imageWidth = image.width();
-            imageHeight = image.width();
+            imageHeight = image.height();
             //console.log(imageWidth)
             TILE.initTile()
             //itemInRow = Math.floor(imageWidth / watermarkWidth) + 1,
@@ -3229,7 +3229,7 @@ var TILE = (function () {
             // получаем марку и её размеры
             watermark = $('.generator-picture__watermark'),
             watermarkWidth = watermark.width();
-            watermarkHeight = watermark.width();
+            watermarkHeight = watermark.height();
             watermarkSrc = watermark.attr('src');
             //console.log(watermarkHeight, watermarkWidth,watermarkSrc );
             TILE.initTile()
@@ -3240,7 +3240,7 @@ var TILE = (function () {
             $('.tile__image').remove();
 
             if (watermarkWidth > 0 & imageWidth > 0) {
-                //alert(true)
+                console.log(watermarkWidth, imageWidth)
                 var itemInRow = Math.floor(imageWidth / watermarkWidth) + 1,
                     rows = Math.floor(imageHeight / watermarkHeight) + 1;
                 //alert(watermark.width(),image.width())
