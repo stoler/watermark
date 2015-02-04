@@ -8,9 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta rel="icon" type="image/vnd.microsoft.icon" href="favicon.ico">
     <link rel="SHORTCUT ICON" href="favicon.ico">
-    <title>watermark</title>
+    <title>Сервис для наложения водяных знаков</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="">
+    <meta name="description" content="Сервис для наложения водяных знаков">
+    <meta name="keywords" content="Сервис для наложения водяных знаков">
     <link rel="stylesheet" href="dist/css/style.min.css"><!--[if lt IE 9]><script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 </head>
 <body>
@@ -147,9 +148,9 @@
         <iframe src="" frameborder="0"></iframe>
     </div>
 </div>
+<script src="dist/js/scripts.js"></script>
 <div class="preloader">
     <img src="/dist/img/ajax-loader.gif" alt="" class="preloader__image"/>
 </div>
-<script src="dist/js/scripts.js"></script>
 </body>
 </html>
