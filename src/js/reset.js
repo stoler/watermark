@@ -1,8 +1,8 @@
 var RESET = (function () {
     var
         deleteImage = function () {
-            $('.generator-picture__watermark').remove();
-            $('.generator-picture__img').remove();
+            $('.generator-picture__watermark').fadeOut().attr('src','dist/img/upload/watermark.png');
+            $('.generator-picture__img').attr('src','dist/img/upload/image.png');
         };
     return {
         init: function () {
@@ -41,6 +41,7 @@ var RESET = (function () {
                 // свитч отключен
                 SWITCH.disable();
 
+                $('.generator-picture__tile-row').hide();
                 $('.button-reset--hover').removeClass('button-reset--hover');
                 $('.button-download--hover').removeClass('button-download--hover');
 
