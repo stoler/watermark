@@ -22,6 +22,7 @@ var FILESINPT = (function () {
       $('#upload-picture').fileupload({
           dataType: 'json',
           done: function (e, data) {
+              $('.generator-picture__watermark').fadeIn();
               PRELOADER.hide();
               if (typeof data.result.files[0]['error'] == 'undefined') {
                   $.each(data.result.files, function (index, file) {
@@ -33,7 +34,7 @@ var FILESINPT = (function () {
                       });
                       FILESINPT.setModel('image', file.name);
                       FILESINPT.updateInputField('upload-picture');
-                      TILE.initImage()
+                      TILE.initImage();
                       itsAlive();
                   });
               } else {

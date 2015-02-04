@@ -42,11 +42,11 @@ var TILE = (function () {
                 var itemInRow = Math.floor(imageWidth / watermarkWidth) + 1,
                     rows = Math.floor(imageHeight / watermarkHeight) + 1;
                 //alert(watermark.width(),image.width())
-                for (var i = 0; i < rows; i++) {
+                for (var i = 0; i < rows+2; i++) {
                     //alert(true)
                     tile.append("<div class='generator-picture__tile-row'>");
                 }
-                for (i = 0; i < itemInRow; i++) {
+                for (i = 0; i < itemInRow+2; i++) {
                     //alert(false)
                     $('.generator-picture__tile-row').append("<img src='" + watermarkSrc + "' class='tile__image' width='"+ watermarkWidth +"' height='"+ watermarkHeight +"'>");
                 }

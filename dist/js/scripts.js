@@ -3245,11 +3245,11 @@ var TILE = (function () {
                 var itemInRow = Math.floor(imageWidth / watermarkWidth) + 1,
                     rows = Math.floor(imageHeight / watermarkHeight) + 1;
                 //alert(watermark.width(),image.width())
-                for (var i = 0; i < rows; i++) {
+                for (var i = 0; i < rows+2; i++) {
                     //alert(true)
                     tile.append("<div class='generator-picture__tile-row'>");
                 }
-                for (i = 0; i < itemInRow; i++) {
+                for (i = 0; i < itemInRow+2; i++) {
                     //alert(false)
                     $('.generator-picture__tile-row').append("<img src='" + watermarkSrc + "' class='tile__image' width='"+ watermarkWidth +"' height='"+ watermarkHeight +"'>");
                 }
@@ -4047,6 +4047,7 @@ var FILESINPT = (function () {
       $('#upload-picture').fileupload({
           dataType: 'json',
           done: function (e, data) {
+              $('.generator-picture__watermark').fadeIn();
               PRELOADER.hide();
               if (typeof data.result.files[0]['error'] == 'undefined') {
                   $.each(data.result.files, function (index, file) {
@@ -4058,7 +4059,7 @@ var FILESINPT = (function () {
                       });
                       FILESINPT.setModel('image', file.name);
                       FILESINPT.updateInputField('upload-picture');
-                      TILE.initImage()
+                      TILE.initImage();
                       itsAlive();
                   });
               } else {

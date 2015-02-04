@@ -800,6 +800,7 @@ generator-picture
   left: 0;
   display: inline-block;
   height: auto;
+  opacity: 0;
 }
 
 .generator-picture__watermark, .generator-picture__img {
