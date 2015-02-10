@@ -1,3 +1,10 @@
+/*поинтер над полями ввода файлов*/
+
+.js-upload{
+    cursor: pointer;
+}
+
+
 .jq-checkbox {
     top: -1px;
     width: 13px;

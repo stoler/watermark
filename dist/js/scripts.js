@@ -3348,9 +3348,10 @@ var COUNTERBTN = (function () {
   var
       arrowsButtons = $('.crd-arrow-list__item'),
       // на сколько увеличивается значение при режиме моно
-      monoStep = 1,
+      // monoStep = 1,
+      step = 1;
       // на сколько увеличивается значение при режиме мульти
-      multiStep = 1;
+      // multiStep = 1;
   return {
     init: function () {
       // хендлер для стрелок
@@ -3385,19 +3386,37 @@ var COUNTERBTN = (function () {
     // изменяет модель при нажатии на кнопку
     counterBtnModelChange: function (btn) {
       var
-          step = 0,
           axis = btn.hasClass('crd-arrow-list__item--x') ? 'x' : 'y',
-          // для проверки что марджин не уйдет ниже единицы
+          // для проверки что значения не уйдут ниже единицы
+          testValueMin = 0,
+          // для рассчетов точек за которые вотермарк не должен заходить
+          backImage = $('.generator-picture__img'),
+          wattermark = $('.generator-picture__watermark'),
+          wattermarkWidth = wattermark.width(),
+          wattermarkHeight = wattermark.height(),
+          backImageWidth = backImage.width(),
+          backImageHeight = backImage.height(),
+          rightMax = parseInt((backImageWidth - wattermarkWidth).toFixed(0)),
+          bottomMax = parseInt((backImageHeight - wattermarkHeight).toFixed(0)),
+          
+          // значение координат за которые не должен заходить вотермарк
+          testValueMax = {
+            'x': rightMax,
+            'y': bottomMax
+          },
+
           testValue = 0;
+      
 
       if (model.gridType === 'mono') {
-        step = monoStep;
-        model.coord[axis] += btn.hasClass('crd-arrow-list__item--up') ? step : -step;
+        testValue = model.coord[axis] + (btn.hasClass('crd-arrow-list__item--up') ? step : -step);
+        if ((testValue >= testValueMin) && (testValue <= testValueMax[axis])) {
+          model.coord[axis] = testValue;
+        }
       } else {
-        step = multiStep;
         // скидываем значение в переменную чтобы проверить ее величину перед обновлением модели
         testValue = model.margins[axis] + (btn.hasClass('crd-arrow-list__item--up') ? step : -step);
-        if (testValue >= 0) {
+        if ((testValue >= testValueMin) && (testValue <= testValueMax[axis])) {
           model.margins[axis] = testValue;
         }
       }
@@ -3659,16 +3678,46 @@ var INPUTFIELD = (function () {
 
     // проверяет чтобы ввод при мульти-режиме
     // было >= 1
-        validInput = function (val) {
-            if (variant === 'coord') {
-                return val;
-            }
+        validInput = function (val, field) {
 
-            if (val >= 0) {
-                return val;
-            } else {
+          var
+            // рассчеты для максимального значения
+            backImage = $('.generator-picture__img'),
+            wattermark = $('.generator-picture__watermark'),
+            wattermarkWidth = wattermark.width(),
+            wattermarkHeight = wattermark.height(),
+            backImageWidth = backImage.width(),
+            backImageHeight = backImage.height(),
+            rightMax = parseInt((backImageWidth - wattermarkWidth).toFixed(0)),
+            bottomMax = parseInt((backImageHeight - wattermarkHeight).toFixed(0)),
+
+            // значение координат за которые не должен заходить вотермарк
+            testValueMax = {
+              'x': rightMax,
+              'y': bottomMax
+            };
+
+            if (isNaN(val)) {
                 return 0;
             }
+
+            // if (variant === 'coord') {
+                // return val;
+            // }
+
+            if (val < 0) {
+                return 0;
+            }
+            if (val > testValueMax[field]) {
+                return testValueMax[field];
+            }
+            return val;
+
+            // if (val >= 0 && val <= testValueMax[field]) {
+            //     return val;
+            // } else {
+            //     return 0;
+            // }
         },
 
     // изменяем координаты или величину марджина?
@@ -3678,15 +3727,15 @@ var INPUTFIELD = (function () {
             } else {
                 variant = 'margins';
             }
-        },
+        };
 
     // проверяет чтобы инпут был числом
-        validateInput = function (input) {
-            if (isNaN(input)) {
-                return 0;
-            }
-            return input;
-        };
+        // validateInput = function (input) {
+            // if (isNaN(input)) {
+                // return 0;
+            // }
+            // return input;
+        // };
 
     return {
         init: function () {
@@ -3697,20 +3746,7 @@ var INPUTFIELD = (function () {
             windowX.val(model[variant]['x']);
             windowY.val(model[variant]['y']);
 
-            // хендлер для ввода с клавиатуры прямо в инпуты
-            inputWindow.on('input', function () {
-                // изменяем модель
-                INPUTFIELD.updateModel($(this));
-                // обновляем инпут
-                INPUTFIELD.setInput();
-                // обновляем грид
-                PLACEGRID.setStyle();
-                PLACEGRID.setClass();
-                // обновляем вотермарк
-                DRAGGABLE.setWatermark(true);
-            });
-
-            inputWindow.on('keyup', function (e) {
+            inputWindow.on('keydown', function (e) {
                 var
                     key = e.keyCode;
 
@@ -3727,6 +3763,20 @@ var INPUTFIELD = (function () {
                 TILE.changeHorizontalGutter();
                 TILE.changeVerticalGutter();
             });
+
+            // хендлер для ввода с клавиатуры прямо в инпуты
+            inputWindow.on('input', function () {
+                // изменяем модель
+                INPUTFIELD.updateModel($(this));
+                // обновляем инпут
+                INPUTFIELD.setInput();
+                // обновляем грид
+                PLACEGRID.setStyle();
+                PLACEGRID.setClass();
+                // обновляем вотермарк
+                DRAGGABLE.setWatermark(true);
+            });
+
         },
         setInput: function () {
             checkVariant();
@@ -3735,8 +3785,8 @@ var INPUTFIELD = (function () {
         },
         updateModel: function () {
             checkVariant();
-            model[variant]['x'] = validateInput(parseInt(windowX.val()));
-            model[variant]['y'] = validateInput(parseInt(windowY.val()));
+            model[variant]['x'] = validInput(parseInt(windowX.val()), 'x');
+            model[variant]['y'] = validInput(parseInt(windowY.val()), 'y');
         },
         keyUpdateModel: function (inpWin, direction) {
             checkVariant();

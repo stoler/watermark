@@ -2,9 +2,10 @@ var COUNTERBTN = (function () {
   var
       arrowsButtons = $('.crd-arrow-list__item'),
       // на сколько увеличивается значение при режиме моно
-      monoStep = 1,
+      // monoStep = 1,
+      step = 1;
       // на сколько увеличивается значение при режиме мульти
-      multiStep = 1;
+      // multiStep = 1;
   return {
     init: function () {
       // хендлер для стрелок
@@ -39,19 +40,37 @@ var COUNTERBTN = (function () {
     // изменяет модель при нажатии на кнопку
     counterBtnModelChange: function (btn) {
       var
-          step = 0,
           axis = btn.hasClass('crd-arrow-list__item--x') ? 'x' : 'y',
-          // для проверки что марджин не уйдет ниже единицы
+          // для проверки что значения не уйдут ниже единицы
+          testValueMin = 0,
+          // для рассчетов точек за которые вотермарк не должен заходить
+          backImage = $('.generator-picture__img'),
+          wattermark = $('.generator-picture__watermark'),
+          wattermarkWidth = wattermark.width(),
+          wattermarkHeight = wattermark.height(),
+          backImageWidth = backImage.width(),
+          backImageHeight = backImage.height(),
+          rightMax = parseInt((backImageWidth - wattermarkWidth).toFixed(0)),
+          bottomMax = parseInt((backImageHeight - wattermarkHeight).toFixed(0)),
+          
+          // значение координат за которые не должен заходить вотермарк
+          testValueMax = {
+            'x': rightMax,
+            'y': bottomMax
+          },
+
           testValue = 0;
+      
 
       if (model.gridType === 'mono') {
-        step = monoStep;
-        model.coord[axis] += btn.hasClass('crd-arrow-list__item--up') ? step : -step;
+        testValue = model.coord[axis] + (btn.hasClass('crd-arrow-list__item--up') ? step : -step);
+        if ((testValue >= testValueMin) && (testValue <= testValueMax[axis])) {
+          model.coord[axis] = testValue;
+        }
       } else {
-        step = multiStep;
         // скидываем значение в переменную чтобы проверить ее величину перед обновлением модели
         testValue = model.margins[axis] + (btn.hasClass('crd-arrow-list__item--up') ? step : -step);
-        if (testValue >= 0) {
+        if ((testValue >= testValueMin) && (testValue <= testValueMax[axis])) {
           model.margins[axis] = testValue;
         }
       }
