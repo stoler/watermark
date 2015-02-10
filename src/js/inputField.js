@@ -30,10 +30,6 @@ var INPUTFIELD = (function () {
                 return 0;
             }
 
-            // if (variant === 'coord') {
-                // return val;
-            // }
-
             if (val < 0) {
                 return 0;
             }
@@ -109,7 +105,7 @@ var INPUTFIELD = (function () {
             var
                 coordination = inpWin.hasClass('crd-window__num--x') ? 'x' : 'y';
 
-            model[variant][coordination] = validInput(model[variant][coordination] += direction);
+            model[variant][coordination] = validInput((model[variant][coordination] += direction), coordination);
         },
         deactivate: function () {
             inputWindow.each(function () {
