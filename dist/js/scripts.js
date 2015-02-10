@@ -3968,6 +3968,8 @@ var RESET = (function () {
                 PLACEGRID.setClass();
                 // watermark становится mono
                 TILE.showHide();
+                TILE.changeVerticalGutter();
+                TILE.changeHorizontalGutter();
 
                 // удаляет загруженные картинки
                 // deleteImage();
@@ -4010,8 +4012,8 @@ var RESET = (function () {
             // model.files.watermark = '';
             model.gridType = 'mono';
             model.alpha = .5;
-            model.margins.x = 1;
-            model.margins.y = 1;
+            model.margins.x = 0;
+            model.margins.y = 0;
             // model.isActive = false;
 
             // сбрасывает инпуты файлов
