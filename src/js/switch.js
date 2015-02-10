@@ -13,7 +13,8 @@ var SWITCH = (function () {
           // грид должен обновиться
           PLACEGRID.setStyle();
           //показываем/скрываем сетку 'замостить'
-          TILE.showHide($(this))
+          TILE.showHide();
+          // TILE.showHide($(this))
           // watermark должен перестать двигаться и начать увеличивать марджин
           // ...
       });
@@ -23,7 +24,7 @@ var SWITCH = (function () {
     },
     // изменяет значение gridType
     changeSwitchInModel: function (switchPosition) {
-      $('.generator-picture__tile,.generator-picture__watermark').css({'left':model.coord.x + 'px', 'top':model.coord.y + 'px'});
+      // $('.generator-picture__tile,.generator-picture__watermark').css({'left':model.coord.x + 'px', 'top':model.coord.y + 'px'});
       if (switchPosition.hasClass('switch__mono')) {
         model.gridType = 'mono';
       } else {

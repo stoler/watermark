@@ -11,8 +11,8 @@ var model = (function () {
         'gridType': 'mono',
         'alpha': .5,
         'margins': {
-            'x': 1,
-            'y': 1
+            'x': 0,
+            'y': 0
         },
         'isActive': false
     };

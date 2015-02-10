@@ -17,7 +17,7 @@ gulp.task('connect', function () {
         root: '',
         livereload: true
     });
-    opn('http://localhost/');
+    opn('http://watermark/');
 });
 
 gulp.task('sass', function () {

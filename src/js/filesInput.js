@@ -36,6 +36,7 @@ var FILESINPT = (function () {
                       FILESINPT.updateInputField('upload-picture');
                       TILE.initImage();
                       itsAlive();
+                      FILESINPT.watermarkInputAvailable();
                   });
               } else {
                   alert('Error!');
@@ -87,12 +88,16 @@ var FILESINPT = (function () {
     updateInputField: function (place) {
       if (place === 'upload-picture') {
         // добавит текст в div с названием картинки
-        console.log('зашел');
         $('#upload-picture-styler .jq-file__name').text(model.files.image);
       } else if (place = 'upload-watermark') {
         // добавить текст в div с вотермарком
         $('#upload-watermark-styler .jq-file__name').text(model.files.watermark);
       }
+    },
+    // делает доступным инпут для выбора вотермарка
+    watermarkInputAvailable: function () {
+      $('.upload__watermark').removeClass('disable');
+      $('#upload-watermark').attr('disabled', false);
     }
   }
 })();

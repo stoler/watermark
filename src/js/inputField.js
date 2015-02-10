@@ -12,10 +12,10 @@ var INPUTFIELD = (function () {
                 return val;
             }
 
-            if (val >= 1) {
+            if (val >= 0) {
                 return val;
             } else {
-                return 1;
+                return 0;
             }
         },
 
