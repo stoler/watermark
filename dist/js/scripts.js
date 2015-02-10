@@ -16,8 +16,8 @@ var model = (function () {
         'gridType': 'mono',
         'alpha': .5,
         'margins': {
-            'x': 1,
-            'y': 1
+            'x': 0,
+            'y': 0
         },
         'isActive': false
     };
@@ -3387,7 +3387,7 @@ var COUNTERBTN = (function () {
         step = multiStep;
         // скидываем значение в переменную чтобы проверить ее величину перед обновлением модели
         testValue = model.margins[axis] + (btn.hasClass('crd-arrow-list__item--up') ? step : -step);
-        if (testValue > 0) {
+        if (testValue >= 0) {
           model.margins[axis] = testValue;
         }
       }
