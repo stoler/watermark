@@ -1,5 +1,4 @@
 var SLIDER = (function () {
-  // ...
   return {
     init: function () {
       // хендлер для слайдера

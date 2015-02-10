@@ -15,10 +15,7 @@ var TILE = (function () {
             image = $('.generator-picture__img'),
             imageWidth = image.width();
             imageHeight = image.height();
-            //console.log(imageWidth)
             TILE.initTile()
-            //itemInRow = Math.floor(imageWidth / watermarkWidth) + 1,
-            //rows = Math.floor(imageHeight / watermarkHeight) + 1;
 
 
         },
@@ -28,7 +25,6 @@ var TILE = (function () {
             watermarkWidth = watermark.width();
             watermarkHeight = watermark.height();
             watermarkSrc = watermark.attr('src');
-            //console.log(watermarkHeight, watermarkWidth,watermarkSrc );
             TILE.initTile()
         },
         initTile: function() {
@@ -40,13 +36,10 @@ var TILE = (function () {
             if (watermarkWidth > 0 && imageWidth > 0) {
                 var itemInRow = Math.floor(imageWidth / watermarkWidth) + 1,
                     rows = Math.floor(imageHeight / watermarkHeight) + 1;
-                //alert(watermark.width(),image.width())
                 for (var i = 0; i < rows+2; i++) {
-                    //alert(true)
                     tile.append("<div class='generator-picture__tile-row'>");
                 }
                 for (i = 0; i < itemInRow+2; i++) {
-                    //alert(false)
                     $('.generator-picture__tile-row').append("<img src='" + watermarkSrc + "' class='tile__image' width='"+ watermarkWidth +"' height='"+ watermarkHeight +"'>");
                 }
             }
@@ -63,19 +56,6 @@ var TILE = (function () {
                 tile.hide();
             }
         },
-        // showHide: function (elem) {
-        //     var _this = elem;
-        //     // $('.generator-picture__tile').css({'left':model.coord.x + 'px', 'top':model.coord.y + 'px'});
-        //     if (_this.hasClass('switch__multi')) {
-        //         watermark.hide();
-        //         tile.show();
-
-        //     }
-        //     else {
-        //         watermark.show();
-        //         tile.hide();
-        //     }
-        // },
         // изменяем прозрачность
         changeOpacity: function () {
             tile.css('opacity', model.alpha);

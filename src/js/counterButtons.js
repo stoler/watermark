@@ -1,11 +1,7 @@
 var COUNTERBTN = (function () {
   var
       arrowsButtons = $('.crd-arrow-list__item'),
-      // на сколько увеличивается значение при режиме моно
-      // monoStep = 1,
       step = 1;
-      // на сколько увеличивается значение при режиме мульти
-      // multiStep = 1;
   return {
     init: function () {
       // хендлер для стрелок
@@ -83,8 +79,6 @@ var COUNTERBTN = (function () {
       $('.crd-arrow-list__item--down').each(function () {
         $(this).addClass('crd-arrow-list__item--down-no-hover');
       });
-
-
     }
   }
 })();
