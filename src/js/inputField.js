@@ -6,7 +6,7 @@ var INPUTFIELD = (function () {
         variant = 'coord',
 
     // проверяет чтобы ввод при мульти-режиме
-    // было >= 1
+    // было >= 0
         validInput = function (val, field) {
 
           var
@@ -30,10 +30,6 @@ var INPUTFIELD = (function () {
                 return 0;
             }
 
-            // if (variant === 'coord') {
-                // return val;
-            // }
-
             if (val < 0) {
                 return 0;
             }
@@ -42,11 +38,6 @@ var INPUTFIELD = (function () {
             }
             return val;
 
-            // if (val >= 0 && val <= testValueMax[field]) {
-            //     return val;
-            // } else {
-            //     return 0;
-            // }
         },
 
     // изменяем координаты или величину марджина?
@@ -57,14 +48,6 @@ var INPUTFIELD = (function () {
                 variant = 'margins';
             }
         };
-
-    // проверяет чтобы инпут был числом
-        // validateInput = function (input) {
-            // if (isNaN(input)) {
-                // return 0;
-            // }
-            // return input;
-        // };
 
     return {
         init: function () {
@@ -122,7 +105,7 @@ var INPUTFIELD = (function () {
             var
                 coordination = inpWin.hasClass('crd-window__num--x') ? 'x' : 'y';
 
-            model[variant][coordination] = validInput(model[variant][coordination] += direction);
+            model[variant][coordination] = validInput((model[variant][coordination] += direction), coordination);
         },
         deactivate: function () {
             inputWindow.each(function () {

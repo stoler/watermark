@@ -66,7 +66,6 @@ var FILESINPT = (function () {
                       // изменяет поле, содержащее имя файла в разметке
                       FILESINPT.updateInputField('upload-watermark');
 
-                      //alert(true);
                       itsAlive();
                       DRAGGABLE.setOpacity();
 

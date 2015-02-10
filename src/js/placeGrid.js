@@ -35,7 +35,6 @@ var PLACEGRID = (function () {
             });
             // отключаем возможности показа активного квадрата
             $('.square-td--active').removeClass('square-td--active');
-            // todo
             // выключаем ховер
             squareOfGrid.each(function () {
                 $(this).removeClass('square-td--hover-enable');
@@ -153,7 +152,6 @@ var PLACEGRID = (function () {
         init: function () {
             state = 'mono';
             lineToSquare();
-            // this.setStyle();
             setClass();
 
             // хендлер для грида

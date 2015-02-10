@@ -1,39 +1,15 @@
-// $(function(){
     var counterTimeout;
-        // массив для определения пределов
-        // в которых может перемещаться 
-        // вотермарк
-        // contSize = [];
 
     // style input
     $('.js-upload').styler();
 
     // инициализируем драггабл
-    // contSize = DRAGGABLE.calculateContainer();
     $('.generator-picture__watermark').draggable({
         containment: 'parent'
     });
-    // инициализируем драггабл сетки 'замостить'
-    // $('.generator-picture__tile').draggable({
-        // containment: contSize
-    // });
 
     FILESINPT.init();
 
-    // хендлер для резайза окна (когда окно изменяется в размере, то
-    // пересчитывается контейнер в котором может перемещаться изображение)
-    // $( window ).on('resize', function () {
-    //     // пересчитали блок
-    //     contSize = DRAGGABLE.calculateContainer();
-    //     // инициализировали новую область
-    //     $('.generator-picture__watermark').draggable({
-    //         containment: contSize
-    //     });
-    //     $('.generator-picture__tile').draggable({
-    //         containment: contSize
-    //     });
-    // });
-   
     // инициализируем слайдер
     $('.generator-transparency__slider').slider({
         min: 0,
@@ -54,7 +30,9 @@
         e.preventDefault();
         Share[$(this).data('site')]('URL','TITLE','IMG_PATH', 'DESC');
     });
-COUNTERBTN.init();
+
+    COUNTERBTN.init();
+    
     function itsAlive () {
         if (model.isActive) {
           // удаляет опасити с боковой панели
@@ -74,4 +52,3 @@ COUNTERBTN.init();
           DRAGGABLE.init();
         }
     }
-// });

@@ -3218,10 +3218,7 @@ var TILE = (function () {
             image = $('.generator-picture__img'),
             imageWidth = image.width();
             imageHeight = image.height();
-            //console.log(imageWidth)
             TILE.initTile()
-            //itemInRow = Math.floor(imageWidth / watermarkWidth) + 1,
-            //rows = Math.floor(imageHeight / watermarkHeight) + 1;
 
 
         },
@@ -3231,7 +3228,6 @@ var TILE = (function () {
             watermarkWidth = watermark.width();
             watermarkHeight = watermark.height();
             watermarkSrc = watermark.attr('src');
-            //console.log(watermarkHeight, watermarkWidth,watermarkSrc );
             TILE.initTile()
         },
         initTile: function() {
@@ -3243,13 +3239,10 @@ var TILE = (function () {
             if (watermarkWidth > 0 && imageWidth > 0) {
                 var itemInRow = Math.floor(imageWidth / watermarkWidth) + 1,
                     rows = Math.floor(imageHeight / watermarkHeight) + 1;
-                //alert(watermark.width(),image.width())
                 for (var i = 0; i < rows+2; i++) {
-                    //alert(true)
                     tile.append("<div class='generator-picture__tile-row'>");
                 }
                 for (i = 0; i < itemInRow+2; i++) {
-                    //alert(false)
                     $('.generator-picture__tile-row').append("<img src='" + watermarkSrc + "' class='tile__image' width='"+ watermarkWidth +"' height='"+ watermarkHeight +"'>");
                 }
             }
@@ -3266,19 +3259,6 @@ var TILE = (function () {
                 tile.hide();
             }
         },
-        // showHide: function (elem) {
-        //     var _this = elem;
-        //     // $('.generator-picture__tile').css({'left':model.coord.x + 'px', 'top':model.coord.y + 'px'});
-        //     if (_this.hasClass('switch__multi')) {
-        //         watermark.hide();
-        //         tile.show();
-
-        //     }
-        //     else {
-        //         watermark.show();
-        //         tile.hide();
-        //     }
-        // },
         // изменяем прозрачность
         changeOpacity: function () {
             tile.css('opacity', model.alpha);
@@ -3347,11 +3327,7 @@ var Share = {
 var COUNTERBTN = (function () {
   var
       arrowsButtons = $('.crd-arrow-list__item'),
-      // на сколько увеличивается значение при режиме моно
-      // monoStep = 1,
       step = 1;
-      // на сколько увеличивается значение при режиме мульти
-      // multiStep = 1;
   return {
     init: function () {
       // хендлер для стрелок
@@ -3429,8 +3405,6 @@ var COUNTERBTN = (function () {
       $('.crd-arrow-list__item--down').each(function () {
         $(this).addClass('crd-arrow-list__item--down-no-hover');
       });
-
-
     }
   }
 })();
@@ -3471,7 +3445,6 @@ var PLACEGRID = (function () {
             });
             // отключаем возможности показа активного квадрата
             $('.square-td--active').removeClass('square-td--active');
-            // todo
             // выключаем ховер
             squareOfGrid.each(function () {
                 $(this).removeClass('square-td--hover-enable');
@@ -3589,7 +3562,6 @@ var PLACEGRID = (function () {
         init: function () {
             state = 'mono';
             lineToSquare();
-            // this.setStyle();
             setClass();
 
             // хендлер для грида
@@ -3677,7 +3649,7 @@ var INPUTFIELD = (function () {
         variant = 'coord',
 
     // проверяет чтобы ввод при мульти-режиме
-    // было >= 1
+    // было >= 0
         validInput = function (val, field) {
 
           var
@@ -3701,10 +3673,6 @@ var INPUTFIELD = (function () {
                 return 0;
             }
 
-            // if (variant === 'coord') {
-                // return val;
-            // }
-
             if (val < 0) {
                 return 0;
             }
@@ -3713,11 +3681,6 @@ var INPUTFIELD = (function () {
             }
             return val;
 
-            // if (val >= 0 && val <= testValueMax[field]) {
-            //     return val;
-            // } else {
-            //     return 0;
-            // }
         },
 
     // изменяем координаты или величину марджина?
@@ -3728,14 +3691,6 @@ var INPUTFIELD = (function () {
                 variant = 'margins';
             }
         };
-
-    // проверяет чтобы инпут был числом
-        // validateInput = function (input) {
-            // if (isNaN(input)) {
-                // return 0;
-            // }
-            // return input;
-        // };
 
     return {
         init: function () {
@@ -3793,7 +3748,7 @@ var INPUTFIELD = (function () {
             var
                 coordination = inpWin.hasClass('crd-window__num--x') ? 'x' : 'y';
 
-            model[variant][coordination] = validInput(model[variant][coordination] += direction);
+            model[variant][coordination] = validInput((model[variant][coordination] += direction), coordination);
         },
         deactivate: function () {
             inputWindow.each(function () {
@@ -3805,7 +3760,6 @@ var INPUTFIELD = (function () {
     }
 })();
 var SLIDER = (function () {
-  // ...
   return {
     init: function () {
       // хендлер для слайдера
@@ -3862,9 +3816,6 @@ var SWITCH = (function () {
           PLACEGRID.setStyle();
           //показываем/скрываем сетку 'замостить'
           TILE.showHide();
-          // TILE.showHide($(this))
-          // watermark должен перестать двигаться и начать увеличивать марджин
-          // ...
       });
       $('.switch__mono').addClass('switch--active switch__mono--hover');
       $('.switch__multi').addClass('switch__multi--hover');
@@ -3872,7 +3823,6 @@ var SWITCH = (function () {
     },
     // изменяет значение gridType
     changeSwitchInModel: function (switchPosition) {
-      // $('.generator-picture__tile,.generator-picture__watermark').css({'left':model.coord.x + 'px', 'top':model.coord.y + 'px'});
       if (switchPosition.hasClass('switch__mono')) {
         model.gridType = 'mono';
       } else {
@@ -3939,8 +3889,6 @@ var DRAGGABLE = (function () {
     updateModel: function (ui) {
       model.coord.x = parseInt((ui.position.left).toFixed(0));
       model.coord.y = parseInt((ui.position.top).toFixed(0));
-      // model.coord.x = ui.position.left;
-      // model.coord.y = ui.position.top;
     },
 
     // изменяет положение
@@ -3956,48 +3904,12 @@ var DRAGGABLE = (function () {
       watermark.css('opacity', model.alpha);
     },
 
-    // рассчитывает величину
-    // контейнера внутри которого можно драгать
-    // вотермарк
-    // calculateContainer: function () {
-    //   var
-    //       watermark = $('.generator-picture__watermark'),
-    //       image = $('.generator-picture__image'),
-
-    //       // координаты контейнера вотермарка
-    //       container = [
-    //         image.offset().left,
-    //         image.offset().top,
-    //         image.offset().left + image.width(),
-    //         image.offset().top + image.height(),
-    //       ],
-
-    //       // массив [x1, y1, x2, y2] для определения четырехуголника
-    //       // в котором можно дрегать вотермарк
-    //       resultArray = [];
-      
-      
-
-    //   resultArray.push(container[0] - watermark.width());
-    //   resultArray.push(container[1] - watermark.height());
-    //   resultArray.push(container[2]);
-    //   resultArray.push(container[3]);
-
-    //   return resultArray;
-
-    // },
-
     disable: function () {
       $('.generator-picture__watermark').off('drag');
     }
   }
 })();
 var RESET = (function () {
-    // var
-        // deleteImage = function () {
-            // $('.generator-picture__watermark').fadeOut().attr('src','dist/img/upload/watermark.png');
-            // $('.generator-picture__img').attr('src','dist/img/upload/image.png');
-        // };
     return {
         init: function () {
             // сброс
@@ -4021,53 +3933,15 @@ var RESET = (function () {
                 TILE.changeVerticalGutter();
                 TILE.changeHorizontalGutter();
 
-                // удаляет загруженные картинки
-                // deleteImage();
-
-                // отключаются хендлеры и все возвращается в состоянии до
-                // инициализации
-                // ...
-                // инпуты отключаются
-                // INPUTFIELD.deactivate();
-                // стрелки не нажимаются
-                // COUNTERBTN.deactivate();
-                // грид не работает
-                // PLACEGRID.deactivate();
-                // ползунок не двигается
-                // SLIDER.deactivate();
-                // драг отключен
-                // DRAGGABLE.disable();
-                // свитч отключен
-                // SWITCH.disable();
-
-                // $('.generator-picture__tile-row').hide();
-                // $('.button-reset--hover').removeClass('button-reset--hover');
-                // $('.button-download--hover').removeClass('button-download--hover');
-
-                // боковая панель становится очень сильно прозрачной
-                // $('.main-generator-buttons').addClass('disable');
-                // $('.main-generator-transparency').addClass('disable');
-                // $('.main-generator-position').addClass('disable');
-                // $('.upload__watermark').addClass('disable');
-
-                // отключаем возможность подключения файла вотермарка
-                // $('#upload-watermark').attr('disabled', true);
-
             });
         },
         resetApp: function () {
             model.coord.x = 0;
             model.coord.y = 0;
-            // model.files.image = '';
-            // model.files.watermark = '';
             model.gridType = 'mono';
             model.alpha = .5;
             model.margins.x = 0;
             model.margins.y = 0;
-            // model.isActive = false;
-
-            // сбрасывает инпуты файлов
-            // $('.jq-file__name').text('Файл не выбран');
         }
     }
 })();
@@ -4163,7 +4037,6 @@ var FILESINPT = (function () {
                       // изменяет поле, содержащее имя файла в разметке
                       FILESINPT.updateInputField('upload-watermark');
 
-                      //alert(true);
                       itsAlive();
                       DRAGGABLE.setOpacity();
 
@@ -4198,42 +4071,18 @@ var FILESINPT = (function () {
     }
   }
 })();
-// $(function(){
     var counterTimeout;
-        // массив для определения пределов
-        // в которых может перемещаться 
-        // вотермарк
-        // contSize = [];
 
     // style input
     $('.js-upload').styler();
 
     // инициализируем драггабл
-    // contSize = DRAGGABLE.calculateContainer();
     $('.generator-picture__watermark').draggable({
         containment: 'parent'
     });
-    // инициализируем драггабл сетки 'замостить'
-    // $('.generator-picture__tile').draggable({
-        // containment: contSize
-    // });
 
     FILESINPT.init();
 
-    // хендлер для резайза окна (когда окно изменяется в размере, то
-    // пересчитывается контейнер в котором может перемещаться изображение)
-    // $( window ).on('resize', function () {
-    //     // пересчитали блок
-    //     contSize = DRAGGABLE.calculateContainer();
-    //     // инициализировали новую область
-    //     $('.generator-picture__watermark').draggable({
-    //         containment: contSize
-    //     });
-    //     $('.generator-picture__tile').draggable({
-    //         containment: contSize
-    //     });
-    // });
-   
     // инициализируем слайдер
     $('.generator-transparency__slider').slider({
         min: 0,
@@ -4254,7 +4103,9 @@ var FILESINPT = (function () {
         e.preventDefault();
         Share[$(this).data('site')]('URL','TITLE','IMG_PATH', 'DESC');
     });
-COUNTERBTN.init();
+
+    COUNTERBTN.init();
+    
     function itsAlive () {
         if (model.isActive) {
           // удаляет опасити с боковой панели
@@ -4274,4 +4125,3 @@ COUNTERBTN.init();
           DRAGGABLE.init();
         }
     }
-// });
