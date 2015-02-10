@@ -3887,8 +3887,10 @@ var DRAGGABLE = (function () {
         });
     },
     updateModel: function (ui) {
-      model.coord.x = parseInt((ui.position.left).toFixed(0));
-      model.coord.y = parseInt((ui.position.top).toFixed(0));
+      if (typeof ui != "undefined") {
+        model.coord.x = parseInt((ui.position.left).toFixed(0));
+        model.coord.y = parseInt((ui.position.top).toFixed(0));
+      }
     },
 
     // изменяет положение
@@ -3947,8 +3949,6 @@ var RESET = (function () {
 })();
 var SENDDATA = (function ($) {
     var validateData = function () {
-        console.log($.trim(model.files.image).length,$.trim(model.files.watermark).length);
-
         if ($.trim(model.files.image).length === 0 || $.trim(model.files.watermark).length === 0) {
             return false;
         }
@@ -3958,13 +3958,14 @@ var SENDDATA = (function ($) {
     return {
         send: function () {
             if (validateData()) {
-                console.log(JSON.stringify(model));
+                model.tmpW = $('.generator-picture__img').width();
+                model.tmpH = $('.generator-picture__img').height();
                 PRELOADER.show();
                 $("iframe").attr("src",'/?download=1&data=' + JSON.stringify(model)).ready(function () {
                     PRELOADER.hide();
                 });
             } else {
-                console.log('Ошибка при отправке данных');
+                alert('Ошибка при отправке данных');
             }
         }
     };

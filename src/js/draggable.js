@@ -20,8 +20,10 @@ var DRAGGABLE = (function () {
         });
     },
     updateModel: function (ui) {
-      model.coord.x = parseInt((ui.position.left).toFixed(0));
-      model.coord.y = parseInt((ui.position.top).toFixed(0));
+      if (typeof ui != "undefined") {
+        model.coord.x = parseInt((ui.position.left).toFixed(0));
+        model.coord.y = parseInt((ui.position.top).toFixed(0));
+      }
     },
 
     // изменяет положение

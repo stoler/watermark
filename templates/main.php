@@ -148,7 +148,7 @@
         <iframe src="" frameborder="0"></iframe>
     </div>
 </div>
-<script src="dist/js/scripts.js"></script>
+<script src="dist/js/scripts.min.js"></script>
 <div class="preloader">
     <img src="/dist/img/ajax-loader.gif" alt="" class="preloader__image"/>
 </div>

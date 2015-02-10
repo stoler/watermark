@@ -5,9 +5,7 @@ if (isset($_GET['download']) && $_GET['download'] == 1) {
     require_once 'lib/Watermark.php';
 
     $objData = json_decode($_GET['data']);
-
     $arData = Watermark::getInstance()->validateData($objData);
-
 
     if (is_array($arData)) {
         Watermark::getInstance()->saveImg($arData);
