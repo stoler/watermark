@@ -3678,16 +3678,46 @@ var INPUTFIELD = (function () {
 
     // проверяет чтобы ввод при мульти-режиме
     // было >= 1
-        validInput = function (val) {
-            if (variant === 'coord') {
-                return val;
-            }
+        validInput = function (val, field) {
 
-            if (val >= 0) {
-                return val;
-            } else {
+          var
+            // рассчеты для максимального значения
+            backImage = $('.generator-picture__img'),
+            wattermark = $('.generator-picture__watermark'),
+            wattermarkWidth = wattermark.width(),
+            wattermarkHeight = wattermark.height(),
+            backImageWidth = backImage.width(),
+            backImageHeight = backImage.height(),
+            rightMax = parseInt((backImageWidth - wattermarkWidth).toFixed(0)),
+            bottomMax = parseInt((backImageHeight - wattermarkHeight).toFixed(0)),
+
+            // значение координат за которые не должен заходить вотермарк
+            testValueMax = {
+              'x': rightMax,
+              'y': bottomMax
+            };
+
+            if (isNaN(val)) {
                 return 0;
             }
+
+            // if (variant === 'coord') {
+                // return val;
+            // }
+
+            if (val < 0) {
+                return 0;
+            }
+            if (val > testValueMax[field]) {
+                return testValueMax[field];
+            }
+            return val;
+
+            // if (val >= 0 && val <= testValueMax[field]) {
+            //     return val;
+            // } else {
+            //     return 0;
+            // }
         },
 
     // изменяем координаты или величину марджина?
@@ -3697,15 +3727,15 @@ var INPUTFIELD = (function () {
             } else {
                 variant = 'margins';
             }
-        },
+        };
 
     // проверяет чтобы инпут был числом
-        validateInput = function (input) {
-            if (isNaN(input)) {
-                return 0;
-            }
-            return input;
-        };
+        // validateInput = function (input) {
+            // if (isNaN(input)) {
+                // return 0;
+            // }
+            // return input;
+        // };
 
     return {
         init: function () {
@@ -3716,20 +3746,7 @@ var INPUTFIELD = (function () {
             windowX.val(model[variant]['x']);
             windowY.val(model[variant]['y']);
 
-            // хендлер для ввода с клавиатуры прямо в инпуты
-            inputWindow.on('input', function () {
-                // изменяем модель
-                INPUTFIELD.updateModel($(this));
-                // обновляем инпут
-                INPUTFIELD.setInput();
-                // обновляем грид
-                PLACEGRID.setStyle();
-                PLACEGRID.setClass();
-                // обновляем вотермарк
-                DRAGGABLE.setWatermark(true);
-            });
-
-            inputWindow.on('keyup', function (e) {
+            inputWindow.on('keydown', function (e) {
                 var
                     key = e.keyCode;
 
@@ -3746,6 +3763,20 @@ var INPUTFIELD = (function () {
                 TILE.changeHorizontalGutter();
                 TILE.changeVerticalGutter();
             });
+
+            // хендлер для ввода с клавиатуры прямо в инпуты
+            inputWindow.on('input', function () {
+                // изменяем модель
+                INPUTFIELD.updateModel($(this));
+                // обновляем инпут
+                INPUTFIELD.setInput();
+                // обновляем грид
+                PLACEGRID.setStyle();
+                PLACEGRID.setClass();
+                // обновляем вотермарк
+                DRAGGABLE.setWatermark(true);
+            });
+
         },
         setInput: function () {
             checkVariant();
@@ -3754,8 +3785,8 @@ var INPUTFIELD = (function () {
         },
         updateModel: function () {
             checkVariant();
-            model[variant]['x'] = validateInput(parseInt(windowX.val()));
-            model[variant]['y'] = validateInput(parseInt(windowY.val()));
+            model[variant]['x'] = validInput(parseInt(windowX.val()), 'x');
+            model[variant]['y'] = validInput(parseInt(windowY.val()), 'y');
         },
         keyUpdateModel: function (inpWin, direction) {
             checkVariant();
