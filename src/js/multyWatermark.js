@@ -55,7 +55,7 @@ var TILE = (function () {
         // скрываем/показываем сетку замости
         showHide: function (elem) {
             var _this = elem;
-            $('.generator-picture__tile').css({'left':model.coord.x + 'px', 'top':model.coord.y + 'px'});
+            // $('.generator-picture__tile').css({'left':model.coord.x + 'px', 'top':model.coord.y + 'px'});
             if (_this.hasClass('switch__multi')) {
                 watermark.hide();
                 tile.show();

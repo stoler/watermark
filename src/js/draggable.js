@@ -42,33 +42,33 @@ var DRAGGABLE = (function () {
     // рассчитывает величину
     // контейнера внутри которого можно драгать
     // вотермарк
-    calculateContainer: function () {
-      var
-          watermark = $('.generator-picture__watermark'),
-          image = $('.generator-picture__image'),
+    // calculateContainer: function () {
+    //   var
+    //       watermark = $('.generator-picture__watermark'),
+    //       image = $('.generator-picture__image'),
 
-          // координаты контейнера вотермарка
-          container = [
-            image.offset().left,
-            image.offset().top,
-            image.offset().left + image.width(),
-            image.offset().top + image.height(),
-          ],
+    //       // координаты контейнера вотермарка
+    //       container = [
+    //         image.offset().left,
+    //         image.offset().top,
+    //         image.offset().left + image.width(),
+    //         image.offset().top + image.height(),
+    //       ],
 
-          // массив [x1, y1, x2, y2] для определения четырехуголника
-          // в котором можно дрегать вотермарк
-          resultArray = [];
+    //       // массив [x1, y1, x2, y2] для определения четырехуголника
+    //       // в котором можно дрегать вотермарк
+    //       resultArray = [];
       
       
 
-      resultArray.push(container[0] - watermark.width());
-      resultArray.push(container[1] - watermark.height());
-      resultArray.push(container[2]);
-      resultArray.push(container[3]);
+    //   resultArray.push(container[0] - watermark.width());
+    //   resultArray.push(container[1] - watermark.height());
+    //   resultArray.push(container[2]);
+    //   resultArray.push(container[3]);
 
-      return resultArray;
+    //   return resultArray;
 
-    },
+    // },
 
     disable: function () {
       $('.generator-picture__watermark').off('drag');

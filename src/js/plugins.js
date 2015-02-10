@@ -1,22 +1,22 @@
 // $(function(){
-    var counterTimeout,
+    var counterTimeout;
         // массив для определения пределов
         // в которых может перемещаться 
         // вотермарк
-        contSize = [];
+        // contSize = [];
 
     // style input
     $('.js-upload').styler();
 
     // инициализируем драггабл
-    contSize = DRAGGABLE.calculateContainer();
+    // contSize = DRAGGABLE.calculateContainer();
     $('.generator-picture__watermark').draggable({
         containment: 'parent'
     });
     // инициализируем драггабл сетки 'замостить'
-    $('.generator-picture__tile').draggable({
-        containment: contSize
-    });
+    // $('.generator-picture__tile').draggable({
+        // containment: contSize
+    // });
 
     FILESINPT.init();
 

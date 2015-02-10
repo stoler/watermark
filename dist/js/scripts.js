@@ -3258,7 +3258,7 @@ var TILE = (function () {
         // скрываем/показываем сетку замости
         showHide: function (elem) {
             var _this = elem;
-            $('.generator-picture__tile').css({'left':model.coord.x + 'px', 'top':model.coord.y + 'px'});
+            // $('.generator-picture__tile').css({'left':model.coord.x + 'px', 'top':model.coord.y + 'px'});
             if (_this.hasClass('switch__multi')) {
                 watermark.hide();
                 tile.show();
@@ -3811,7 +3811,7 @@ var SWITCH = (function () {
     },
     // изменяет значение gridType
     changeSwitchInModel: function (switchPosition) {
-      $('.generator-picture__tile,.generator-picture__watermark').css({'left':model.coord.x + 'px', 'top':model.coord.y + 'px'});
+      // $('.generator-picture__tile,.generator-picture__watermark').css({'left':model.coord.x + 'px', 'top':model.coord.y + 'px'});
       if (switchPosition.hasClass('switch__mono')) {
         model.gridType = 'mono';
       } else {
@@ -3898,33 +3898,33 @@ var DRAGGABLE = (function () {
     // рассчитывает величину
     // контейнера внутри которого можно драгать
     // вотермарк
-    calculateContainer: function () {
-      var
-          watermark = $('.generator-picture__watermark'),
-          image = $('.generator-picture__image'),
+    // calculateContainer: function () {
+    //   var
+    //       watermark = $('.generator-picture__watermark'),
+    //       image = $('.generator-picture__image'),
 
-          // координаты контейнера вотермарка
-          container = [
-            image.offset().left,
-            image.offset().top,
-            image.offset().left + image.width(),
-            image.offset().top + image.height(),
-          ],
+    //       // координаты контейнера вотермарка
+    //       container = [
+    //         image.offset().left,
+    //         image.offset().top,
+    //         image.offset().left + image.width(),
+    //         image.offset().top + image.height(),
+    //       ],
 
-          // массив [x1, y1, x2, y2] для определения четырехуголника
-          // в котором можно дрегать вотермарк
-          resultArray = [];
+    //       // массив [x1, y1, x2, y2] для определения четырехуголника
+    //       // в котором можно дрегать вотермарк
+    //       resultArray = [];
       
       
 
-      resultArray.push(container[0] - watermark.width());
-      resultArray.push(container[1] - watermark.height());
-      resultArray.push(container[2]);
-      resultArray.push(container[3]);
+    //   resultArray.push(container[0] - watermark.width());
+    //   resultArray.push(container[1] - watermark.height());
+    //   resultArray.push(container[2]);
+    //   resultArray.push(container[3]);
 
-      return resultArray;
+    //   return resultArray;
 
-    },
+    // },
 
     disable: function () {
       $('.generator-picture__watermark').off('drag');
@@ -4123,24 +4123,24 @@ var FILESINPT = (function () {
   }
 })();
 // $(function(){
-    var counterTimeout,
+    var counterTimeout;
         // массив для определения пределов
         // в которых может перемещаться 
         // вотермарк
-        contSize = [];
+        // contSize = [];
 
     // style input
     $('.js-upload').styler();
 
     // инициализируем драггабл
-    contSize = DRAGGABLE.calculateContainer();
+    // contSize = DRAGGABLE.calculateContainer();
     $('.generator-picture__watermark').draggable({
         containment: 'parent'
     });
     // инициализируем драггабл сетки 'замостить'
-    $('.generator-picture__tile').draggable({
-        containment: contSize
-    });
+    // $('.generator-picture__tile').draggable({
+        // containment: contSize
+    // });
 
     FILESINPT.init();
 
