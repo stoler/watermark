@@ -3241,7 +3241,6 @@ var TILE = (function () {
             $tile__image.remove();
 
             if (watermarkWidth > 0 && imageWidth > 0) {
-                console.log(watermarkWidth, watermarkHeight)
                 var itemInRow = Math.floor(imageWidth / watermarkWidth) + 1,
                     rows = Math.floor(imageHeight / watermarkHeight) + 1;
                 //alert(watermark.width(),image.width())
@@ -3654,10 +3653,10 @@ var INPUTFIELD = (function () {
                 return val;
             }
 
-            if (val >= 1) {
+            if (val >= 0) {
                 return val;
             } else {
-                return 1;
+                return 0;
             }
         },
 
@@ -3982,6 +3981,11 @@ var RESET = (function () {
                 $('.main-generator-buttons').addClass('disable');
                 $('.main-generator-transparency').addClass('disable');
                 $('.main-generator-position').addClass('disable');
+                $('.upload__watermark').addClass('disable');
+
+                // отключаем возможность подключения файла вотермарка
+                $('#upload-watermark').attr('disabled', true);
+
             });
         },
         resetApp: function () {
@@ -4062,6 +4066,7 @@ var FILESINPT = (function () {
                       FILESINPT.updateInputField('upload-picture');
                       TILE.initImage();
                       itsAlive();
+                      FILESINPT.watermarkInputAvailable();
                   });
               } else {
                   alert('Error!');
@@ -4113,12 +4118,16 @@ var FILESINPT = (function () {
     updateInputField: function (place) {
       if (place === 'upload-picture') {
         // добавит текст в div с названием картинки
-        console.log('зашел');
         $('#upload-picture-styler .jq-file__name').text(model.files.image);
       } else if (place = 'upload-watermark') {
         // добавить текст в div с вотермарком
         $('#upload-watermark-styler .jq-file__name').text(model.files.watermark);
       }
+    },
+    // делает доступным инпут для выбора вотермарка
+    watermarkInputAvailable: function () {
+      $('.upload__watermark').removeClass('disable');
+      $('#upload-watermark').attr('disabled', false);
     }
   }
 })();

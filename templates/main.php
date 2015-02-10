@@ -48,9 +48,9 @@
                             <label for="upload-picture" class="main-picture__title"><?= $lang['origin_img'] ?></label>
                             <input type="file" placeholder="image.png" name="files[]" data-url="/lib/jquery-file-upload/" id="upload-picture" class="main-picture__file js-upload">
                         </div>
-                        <div class="upload__watermark">
+                        <div class="upload__watermark disable">
                             <label for="upload-watermark" class="watermark__title"><?= $lang['watermark'] ?></label>
-                            <input type="file" placeholder="image.png" name="files[]" data-url="/lib/jquery-file-upload/" id="upload-watermark" class="watermark__file js-upload">
+                            <input disabled type="file" placeholder="image.png" name="files[]" data-url="/lib/jquery-file-upload/" id="upload-watermark" class="watermark__file js-upload">
                         </div>
                     </form>
                 </div>

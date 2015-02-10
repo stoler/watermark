@@ -49,6 +49,11 @@ var RESET = (function () {
                 $('.main-generator-buttons').addClass('disable');
                 $('.main-generator-transparency').addClass('disable');
                 $('.main-generator-position').addClass('disable');
+                $('.upload__watermark').addClass('disable');
+
+                // отключаем возможность подключения файла вотермарка
+                $('#upload-watermark').attr('disabled', true);
+
             });
         },
         resetApp: function () {

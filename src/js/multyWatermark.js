@@ -38,7 +38,6 @@ var TILE = (function () {
             $tile__image.remove();
 
             if (watermarkWidth > 0 && imageWidth > 0) {
-                console.log(watermarkWidth, watermarkHeight)
                 var itemInRow = Math.floor(imageWidth / watermarkWidth) + 1,
                     rows = Math.floor(imageHeight / watermarkHeight) + 1;
                 //alert(watermark.width(),image.width())
