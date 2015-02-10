@@ -1,5 +1,6 @@
 <?php
 $lang = array();
+$lang['page_title'] = 'Service for watermark generating';
 $lang['title'] = 'Watermarks generator';
 $lang['settings'] = 'Settings';
 $lang['origin_img'] = 'Original image';

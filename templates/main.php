@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta rel="icon" type="image/vnd.microsoft.icon" href="favicon.ico">
     <link rel="SHORTCUT ICON" href="favicon.ico">
-    <title>Сервис для наложения водяных знаков</title>
+    <title><?= $lang['page_title'] ?></title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Сервис для наложения водяных знаков">
     <meta name="keywords" content="Сервис для наложения водяных знаков">
