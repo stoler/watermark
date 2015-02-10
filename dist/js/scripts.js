@@ -3255,10 +3255,8 @@ var TILE = (function () {
             }
         },
         // скрываем/показываем сетку замости
-        showHide: function (elem) {
-            var _this = elem;
-            // $('.generator-picture__tile').css({'left':model.coord.x + 'px', 'top':model.coord.y + 'px'});
-            if (_this.hasClass('switch__multi')) {
+        showHide: function () {
+            if (model.gridType === 'multi') {
                 watermark.hide();
                 tile.show();
 
@@ -3268,6 +3266,19 @@ var TILE = (function () {
                 tile.hide();
             }
         },
+        // showHide: function (elem) {
+        //     var _this = elem;
+        //     // $('.generator-picture__tile').css({'left':model.coord.x + 'px', 'top':model.coord.y + 'px'});
+        //     if (_this.hasClass('switch__multi')) {
+        //         watermark.hide();
+        //         tile.show();
+
+        //     }
+        //     else {
+        //         watermark.show();
+        //         tile.hide();
+        //     }
+        // },
         // изменяем прозрачность
         changeOpacity: function () {
             tile.css('opacity', model.alpha);
@@ -3800,7 +3811,8 @@ var SWITCH = (function () {
           // грид должен обновиться
           PLACEGRID.setStyle();
           //показываем/скрываем сетку 'замостить'
-          TILE.showHide($(this))
+          TILE.showHide();
+          // TILE.showHide($(this))
           // watermark должен перестать двигаться и начать увеличивать марджин
           // ...
       });
@@ -3931,11 +3943,11 @@ var DRAGGABLE = (function () {
   }
 })();
 var RESET = (function () {
-    var
-        deleteImage = function () {
-            $('.generator-picture__watermark').fadeOut().attr('src','dist/img/upload/watermark.png');
-            $('.generator-picture__img').attr('src','dist/img/upload/image.png');
-        };
+    // var
+        // deleteImage = function () {
+            // $('.generator-picture__watermark').fadeOut().attr('src','dist/img/upload/watermark.png');
+            // $('.generator-picture__img').attr('src','dist/img/upload/image.png');
+        // };
     return {
         init: function () {
             // сброс
@@ -3944,7 +3956,7 @@ var RESET = (function () {
                 INPUTFIELD.setInput();
                 // сбрасывает свитч до моно
                 SWITCH.setSwitch();
-                // сбрасывает положение слайдбара до правого положения (100%)
+                // сбрасывает положение слайдбара до среднего положения (50%)
                 SLIDER.setSlider();
                 // вотермарк изменяется
                 DRAGGABLE.setWatermark(true);
@@ -3954,53 +3966,56 @@ var RESET = (function () {
                 // грид должен изменяться до первоначального значения
                 PLACEGRID.setStyle();
                 PLACEGRID.setClass();
+                // watermark становится mono
+                TILE.showHide();
+
                 // удаляет загруженные картинки
-                deleteImage();
+                // deleteImage();
 
                 // отключаются хендлеры и все возвращается в состоянии до
                 // инициализации
                 // ...
                 // инпуты отключаются
-                INPUTFIELD.deactivate();
+                // INPUTFIELD.deactivate();
                 // стрелки не нажимаются
-                COUNTERBTN.deactivate();
+                // COUNTERBTN.deactivate();
                 // грид не работает
-                PLACEGRID.deactivate();
+                // PLACEGRID.deactivate();
                 // ползунок не двигается
-                SLIDER.deactivate();
+                // SLIDER.deactivate();
                 // драг отключен
-                DRAGGABLE.disable();
+                // DRAGGABLE.disable();
                 // свитч отключен
-                SWITCH.disable();
+                // SWITCH.disable();
 
-                $('.generator-picture__tile-row').hide();
-                $('.button-reset--hover').removeClass('button-reset--hover');
-                $('.button-download--hover').removeClass('button-download--hover');
+                // $('.generator-picture__tile-row').hide();
+                // $('.button-reset--hover').removeClass('button-reset--hover');
+                // $('.button-download--hover').removeClass('button-download--hover');
 
                 // боковая панель становится очень сильно прозрачной
-                $('.main-generator-buttons').addClass('disable');
-                $('.main-generator-transparency').addClass('disable');
-                $('.main-generator-position').addClass('disable');
-                $('.upload__watermark').addClass('disable');
+                // $('.main-generator-buttons').addClass('disable');
+                // $('.main-generator-transparency').addClass('disable');
+                // $('.main-generator-position').addClass('disable');
+                // $('.upload__watermark').addClass('disable');
 
                 // отключаем возможность подключения файла вотермарка
-                $('#upload-watermark').attr('disabled', true);
+                // $('#upload-watermark').attr('disabled', true);
 
             });
         },
         resetApp: function () {
             model.coord.x = 0;
             model.coord.y = 0;
-            model.files.image = '';
-            model.files.watermark = '';
+            // model.files.image = '';
+            // model.files.watermark = '';
             model.gridType = 'mono';
             model.alpha = .5;
             model.margins.x = 1;
             model.margins.y = 1;
-            model.isActive = false;
+            // model.isActive = false;
 
             // сбрасывает инпуты файлов
-            $('.jq-file__name').text('Файл не выбран');
+            // $('.jq-file__name').text('Файл не выбран');
         }
     }
 })();

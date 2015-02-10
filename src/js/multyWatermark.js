@@ -52,10 +52,8 @@ var TILE = (function () {
             }
         },
         // скрываем/показываем сетку замости
-        showHide: function (elem) {
-            var _this = elem;
-            // $('.generator-picture__tile').css({'left':model.coord.x + 'px', 'top':model.coord.y + 'px'});
-            if (_this.hasClass('switch__multi')) {
+        showHide: function () {
+            if (model.gridType === 'multi') {
                 watermark.hide();
                 tile.show();
 
@@ -65,6 +63,19 @@ var TILE = (function () {
                 tile.hide();
             }
         },
+        // showHide: function (elem) {
+        //     var _this = elem;
+        //     // $('.generator-picture__tile').css({'left':model.coord.x + 'px', 'top':model.coord.y + 'px'});
+        //     if (_this.hasClass('switch__multi')) {
+        //         watermark.hide();
+        //         tile.show();
+
+        //     }
+        //     else {
+        //         watermark.show();
+        //         tile.hide();
+        //     }
+        // },
         // изменяем прозрачность
         changeOpacity: function () {
             tile.css('opacity', model.alpha);

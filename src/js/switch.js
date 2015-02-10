@@ -13,7 +13,8 @@ var SWITCH = (function () {
           // грид должен обновиться
           PLACEGRID.setStyle();
           //показываем/скрываем сетку 'замостить'
-          TILE.showHide($(this))
+          TILE.showHide();
+          // TILE.showHide($(this))
           // watermark должен перестать двигаться и начать увеличивать марджин
           // ...
       });
